@@ -136,6 +136,15 @@ body {
     overflow: hidden;
 }
 
+.landing-page {
+    display: block;
+}
+
+.landing-page main {
+    position: relative;
+    z-index: 1;
+}
+
 .login-page::before {
     content: '';
     position: absolute;
@@ -165,6 +174,13 @@ body {
     position: relative;
     z-index: 1;
     animation: fadeIn 0.8s ease-out, slideInUp 0.8s ease-out;
+}
+
+.login-section {
+    display: flex;
+    justify-content: center;
+    padding: 80px 20px 100px;
+    background: #ffffff;
 }
 
 .login-card {
@@ -339,6 +355,17 @@ body {
     color: #8B1538;
 }
 
+.logo-image {
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+    object-fit: cover;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+    border: 2px solid rgba(139, 21, 56, 0.15);
+    transform: scale(1.18);
+    transform-origin: left center;
+}
+
 .logo-text h2 {
     font-size: 24px;
     font-weight: 700;
@@ -479,6 +506,32 @@ body {
     padding: 80px 40px;
     color: #ffffff;
     text-align: center;
+    position: relative;
+}
+
+.landing-header {
+    position: absolute;
+    top: 24px;
+    left: 32px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    z-index: 1;
+}
+
+.landing-logo {
+    width: 96px;
+    height: 96px;
+    border-radius: 20px;
+    object-fit: cover;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.25);
+    border: 2px solid rgba(255, 255, 255, 0.7);
+}
+
+.landing-title {
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 0.03em;
 }
 
 .hero-content {
@@ -530,7 +583,7 @@ body {
 /* Image Grid */
 .image-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 20px;
     max-width: 1200px;
     margin: 0 auto;
@@ -541,7 +594,7 @@ body {
     position: relative;
     border-radius: 12px;
     overflow: hidden;
-    aspect-ratio: 1;
+    aspect-ratio: 4 / 3;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     transition: transform 0.3s ease;
 }
@@ -560,21 +613,93 @@ body {
     position: absolute;
     bottom: 12px;
     left: 12px;
-    width: 32px;
-    height: 32px;
+    width: 28px;
+    height: 28px;
     border-radius: 6px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 18px;
+    font-size: 16px;
     background: rgba(255, 255, 255, 0.9);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    border: none;
+    cursor: pointer;
+}
+
+.image-icon:focus-visible {
+    outline: 2px solid #ffffff;
+    outline-offset: 2px;
 }
 
 .green-icon { background: #4CAF50; }
 .blue-icon { background: #2196F3; }
 .yellow-icon { background: #FFC107; }
 .red-icon { background: #F44336; }
+
+/* Popup Modal */
+.popup-modal {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+    z-index: 2000;
+}
+
+.popup-modal.is-open {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.popup-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(8, 8, 8, 0.65);
+}
+
+.popup-card {
+    position: relative;
+    width: min(480px, 90vw);
+    padding: 28px;
+    border-radius: 16px;
+    background: #ffffff;
+    color: #333;
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.3);
+    animation: scaleIn 0.25s ease-out;
+    z-index: 1;
+    text-align: left;
+}
+
+.popup-card h3 {
+    font-size: 22px;
+    margin-bottom: 12px;
+}
+
+.popup-card p {
+    font-size: 15px;
+    line-height: 1.6;
+    color: #555;
+}
+
+.popup-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    border: none;
+    background: #f3f3f3;
+    color: #333;
+    padding: 6px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.popup-close:hover {
+    background: #e6e6e6;
+}
 
 /* Secure Section */
 .secure-section {
@@ -597,6 +722,103 @@ body {
     max-width: 800px;
     margin: 0 auto;
     color: #666;
+}
+
+/* Sevilla Section */
+.sevilla-section {
+    background: #ffffff;
+    padding: 96px 40px;
+    color: #333;
+}
+
+.sevilla-section .page-header {
+    margin-bottom: 32px;
+}
+
+.sevilla-actions {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(160px, 1fr));
+    gap: 18px;
+}
+
+.sevilla-button {
+    border: 1px solid rgba(139, 21, 56, 0.15);
+    background: #ffffff;
+    color: #8B1538;
+    border-radius: 999px;
+    padding: 14px 22px;
+    font-weight: 700;
+    font-size: 15px;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.06);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.sevilla-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+    background: #fff5f7;
+}
+
+.sevilla-button:focus-visible {
+    outline: 2px solid #8B1538;
+    outline-offset: 2px;
+}
+
+/* Culture Section */
+.culture-section {
+    background: #ffffff;
+    padding: 80px 40px;
+    color: #333;
+}
+
+.culture-section .page-header {
+    margin-bottom: 32px;
+}
+
+.culture-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+.culture-card {
+    border: 1px solid rgba(139, 21, 56, 0.12);
+    border-radius: 14px;
+    padding: 20px;
+    background: #ffffff;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+    text-align: left;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border-color: rgba(139, 21, 56, 0.12);
+}
+
+.culture-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 26px rgba(0, 0, 0, 0.1);
+}
+
+.culture-card:focus-visible {
+    outline: 2px solid #8B1538;
+    outline-offset: 2px;
+}
+
+.culture-card:disabled {
+    cursor: default;
+}
+
+.culture-card h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #8B1538;
+}
+
+.culture-card p {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #555;
 }
 
 /* Connected Section */

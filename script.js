@@ -25,13 +25,15 @@ document.addEventListener('DOMContentLoaded', function() {
     if (document.querySelector('.portal-page')) {
         initializePortal();
     }
+
+    initializePopups();
 });
 
 function initializePortal() {
     // Check if user is logged in
     const username = sessionStorage.getItem('username');
     if (!username) {
-        window.location.href = 'index.html';
+        window.location.href = 'login.html';
         return;
     }
     
@@ -103,4 +105,54 @@ function initializePortal() {
 function logout() {
     sessionStorage.removeItem('username');
     window.location.href = 'index.html';
+}
+
+function initializePopups() {
+    const modal = document.getElementById('popupModal');
+    if (!modal) {
+        return;
+    }
+
+    const titleEl = document.getElementById('popupTitle');
+    const bodyEl = document.getElementById('popupBody');
+    const closeButtons = modal.querySelectorAll('[data-popup-close]');
+    const closeButton = modal.querySelector('.popup-close');
+
+    function openModal(trigger) {
+        if (!titleEl || !bodyEl) {
+            return;
+        }
+
+        titleEl.textContent = trigger.dataset.title || 'More info';
+        bodyEl.textContent = trigger.dataset.body || '';
+        modal.classList.add('is-open');
+        modal.setAttribute('aria-hidden', 'false');
+
+        if (closeButton) {
+            closeButton.focus();
+        }
+    }
+
+    function closeModal() {
+        modal.classList.remove('is-open');
+        modal.setAttribute('aria-hidden', 'true');
+    }
+
+    document.addEventListener('click', function(event) {
+        const trigger = event.target.closest('.popup-trigger');
+        if (trigger) {
+            event.preventDefault();
+            openModal(trigger);
+        }
+    });
+
+    closeButtons.forEach(button => {
+        button.addEventListener('click', closeModal);
+    });
+
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape' && modal.classList.contains('is-open')) {
+            closeModal();
+        }
+    });
 }

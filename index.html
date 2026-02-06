@@ -3,36 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spain Travel Portal - Login</title>
+    <title>Spain Travel Portal - Overview</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-<body class="login-page">
-    <div class="login-container">
-        <div class="login-card">
-            <div class="login-icon">
-                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M21 16V8C21 6.9 20.1 6 19 6H5C3.9 6 3 6.9 3 8V16C3 17.1 3.9 18 5 18H19C20.1 18 21 17.1 21 16Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M3 10L12 15L21 10" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
+<body class="login-page landing-page">
+    <main>
+        <section class="hero-section">
+            <div class="landing-header">
+                <img class="landing-logo" src="pictures/LC%20Logo.JPG" alt="LC Logo">
+                <span class="landing-title">Spain Travel Portal - Leicester College</span>
             </div>
-            <h1 class="login-title">Spain Travel Portal</h1>
-            <p class="login-subtitle">School Trip 2026 - Login to access your travel details</p>
+            <div class="hero-content">
+                <h1 class="hero-title">Uplifting Travel Experience</h1>
+                <p class="hero-subtitle">Spain Travel Portal enables students to access trip details end-to-end, in one streamlined platform.</p>
+                <a class="hero-cta" href="login.html">Login to Continue</a>
+            </div>
 
-            <form id="loginForm" class="login-form">
-                <div class="form-group">
-                    <label for="username">Username</label>
-                    <input type="text" id="username" name="username" placeholder="Enter your username" required>
+            <div class="image-grid">
+                <div class="grid-image">
+                    <img src="images/spain.jpg" alt="Spain">
+                    <button class="image-icon green-icon popup-trigger" type="button" data-title="Spain Highlights" data-body="Random note: sunrise meetup at 7:15, bring a light jacket.">✈️</button>
                 </div>
-
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                <div class="grid-image">
+                    <img src="images/barcelona.jpg" alt="Barcelona">
+                    <button class="image-icon blue-icon popup-trigger" type="button" data-title="Barcelona" data-body="Random note: meet by the fountain for a quick headcount.">🏛️</button>
                 </div>
+                <div class="grid-image">
+                    <img src="images/madrid.jpg" alt="Madrid">
+                    <button class="image-icon yellow-icon popup-trigger" type="button" data-title="Madrid" data-body="Random note: check-in opens at 14:00 in the main lobby.">⚡</button>
+                </div>
+            </div>
+        </section>
 
-                <button type="submit" class="login-button">Login</button>
-            </form>
+        <section class="sevilla-section">
+            <div class="page-header">
+                <h1>Sevilla City</h1>
+                <p>Highlights and expectations for the Sevilla portion of the trip.</p>
+            </div>
+            <div class="sevilla-actions">
+                <button class="sevilla-button popup-trigger" type="button" data-title="Sevilla Landmarks" data-body="Random note: arrive 10 minutes early for the cathedral entry.">Landmarks</button>
+                <button class="sevilla-button popup-trigger" type="button" data-title="River Walk" data-body="Random note: stay in pairs along the riverside path.">River Walk</button>
+                <button class="sevilla-button popup-trigger" type="button" data-title="Flamenco" data-body="Random note: phones on silent during the performance.">Flamenco</button>
+                <button class="sevilla-button popup-trigger" type="button" data-title="Markets" data-body="Random note: keep receipts for group budget tracking.">Markets</button>
+                <button class="sevilla-button popup-trigger" type="button" data-title="Weather" data-body="Random note: expect warm afternoons, bring water.">Weather</button>
+                <button class="sevilla-button popup-trigger" type="button" data-title="Dress Code" data-body="Random note: covered shoulders for certain sites.">Dress Code</button>
+                <button class="sevilla-button popup-trigger" type="button" data-title="Safety" data-body="Random note: keep bags zipped in crowded areas.">Safety</button>
+                <button class="sevilla-button popup-trigger" type="button" data-title="Food Stops" data-body="Random note: notify staff about allergies in advance.">Food Stops</button>
+                <button class="sevilla-button popup-trigger" type="button" data-title="Timing" data-body="Random note: meet at the plaza at 16:45.">Timing</button>
+                <button class="sevilla-button popup-trigger" type="button" data-title="Maps" data-body="Random note: use the shared map pin for check-ins.">Maps</button>
+            </div>
+        </section>
 
-            <p class="demo-text">Demo: Use any username and password to login</p>
+
+
+    </main>
+    <div class="popup-modal" id="popupModal" aria-hidden="true">
+        <div class="popup-backdrop" data-popup-close></div>
+        <div class="popup-card" role="dialog" aria-modal="true" aria-labelledby="popupTitle">
+            <button class="popup-close" type="button" data-popup-close>Close</button>
+            <h3 id="popupTitle"></h3>
+            <p id="popupBody"></p>
         </div>
     </div>
     <script src="script.js"></script>
