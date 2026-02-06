@@ -40,6 +40,11 @@ function initializePortal() {
     if (usernameDisplay) {
         usernameDisplay.textContent = username;
     }
+
+    const fullNameDisplay = document.getElementById('fullNameDisplay');
+    if (fullNameDisplay) {
+        fullNameDisplay.textContent = username;
+    }
     
     // Navigation functionality
     const navItems = document.querySelectorAll('.nav-item');
@@ -63,15 +68,36 @@ function initializePortal() {
         });
     });
     
-    // Set initial active page based on URL hash or default to overview
+    // Set initial active page based on URL hash or fall back to the first tab
     const hash = window.location.hash.substring(1);
-    const initialPage = hash || 'overview';
-    
+    const initialPage = hash || (navItems[0] ? navItems[0].getAttribute('data-page') : null);
+    let activated = false;
+
     navItems.forEach(item => {
         if (item.getAttribute('data-page') === initialPage) {
             item.click();
+            activated = true;
         }
     });
+
+    const documentInput = document.getElementById('documentUpload');
+    const documentList = document.getElementById('documentList');
+
+    if (documentInput && documentList) {
+        documentInput.addEventListener('change', function() {
+            const files = Array.from(documentInput.files || []);
+            if (files.length === 0) {
+                documentList.innerHTML = '<li class="details-empty">No documents uploaded yet.</li>';
+                return;
+            }
+
+            documentList.innerHTML = files.map(file => `<li>${file.name}</li>`).join('');
+        });
+    }
+
+    if (!activated && navItems[0]) {
+        navItems[0].click();
+    }
 }
 
 function logout() {

@@ -68,20 +68,25 @@
             </svg>
             Itinerary
         </button>
+        <button class="nav-item" data-page="personal">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20 21V19C20 17.9391 19.5786 16.9217 18.8284 16.1716C18.0783 15.4214 17.0609 15 16 15H8C6.93913 15 5.92172 15.4214 5.17157 16.1716C4.42143 16.9217 4 17.9391 4 19V21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M12 11C14.2091 11 16 9.20914 16 7C16 4.79086 14.2091 3 12 3C9.79086 3 8 4.79086 8 7C8 9.20914 9.79086 11 12 11Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Personal Details
+        </button>
     </nav>
 
     <!-- Main Content -->
     <main class="portal-main">
         <!-- Overview Page -->
         <div id="overview" class="page-content active">
-            <!-- Hero Section with Maroon Background -->
             <section class="hero-section">
                 <div class="hero-content">
                     <h1 class="hero-title">Uplifting Travel Experience</h1>
                     <p class="hero-subtitle">Spain Travel Portal enables students to access trip details end-to-end, in one streamlined platform.</p>
                 </div>
-                
-                <!-- Image Grid -->
+
                 <div class="image-grid">
                     <div class="grid-image">
                         <img src="images/spain.jpg" alt="Spain">
@@ -102,13 +107,11 @@
                 </div>
             </section>
 
-            <!-- Secure Section (White Background) -->
             <section class="secure-section">
                 <h2 class="section-heading">Secure, supportive travel anywhere, anytime</h2>
                 <p class="section-description">Spain Travel Portal provides a safe place for quality travel experiences through one secure platform that guides students to success and optimizes trip outcomes.</p>
             </section>
 
-            <!-- Connected Experience Section (Two Columns) -->
             <section class="connected-section">
                 <h2 class="section-heading">A connected experience for teachers and students</h2>
                 <div class="two-columns">
@@ -777,6 +780,64 @@
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Personal Details Page -->
+        <div id="personal" class="page-content">
+            <div class="page-header">
+                <h1>Personal Details</h1>
+                <p>Manage your profile and upload required travel documents</p>
+            </div>
+
+            <div class="details-grid">
+                <div class="details-card">
+                    <h2>Student Profile</h2>
+                    <div class="details-row">
+                        <span class="details-label">Full Name</span>
+                        <span class="details-value" id="fullNameDisplay">Student Name</span>
+                    </div>
+                    <div class="details-row">
+                        <span class="details-label">Student Group</span>
+                        <span class="details-value">Barcelona Cohort A</span>
+                    </div>
+                    <div class="details-row">
+                        <span class="details-label">Emergency Contact</span>
+                        <span class="details-value">Parent/Guardian on file</span>
+                    </div>
+                </div>
+
+                <div class="details-card">
+                    <h2>Group Members</h2>
+                    <ul class="details-list">
+                        <li>Amira El-Sayed</li>
+                        <li>Jonas Keller</li>
+                        <li>Rita Nair</li>
+                        <li>Mateo Silva</li>
+                    </ul>
+                </div>
+
+                <div class="details-card">
+                    <h2>Teachers</h2>
+                    <ul class="details-list">
+                        <li>Ms. Harper - Trip Lead</li>
+                        <li>Mr. Ortega - Safety Coordinator</li>
+                        <li>Ms. Patel - Logistics</li>
+                    </ul>
+                </div>
+
+                <div class="details-card upload-card">
+                    <h2>Documents Upload</h2>
+                    <p class="details-subtitle">Upload passport, medical form, and consent letter.</p>
+                    <label class="upload-area" for="documentUpload">
+                        <input type="file" id="documentUpload" multiple>
+                        <span class="upload-title">Click to upload or drag files here</span>
+                        <span class="upload-hint">PDF, JPG, or PNG up to 10 MB each</span>
+                    </label>
+                    <ul class="details-list" id="documentList">
+                        <li class="details-empty">No documents uploaded yet.</li>
+                    </ul>
                 </div>
             </div>
         </div>
