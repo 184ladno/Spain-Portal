@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spain Travel Portal - School Trip 2026</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="portal-page">
+    <!-- Header -->
+    <header class="portal-header">
+        <div class="header-left">
+            <div class="logo">
+                <svg class="logo-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 16V8C21 6.9 20.1 6 19 6H5C3.9 6 3 6.9 3 8V16C3 17.1 3.9 18 5 18H19C20.1 18 21 17.1 21 16Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M3 10L12 15L21 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <div class="logo-text">
+                    <h2>Spain Travel Portal</h2>
+                    <p>School Trip 2026</p>
+                </div>
+            </div>
+        </div>
+        <div class="header-right">
+            <span class="welcome-text">Welcome back, <span id="usernameDisplay">assia</span></span>
+            <button class="logout-button" onclick="logout()">
+                Logout
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M9 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V5C3 4.46957 3.21071 3.96086 3.58579 3.58579C3.96086 3.21071 4.46957 3 5 3H9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M16 17L21 12L16 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M21 12H9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="portal-nav">
+        <button class="nav-item active" data-page="overview">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M21 10C21 17 12 23 12 23C12 23 3 17 3 10C3 7.61305 3.94821 5.32387 5.63604 3.63604C7.32387 1.94821 9.61305 1 12 1C14.3869 1 16.6761 1.94821 18.364 3.63604C20.0518 5.32387 21 7.61305 21 10Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M12 13C13.6569 13 15 11.6569 15 10C15 8.34315 13.6569 7 12 7C10.3431 7 9 8.34315 9 10C9 11.6569 10.3431 13 12 13Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Overview
+        </button>
+        <button class="nav-item" data-page="flights">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M21 16V8C21 6.9 20.1 6 19 6H5C3.9 6 3 6.9 3 8V16C3 17.1 3.9 18 5 18H19C20.1 18 21 17.1 21 16Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M3 10L12 15L21 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Flights
+        </button>
+        <button class="nav-item" data-page="hotels">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3 21H21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M5 21V7L12 3L19 7V21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M9 9V13H15V9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M9 21V17H15V21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Hotels
+        </button>
+        <button class="nav-item" data-page="itinerary">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M16 2V6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M8 2V6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M3 10H21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Itinerary
+        </button>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="portal-main">
+        <!-- Overview Page -->
+        <div id="overview" class="page-content active">
+            <!-- Hero Section with Maroon Background -->
+            <section class="hero-section">
+                <div class="hero-content">
+                    <h1 class="hero-title">Uplifting Travel Experience</h1>
+                    <p class="hero-subtitle">Spain Travel Portal enables students to access trip details end-to-end, in one streamlined platform.</p>
+                </div>
+                
+                <!-- Image Grid -->
+                <div class="image-grid">
+                    <div class="grid-image">
+                        <img src="images/spain.jpg" alt="Spain">
+                        <div class="image-icon green-icon">✈️</div>
+                    </div>
+                    <div class="grid-image">
+                        <img src="images/barcelona.jpg" alt="Barcelona">
+                        <div class="image-icon blue-icon">🏛️</div>
+                    </div>
+                    <div class="grid-image">
+                        <img src="images/madrid.jpg" alt="Madrid">
+                        <div class="image-icon yellow-icon">⚡</div>
+                    </div>
+                    <div class="grid-image">
+                        <img src="images/spain.jpg" alt="Spain Culture">
+                        <div class="image-icon red-icon">📊</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Secure Section (White Background) -->
+            <section class="secure-section">
+                <h2 class="section-heading">Secure, supportive travel anywhere, anytime</h2>
+                <p class="section-description">Spain Travel Portal provides a safe place for quality travel experiences through one secure platform that guides students to success and optimizes trip outcomes.</p>
+            </section>
+
+            <!-- Connected Experience Section (Two Columns) -->
+            <section class="connected-section">
+                <h2 class="section-heading">A connected experience for teachers and students</h2>
+                <div class="two-columns">
+                    <div class="column teachers-column">
+                        <h3>Teachers</h3>
+                        <ul class="feature-list">
+                            <li>Creating trip itineraries</li>
+                            <li>Managing the trip</li>
+                            <li>Providing guidance</li>
+                            <li>Safety support</li>
+                            <li>Managing attendance</li>
+                            <li>Coordinating activities</li>
+                        </ul>
+                    </div>
+                    <div class="column students-column">
+                        <h3>Students</h3>
+                        <ul class="feature-list">
+                            <li>Completing trip preparation</li>
+                            <li>Preparing for departure</li>
+                            <li>Getting timely updates</li>
+                            <li>Submission confidence</li>
+                            <li>Getting trip details</li>
+                            <li>Accessing resources</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Flights Page -->
+        <div id="flights" class="page-content">
+            <div class="page-header">
+                <h1>Flight Details</h1>
+                <p>Your complete flight itinerary for the Spain School Trip 2026</p>
+            </div>
+
+            <div class="flights-container">
+                <div class="flight-card">
+                    <div class="flight-header">
+                        <div class="flight-icon blue">
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M21 16V8C21 6.9 20.1 6 19 6H5C3.9 6 3 6.9 3 8V16C3 17.1 3.9 18 5 18H19C20.1 18 21 17.1 21 16Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M3 10L12 15L21 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <div class="flight-title">
+                            <h2>Outbound Flight</h2>
+                            <p class="flight-date">June 15, 2026</p>
+                        </div>
+                    </div>
+                    <div class="flight-details">
+                        <div class="flight-route">
+                            <div class="route-point">
+                                <div class="route-time">09:30</div>
+                                <div class="route-location">
+                                    <strong>London Heathrow (LHR)</strong>
+                                    <p>Terminal 5</p>
+                                </div>
+                            </div>
+                            <div class="route-line">
+                                <div class="route-duration">2h 35m</div>
+                            </div>
+                            <div class="route-point">
+                                <div class="route-time">13:05</div>
+                                <div class="route-location">
+                                    <strong>Barcelona El Prat (BCN)</strong>
+                                    <p>Terminal 1</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flight-info">
+                            <div class="info-item">
+                                <span class="info-label">Flight Number:</span>
+                                <span class="info-value">BA 478</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Aircraft:</span>
+                                <span class="info-value">Airbus A320</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Seat Assignment:</span>
+                                <span class="info-value">Check-in opens 24h before</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flight-card">
+                    <div class="flight-header">
+                        <div class="flight-icon orange">
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M21 16V8C21 6.9 20.1 6 19 6H5C3.9 6 3 6.9 3 8V16C3 17.1 3.9 18 5 18H19C20.1 18 21 17.1 21 16Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M3 10L12 15L21 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <div class="flight-title">
+                            <h2>Return Flight</h2>
+                            <p class="flight-date">June 22, 2026</p>
+                        </div>
+                    </div>
+                    <div class="flight-details">
+                        <div class="flight-route">
+                            <div class="route-point">
+                                <div class="route-time">20:20</div>
+                                <div class="route-location">
+                                    <strong>Madrid Barajas (MAD)</strong>
+                                    <p>Terminal 4</p>
+                                </div>
+                            </div>
+                            <div class="route-line">
+                                <div class="route-duration">2h 25m</div>
+                            </div>
+                            <div class="route-point">
+                                <div class="route-time">22:45</div>
+                                <div class="route-location">
+                                    <strong>London Heathrow (LHR)</strong>
+                                    <p>Terminal 5</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flight-info">
+                            <div class="info-item">
+                                <span class="info-label">Flight Number:</span>
+                                <span class="info-value">BA 491</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Aircraft:</span>
+                                <span class="info-value">Airbus A320</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Seat Assignment:</span>
+                                <span class="info-value">Check-in opens 24h before</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flight-notes">
+                <h3>Important Flight Information</h3>
+                <ul>
+                    <li>Please arrive at the airport at least 3 hours before departure</li>
+                    <li>Online check-in opens 24 hours before your flight</li>
+                    <li>Baggage allowance: 1 carry-on bag (max 10kg) + 1 checked bag (max 23kg)</li>
+                    <li>All students must travel with valid ID (passport or national ID card)</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Hotels Page -->
+        <div id="hotels" class="page-content">
+            <div class="page-header">
+                <h1>Hotel Accommodation</h1>
+                <p>Your accommodation details for Barcelona and Madrid</p>
+            </div>
+
+            <div class="hotels-container">
+                <div class="hotel-card">
+                    <div class="hotel-image barcelona-hotel" style="background-image: url('images/barcelona.jpg');"></div>
+                    <div class="hotel-content">
+                        <div class="hotel-header">
+                            <div class="hotel-icon purple">
+                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M3 21H21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M5 21V7L12 3L19 7V21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M9 9V13H15V9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M9 21V17H15V21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h2>Hotel Barcelona Center</h2>
+                                <p class="hotel-location">Barcelona, Spain</p>
+                            </div>
+                        </div>
+                        <div class="hotel-details">
+                            <div class="hotel-period">
+                                <strong>Stay Period:</strong> June 15 - June 18, 2026 (3 nights)
+                            </div>
+                            <div class="hotel-info-grid">
+                                <div class="hotel-info-item">
+                                    <span class="info-label">Address:</span>
+                                    <span class="info-value">Carrer de la Diputació, 142, 08015 Barcelona</span>
+                                </div>
+                                <div class="hotel-info-item">
+                                    <span class="info-label">Check-in:</span>
+                                    <span class="info-value">15:00</span>
+                                </div>
+                                <div class="hotel-info-item">
+                                    <span class="info-label">Check-out:</span>
+                                    <span class="info-value">11:00</span>
+                                </div>
+                                <div class="hotel-info-item">
+                                    <span class="info-label">Room Type:</span>
+                                    <span class="info-value">Triple rooms (3 students per room)</span>
+                                </div>
+                                <div class="hotel-info-item">
+                                    <span class="info-label">Amenities:</span>
+                                    <span class="info-value">Free WiFi, Breakfast included, 24/7 reception</span>
+                                </div>
+                                <div class="hotel-info-item">
+                                    <span class="info-label">Contact:</span>
+                                    <span class="info-value">+34 93 123 4567</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hotel-card">
+                    <div class="hotel-image madrid-hotel" style="background-image: url('images/madrid.jpg');"></div>
+                    <div class="hotel-content">
+                        <div class="hotel-header">
+                            <div class="hotel-icon purple">
+                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M3 21H21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M5 21V7L12 3L19 7V21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M9 9V13H15V9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M9 21V17H15V21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h2>Hotel Madrid Central</h2>
+                                <p class="hotel-location">Madrid, Spain</p>
+                            </div>
+                        </div>
+                        <div class="hotel-details">
+                            <div class="hotel-period">
+                                <strong>Stay Period:</strong> June 18 - June 22, 2026 (4 nights)
+                            </div>
+                            <div class="hotel-info-grid">
+                                <div class="hotel-info-item">
+                                    <span class="info-label">Address:</span>
+                                    <span class="info-value">Calle de Gran Vía, 45, 28013 Madrid</span>
+                                </div>
+                                <div class="hotel-info-item">
+                                    <span class="info-label">Check-in:</span>
+                                    <span class="info-value">15:00</span>
+                                </div>
+                                <div class="hotel-info-item">
+                                    <span class="info-label">Check-out:</span>
+                                    <span class="info-value">11:00</span>
+                                </div>
+                                <div class="hotel-info-item">
+                                    <span class="info-label">Room Type:</span>
+                                    <span class="info-value">Triple rooms (3 students per room)</span>
+                                </div>
+                                <div class="hotel-info-item">
+                                    <span class="info-label">Amenities:</span>
+                                    <span class="info-value">Free WiFi, Breakfast included, Fitness center</span>
+                                </div>
+                                <div class="hotel-info-item">
+                                    <span class="info-label">Contact:</span>
+                                    <span class="info-value">+34 91 987 6543</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hotel-notes">
+                <h3>Hotel Guidelines</h3>
+                <ul>
+                    <li>Room assignments will be provided upon check-in</li>
+                    <li>Breakfast is served daily from 7:00 AM to 10:00 AM</li>
+                    <li>Quiet hours are from 10:00 PM to 7:00 AM</li>
+                    <li>All rooms include private bathrooms and air conditioning</li>
+                    <li>Lost key replacement fee: €25</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Itinerary Page -->
+        <div id="itinerary" class="page-content">
+            <div class="page-header">
+                <h1>Daily Itinerary</h1>
+                <p>Your complete day-by-day schedule for the Spain School Trip 2026</p>
+            </div>
+
+            <div class="itinerary-container">
+                <div class="itinerary-day">
+                    <div class="day-header">
+                        <div class="day-number">Day 1</div>
+                        <div class="day-info">
+                            <h2>June 15 - Arrival in Barcelona</h2>
+                            <p>Travel Day</p>
+                        </div>
+                    </div>
+                    <div class="day-schedule">
+                        <div class="schedule-item">
+                            <div class="schedule-time">09:30</div>
+                            <div class="schedule-content">
+                                <strong>Departure from London Heathrow</strong>
+                                <p>Flight BA 478 to Barcelona</p>
+                            </div>
+                        </div>
+                        <div class="schedule-item">
+                            <div class="schedule-time">13:05</div>
+                            <div class="schedule-content">
+                                <strong>Arrival in Barcelona</strong>
+                                <p>Transfer to Hotel Barcelona Center</p>
+                            </div>
+                        </div>
+                        <div class="schedule-item">
+                            <div class="schedule-time">15:00</div>
+                            <div class="schedule-content">
+                                <strong>Hotel Check-in</strong>
+                                <p>Room assignments and orientation</p>
+                            </div>
+                        </div>
+                        <div class="schedule-item">
+                            <div class="schedule-time">18:00</div>
+                            <div class="schedule-content">
+                                <strong>Welcome Dinner</strong>
+                                <p>Group dinner at hotel restaurant</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="itinerary-day">
+                    <div class="day-header">
+                        <div class="day-number">Day 2</div>
+                        <div class="day-info">
+                            <h2>June 16 - Barcelona City Tour</h2>
+                            <p>Gothic Quarter & Sagrada Familia</p>
+                        </div>
+                    </div>
+                    <div class="day-schedule">
+                        <div class="schedule-item">
+                            <div class="schedule-time">08:00</div>
+                            <div class="schedule-content">
+                                <strong>Breakfast</strong>
+                                <p>Hotel restaurant</p>
+                            </div>
+                        </div>
+                        <div class="schedule-item">
+                            <div class="schedule-time">09:30</div>
+                            <div class="schedule-content">
+                                <strong>Gothic Quarter Walking Tour</strong>
+                                <p>Guided tour of historic Barcelona</p>
+                            </div>
+                        </div>
+                        <div class="schedule-item">
+                            <div class="schedule-time">14:00</div>
+                            <div class="schedule-content">
+                                <strong>Lunch Break</strong>
+                                <p>Free time for lunch</p>
+                            </div>
+                        </div>
+                        <div class="schedule-item">
+                            <div class="schedule-time">15:30</div>
+                            <div class="schedule-content">
+                                <strong>Sagrada Familia Visit</strong>
+                                <p>Guided tour of Gaudí's masterpiece</p>
+                            </div>
+                        </div>
+                        <div class="schedule-item">
+                            <div class="schedule-time">19:00</div>
+                            <div class="schedule-content">
+                                <strong>Dinner</strong>
+                                <p>Group dinner</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="itinerary-day">
+                    <div class="day-header">
+                        <div class="day-number">Day 3</div>
+                        <div class="day-info">
+                            <h2>June 17 - Park Güell & Camp Nou</h2>
+                            <p>Gaudí & Football</p>
+                        </div>
+                    </div>
+                    <div class="day-schedule">
+                        <div class="schedule-item">
+                            <div class="schedule-time">08:00</div>
+                            <div class="schedule-content">
+                                <strong>Breakfast</strong>
+                                <p>Hotel restaurant</p>
+                            </div>
+                        </div>
+                        <div class="schedule-item">
+                            <div class="schedule-time">10:00</div>
+                            <div class="schedule-content">
+                                <strong>Park Güell</strong>
+                                <p>Explore Gaudí's colorful park</p>
+                            </div>
+                        </div>
+                        <div class="schedule-item">
+                            <div class="schedule-time">14:00</div>
+                            <div class="schedule-content">
+                                <strong>Lunch</strong>
+                                <p>Free time</p>
+                            </div>
+                        </div>
+                        <div class="schedule-item">
+                            <div class="schedule-time">16:00</div>
+                            <div class="schedule-content">
+                                <strong>Camp Nou Stadium Tour</strong>
+                                <p>FC Barcelona museum and stadium</p>
+                            </div>
+                        </div>
+                        <div class="schedule-item">
+                            <div class="schedule-time">18:00</div>
+                            <div class="schedule-content">
+                                <strong>Barceloneta Beach</strong>
+                                <p>Relaxation time at the beach</p>
+                            </div>
+                        </div>
+                        <div class="schedule-item">
+                            <div class="schedule-time">21:00</div>
+                            <div class="schedule-content">
+                                <strong>Magic Fountain Show</strong>
+                                <p>Evening light and music show</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="itinerary-day">
+                    <div class="day-header">
+                        <div class="day-number">Day 4</div>
+                        <div class="day-info">
+                            <h2>June 18 - Travel to Madrid</h2>
+                            <p>High-Speed Train Journey</p>
+                        </div>
+                    </div>
+                    <div class="day-schedule">
+                        <div class="schedule-item">
+                            <div class="schedule-time">08:00</div>
+                            <div class="schedule-content">
+                                <strong>Breakfast & Check-out</strong>
+                                <p>Hotel Barcelona Center</p>
+                            </div>
+                        </div>
+                        <div class="schedule-item">
+                            <div class="schedule-time">10:30</div>
+                            <div class="schedule-content">
+                                <strong>High-Speed Train to Madrid</strong>
+                                <p>AVE train from Barcelona Sants</p>
+                            </div>
+                        </div>
+                        <div class="schedule-item">
+                            <div class="schedule-time">13:30</div>
+                            <div class="schedule-content">
+                                <strong>Arrival in Madrid</strong>
+                                <p>Transfer to Hotel Madrid Central</p>
+                            </div>
+                        </div>
+                        <div class="schedule-item">
+                            <div class="schedule-time">15:00</div>
+                            <div class="schedule-content">
+                                <strong>Hotel Check-in</strong>
+                                <p>Room assignments</p>
+                            </div>
+                        </div>
+                        <div class="schedule-item">
+                            <div class="schedule-time">16:00</div>
+                            <div class="schedule-content">
+                                <strong>Free Afternoon</strong>
+                                <p>Explore Madrid city center</p>
+                            </div>
+                        </div>
+                        <div class="schedule-item">
+                            <div class="schedule-time">19:00</div>
+                            <div class="schedule-content">
+                                <strong>Welcome Dinner</strong>
+                                <p>Traditional Spanish cuisine</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="itinerary-day">
+                    <div class="day-header">
+                        <div class="day-number">Day 5</div>
+                        <div class="day-info">
+                            <h2>June 19 - Royal Palace & Prado Museum</h2>
+                            <p>Royal Heritage & Art</p>
+                        </div>
+                    </div>
+                    <div class="day-schedule">
+                        <div class="schedule-item">
+                            <div class="schedule-time">08:00</div>
+                            <div class="schedule-content">
+                                <strong>Breakfast</strong>
+                                <p>Hotel restaurant</p>
+                            </div>
+                        </div>
+                        <div class="schedule-item">
+                            <div class="schedule-time">10:00</div>
+                            <div class="schedule-content">
+                                <strong>Royal Palace Official Tour</strong>
+                                <p>Guided tour of the official residence</p>
+                            </div>
+                        </div>
+                        <div class="schedule-item">
+                            <div class="schedule-time">13:00</div>
+                            <div class="schedule-content">
+                                <strong>Lunch Break</strong>
+                                <p>Free time</p>
+                            </div>
+                        </div>
+                        <div class="schedule-item">
+                            <div class="schedule-time">15:00</div>
+                            <div class="schedule-content">
+                                <strong>Prado Museum</strong>
+                                <p>World-renowned art collection</p>
+                            </div>
+                        </div>
+                        <div class="schedule-item">
+                            <div class="schedule-time">18:00</div>
+                            <div class="schedule-content">
+                                <strong>Free Evening</strong>
+                                <p>Explore Madrid's nightlife</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="itinerary-day">
+                    <div class="day-header">
+                        <div class="day-number">Day 6</div>
+                        <div class="day-info">
+                            <h2>June 20 - Santiago Bernabéu & Flamenco</h2>
+                            <p>Football & Culture</p>
+                        </div>
+                    </div>
+                    <div class="day-schedule">
+                        <div class="schedule-item">
+                            <div class="schedule-time">08:00</div>
+                            <div class="schedule-content">
+                                <strong>Breakfast</strong>
+                                <p>Hotel restaurant</p>
+                            </div>
+                        </div>
+                        <div class="schedule-item">
+                            <div class="schedule-time">10:00</div>
+                            <div class="schedule-content">
+                                <strong>Santiago Bernabéu Stadium</strong>
+                                <p>Real Madrid stadium tour</p>
+                            </div>
+                        </div>
+                        <div class="schedule-item">
+                            <div class="schedule-time">14:00</div>
+                            <div class="schedule-content">
+                                <strong>Lunch</strong>
+                                <p>Free time</p>
+                            </div>
+                        </div>
+                        <div class="schedule-item">
+                            <div class="schedule-time">16:00</div>
+                            <div class="schedule-content">
+                                <strong>Free Afternoon</strong>
+                                <p>Shopping and exploration</p>
+                            </div>
+                        </div>
+                        <div class="schedule-item">
+                            <div class="schedule-time">20:00</div>
+                            <div class="schedule-content">
+                                <strong>Traditional Flamenco Show</strong>
+                                <p>Evening cultural performance</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="itinerary-day">
+                    <div class="day-header">
+                        <div class="day-number">Day 7</div>
+                        <div class="day-info">
+                            <h2>June 21 - Day Trip to Toledo</h2>
+                            <p>Historic City Excursion</p>
+                        </div>
+                    </div>
+                    <div class="day-schedule">
+                        <div class="schedule-item">
+                            <div class="schedule-time">07:30</div>
+                            <div class="schedule-content">
+                                <strong>Early Breakfast</strong>
+                                <p>Hotel restaurant</p>
+                            </div>
+                        </div>
+                        <div class="schedule-item">
+                            <div class="schedule-time">09:00</div>
+                            <div class="schedule-content">
+                                <strong>Departure for Toledo</strong>
+                                <p>Bus journey to historic city</p>
+                            </div>
+                        </div>
+                        <div class="schedule-item">
+                            <div class="schedule-time">10:30</div>
+                            <div class="schedule-content">
+                                <strong>Arrival in Toledo</strong>
+                                <p>Guided walking tour</p>
+                            </div>
+                        </div>
+                        <div class="schedule-item">
+                            <div class="schedule-time">13:00</div>
+                            <div class="schedule-content">
+                                <strong>Lunch in Toledo</strong>
+                                <p>Traditional Spanish lunch</p>
+                            </div>
+                        </div>
+                        <div class="schedule-item">
+                            <div class="schedule-time">15:00</div>
+                            <div class="schedule-content">
+                                <strong>Free Exploration</strong>
+                                <p>Visit Toledo Cathedral, Alcázar</p>
+                            </div>
+                        </div>
+                        <div class="schedule-item">
+                            <div class="schedule-time">18:00</div>
+                            <div class="schedule-content">
+                                <strong>Return to Madrid</strong>
+                                <p>Bus journey back</p>
+                            </div>
+                        </div>
+                        <div class="schedule-item">
+                            <div class="schedule-time">20:00</div>
+                            <div class="schedule-content">
+                                <strong>Farewell Dinner</strong>
+                                <p>Final group dinner</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="itinerary-day">
+                    <div class="day-header">
+                        <div class="day-number">Day 8</div>
+                        <div class="day-info">
+                            <h2>June 22 - Departure</h2>
+                            <p>Return to London</p>
+                        </div>
+                    </div>
+                    <div class="day-schedule">
+                        <div class="schedule-item">
+                            <div class="schedule-time">08:00</div>
+                            <div class="schedule-content">
+                                <strong>Breakfast & Check-out</strong>
+                                <p>Hotel Madrid Central</p>
+                            </div>
+                        </div>
+                        <div class="schedule-item">
+                            <div class="schedule-time">10:00</div>
+                            <div class="schedule-content">
+                                <strong>Transfer to Airport</strong>
+                                <p>Madrid Barajas Airport</p>
+                            </div>
+                        </div>
+                        <div class="schedule-item">
+                            <div class="schedule-time">20:20</div>
+                            <div class="schedule-content">
+                                <strong>Departure Flight</strong>
+                                <p>Flight BA 491 to London</p>
+                            </div>
+                        </div>
+                        <div class="schedule-item">
+                            <div class="schedule-time">22:45</div>
+                            <div class="schedule-content">
+                                <strong>Arrival in London</strong>
+                                <p>London Heathrow Airport</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
