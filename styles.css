@@ -742,18 +742,21 @@ body {
 
 .sevilla-actions {
     display: grid;
-    grid-template-columns: repeat(5, minmax(160px, 1fr));
-    gap: 18px;
+    grid-template-columns: repeat(5, minmax(190px, 1fr));
+    gap: 22px;
 }
 
 .sevilla-button {
     border: 1px solid rgba(139, 21, 56, 0.15);
     background: #ffffff;
     color: #8B1538;
-    border-radius: 999px;
-    padding: 14px 22px;
+    border-radius: 14px;
+    padding: 22px 28px;
     font-weight: 700;
-    font-size: 25px;
+    font-size: 30px;
+    min-height: 96px;
+    line-height: 1.2;
+    letter-spacing: 0.02em;
     text-align: center;
     cursor: pointer;
     box-shadow: 0 8px 18px rgba(0, 0, 0, 0.06);
@@ -769,6 +772,20 @@ body {
 .sevilla-button:focus-visible {
     outline: 2px solid #8B1538;
     outline-offset: 2px;
+}
+
+.sevilla-button.weather-button {
+    background-image: linear-gradient(rgba(139, 21, 56, 0.6), rgba(139, 21, 56, 0.6)), url('images/cityog.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.55);
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.65);
+}
+
+.sevilla-button.weather-button:hover {
+    background-image: linear-gradient(rgba(139, 21, 56, 0.5), rgba(139, 21, 56, 0.5)), url('images/cityog.png');
 }
 
 .connected-section .section-heading {
