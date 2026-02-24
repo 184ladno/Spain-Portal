@@ -138,6 +138,8 @@ body {
 
 .landing-page {
     display: block;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .landing-page main {
@@ -748,7 +750,7 @@ body {
     border-radius: 999px;
     padding: 14px 22px;
     font-weight: 700;
-    font-size: 15px;
+    font-size: 25px;
     text-align: center;
     cursor: pointer;
     box-shadow: 0 8px 18px rgba(0, 0, 0, 0.06);
@@ -764,68 +766,6 @@ body {
 .sevilla-button:focus-visible {
     outline: 2px solid #8B1538;
     outline-offset: 2px;
-}
-
-/* Culture Section */
-.culture-section {
-    background: #ffffff;
-    padding: 80px 40px;
-    color: #333;
-}
-
-.culture-section .page-header {
-    margin-bottom: 32px;
-}
-
-.culture-cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 20px;
-}
-
-.culture-card {
-    border: 1px solid rgba(139, 21, 56, 0.12);
-    border-radius: 14px;
-    padding: 20px;
-    background: #ffffff;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
-    text-align: left;
-    cursor: pointer;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    border-color: rgba(139, 21, 56, 0.12);
-}
-
-.culture-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 26px rgba(0, 0, 0, 0.1);
-}
-
-.culture-card:focus-visible {
-    outline: 2px solid #8B1538;
-    outline-offset: 2px;
-}
-
-.culture-card:disabled {
-    cursor: default;
-}
-
-.culture-card h3 {
-    font-size: 18px;
-    margin-bottom: 10px;
-    color: #8B1538;
-}
-
-.culture-card p {
-    font-size: 14px;
-    line-height: 1.6;
-    color: #555;
-}
-
-/* Connected Section */
-.connected-section {
-    background: #ffffff;
-    padding: 80px 40px;
-    color: #333;
 }
 
 .connected-section .section-heading {
