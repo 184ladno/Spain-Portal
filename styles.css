@@ -458,6 +458,8 @@ body {
 .nav-item:nth-child(2) { animation-delay: 0.2s; }
 .nav-item:nth-child(3) { animation-delay: 0.3s; }
 .nav-item:nth-child(4) { animation-delay: 0.4s; }
+.nav-item:nth-child(5) { animation-delay: 0.5s; }
+.nav-item:nth-child(6) { animation-delay: 0.6s; }
 
 .nav-item svg {
     width: 18px;
@@ -497,7 +499,8 @@ body {
 }
 
 #personal.page-content,
-#itinerary.page-content {
+#itinerary.page-content,
+#transport.page-content {
     padding: 40px;
     background: #ffffff;
 }
@@ -1624,6 +1627,54 @@ body {
     color: #8B1538;
 }
 
+/* Transport Page */
+.transport-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.transport-card {
+    background: #ffffff;
+    border: 1px solid rgba(139, 21, 56, 0.1);
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    animation: fadeIn 0.7s ease-out, slideInUp 0.7s ease-out;
+}
+
+.transport-card h2 {
+    font-size: 20px;
+    color: #8B1538;
+    margin-bottom: 16px;
+}
+
+.transport-list {
+    list-style: none;
+    padding: 0;
+}
+
+.transport-list li {
+    font-size: 14px;
+    color: #333;
+    line-height: 1.6;
+    margin-bottom: 10px;
+    padding-left: 16px;
+    position: relative;
+}
+
+.transport-list li::before {
+    content: '•';
+    color: #8B1538;
+    position: absolute;
+    left: 0;
+}
+
+.transport-list li:last-child {
+    margin-bottom: 0;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .portal-header {
@@ -1699,6 +1750,10 @@ body {
     }
 
     .hotel-info-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .transport-grid {
         grid-template-columns: 1fr;
     }
 
