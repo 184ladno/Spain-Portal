@@ -30,22 +30,26 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function initializePortal() {
+    const isPublicPortal = document.body.classList.contains('public-portal');
+
     // Check if user is logged in
     const username = sessionStorage.getItem('username');
-    if (!username) {
+    if (!username && !isPublicPortal) {
         window.location.href = 'login.html';
         return;
     }
+
+    const displayName = username || 'Guest';
     
     // Display username
     const usernameDisplay = document.getElementById('usernameDisplay');
     if (usernameDisplay) {
-        usernameDisplay.textContent = username;
+        usernameDisplay.textContent = displayName;
     }
 
     const fullNameDisplay = document.getElementById('fullNameDisplay');
     if (fullNameDisplay) {
-        fullNameDisplay.textContent = username;
+        fullNameDisplay.textContent = displayName;
     }
     
     // Navigation functionality
