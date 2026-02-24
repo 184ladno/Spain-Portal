@@ -742,19 +742,21 @@ body {
 
 .sevilla-actions {
     display: grid;
-    grid-template-columns: repeat(5, minmax(190px, 1fr));
-    gap: 22px;
+    grid-template-columns: repeat(2, minmax(320px, 1fr));
+    gap: 24px;
+    max-width: 980px;
+    margin: 0 auto;
 }
 
 .sevilla-button {
     border: 1px solid rgba(139, 21, 56, 0.15);
     background: #ffffff;
     color: #8B1538;
-    border-radius: 14px;
-    padding: 22px 28px;
+    border-radius: 6px;
+    padding: 26px 34px;
     font-weight: 700;
-    font-size: 30px;
-    min-height: 96px;
+    font-size: 34px;
+    min-height: 155px;
     line-height: 1.2;
     letter-spacing: 0.02em;
     text-align: center;
@@ -786,6 +788,20 @@ body {
 
 .sevilla-button.weather-button:hover {
     background-image: linear-gradient(rgba(139, 21, 56, 0.5), rgba(139, 21, 56, 0.5)), url('images/cityog.png');
+}
+
+.sevilla-button.markets-button {
+    background-image: linear-gradient(rgba(139, 21, 56, 0.6), rgba(139, 21, 56, 0.6)), url('images/OIP.webp');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.55);
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.65);
+}
+
+.sevilla-button.markets-button:hover {
+    background-image: linear-gradient(rgba(139, 21, 56, 0.5), rgba(139, 21, 56, 0.5)), url('images/OIP.webp');
 }
 
 .connected-section .section-heading {
@@ -1745,6 +1761,10 @@ body {
     .secure-section,
     .connected-section {
         padding: 40px 20px;
+    }
+
+    .sevilla-actions {
+        grid-template-columns: 1fr;
     }
 
     .hero-section {
