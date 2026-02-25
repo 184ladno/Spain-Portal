@@ -855,6 +855,8 @@ body {
     display: flex;
     align-items: center;
     gap: 28px;
+    position: relative;
+    left: 350px;
 }
 
 .ready-spain-image {
