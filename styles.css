@@ -767,12 +767,16 @@ body {
 /* Sevilla Section */
 .sevilla-section {
     background: #ffffff;
-    padding: 96px 40px;
+    padding: 44px 40px;
     color: #333;
 }
 
 .sevilla-section .page-header {
     margin-bottom: 32px;
+}
+
+.sevilla-section .page-header h1 {
+    font-size: 56px;
 }
 
 .sevilla-actions {
@@ -839,6 +843,51 @@ body {
     background-image: linear-gradient(rgba(139, 21, 56, 0.5), rgba(139, 21, 56, 0.5)), url('images/OIP.webp');
 }
 
+.ready-spain-section {
+    background: #ffffff;
+    padding: 30px 40px 20px;
+}
+
+.ready-spain-container {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 28px;
+}
+
+.ready-spain-image {
+    flex: 0 0 500px;
+}
+
+.ready-spain-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 12px;
+}
+
+.ready-spain-text h2 {
+    margin: 0;
+    font-size: 52px;
+    color: #8B1538;
+}
+
+.ready-spain-text {
+    border: 2px solid rgba(139, 21, 56, 0.45);
+    border-radius: 12px;
+    padding: 18px 22px;
+}
+
+.ready-spain-note {
+    margin: 12px 0 0;
+    font-size: 18px;
+    line-height: 1.6;
+    color: #666;
+    max-width: 560px;
+}
+
 .packing-guide-section {
     background: #ffffff;
     color: #333;
@@ -903,6 +952,75 @@ body {
 }
 
 .packing-item-content p {
+    font-size: 30px;
+    color: #666;
+    line-height: 1.7;
+}
+
+.spain-wellbeing-section {
+    background: #ffffff;
+    color: #333;
+    padding: 72px 40px;
+}
+
+.spain-wellbeing-container {
+    max-width: 980px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.spain-wellbeing-container h2 {
+    font-size: 56px;
+    color: #8B1538;
+    margin-bottom: 24px;
+}
+
+.spain-wellbeing-intro {
+    max-width: 860px;
+    margin: 0 auto 34px;
+    font-size: 18px;
+    line-height: 1.8;
+    color: #666;
+}
+
+.spain-wellbeing-item {
+    border-bottom: 3px solid rgba(139, 21, 56, 0.5);
+    text-align: left;
+}
+
+.spain-wellbeing-item summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 22px 10px 16px 0;
+    font-size: 48px;
+    font-weight: 700;
+    color: #333;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.spain-wellbeing-item summary::-webkit-details-marker {
+    display: none;
+}
+
+.spain-wellbeing-item summary::after {
+    content: '+';
+    font-size: 40px;
+    color: #8B1538;
+    margin-left: 16px;
+    line-height: 1;
+}
+
+.spain-wellbeing-item[open] summary::after {
+    content: '−';
+}
+
+.spain-wellbeing-item-content {
+    padding: 0 0 18px;
+}
+
+.spain-wellbeing-item-content p {
     font-size: 30px;
     color: #666;
     line-height: 1.7;
@@ -1879,7 +1997,47 @@ body {
         padding: 40px 20px;
     }
 
+    .spain-wellbeing-section {
+        padding: 40px 20px;
+    }
+
+    .ready-spain-section {
+        padding: 20px;
+    }
+
+    .ready-spain-container {
+        flex-direction: column;
+        align-items: flex-start;
+        margin: 0;
+    }
+
+    .ready-spain-image {
+        flex: 1 1 auto;
+        width: 100%;
+        max-width: 460px;
+    }
+
+    .ready-spain-text h2 {
+        font-size: 34px;
+    }
+
+    .ready-spain-text {
+        padding: 14px 16px;
+    }
+
+    .sevilla-section .page-header h1 {
+        font-size: 42px;
+    }
+
+    .ready-spain-note {
+        font-size: 16px;
+    }
+
     .packing-guide-container h2 {
+        font-size: 34px;
+    }
+
+    .spain-wellbeing-container h2 {
         font-size: 34px;
     }
 
@@ -1887,7 +2045,15 @@ body {
         font-size: 26px;
     }
 
+    .spain-wellbeing-item summary {
+        font-size: 26px;
+    }
+
     .packing-item-content p {
+        font-size: 18px;
+    }
+
+    .spain-wellbeing-item-content p {
         font-size: 18px;
     }
 
