@@ -164,16 +164,18 @@ function initializePopups() {
 
         titleEl.textContent = trigger.dataset.title || 'More info';
         bodyEl.textContent = trigger.dataset.body || '';
-
-        const popupImage = document.getElementById('popupImage');
-        if (popupImage) {
-            if (trigger.dataset.image){
-                popupImage.src=trigger.dataset.image;
-                popupImage.style.display='block';
-            }else {
-                popupImage.style.display ='none';
+        ['1','2','3','4','5'].forEach(function(n) {
+            const img = document.getElementById('popupImage'+n);
+            if (img) {
+                if (trigger.dataset['image'+n]){
+                    img.src=trigger.dataset['image'+n];
+                    img.style.display='block';
+                }else {
+                    img.style.display ='none';
+                }
             }
-        }
+        });
+        
        
 
         const linkUrl = trigger.dataset.link;
