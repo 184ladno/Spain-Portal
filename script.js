@@ -1,5 +1,7 @@
 // Login functionality
 document.addEventListener('DOMContentLoaded', function() {
+    updatePortalSideLinesStart();
+
     const loginForm = document.getElementById('loginForm');
     
     if (loginForm) {
@@ -28,7 +30,24 @@ document.addEventListener('DOMContentLoaded', function() {
 
     initializePopups();
     applySharedLandmarksText();
+
+    window.addEventListener('resize', updatePortalSideLinesStart);
 });
+
+function updatePortalSideLinesStart() {
+    if (!document.body.classList.contains('portal-page')) {
+        return;
+    }
+
+    const heroSection = document.querySelector('.hero-section');
+    if (!heroSection) {
+        document.body.style.setProperty('--side-lines-start', '620px');
+        return;
+    }
+
+    const heroBottom = heroSection.offsetTop + heroSection.offsetHeight;
+    document.body.style.setProperty('--side-lines-start', `${heroBottom}px`);
+}
 
 function initializePortal() {
     const isPublicPortal = document.body.classList.contains('public-portal');
