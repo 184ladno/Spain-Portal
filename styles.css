@@ -695,9 +695,9 @@ body.portal-page::after {
     align-items: center;
     justify-content: center;
     font-size: 18px;
-    background: rgba(255, 255, 255, 0.9);
+    background: #8B1538;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-    border: 2px solid rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.55);
     color: #ffffff;
     cursor: pointer;
     transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
@@ -714,19 +714,11 @@ body.portal-page::after {
     outline-offset: 2px;
 }
 
-.green-icon {
-    background: #4CAF50;
-    border-color: #d8f7dd;
-}
-
-.blue-icon {
-    background: #2196F3;
-    border-color: #d8ecff;
-}
-
+.green-icon,
+.blue-icon,
 .yellow-icon {
-    background: #FFC107;
-    border-color: #fff5cf;
+    background: #8B1538;
+    border-color: rgba(255, 255, 255, 0.55);
 }
 
 .red-icon { background: #F44336; }
