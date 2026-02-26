@@ -668,6 +668,7 @@ html::after {
     border-radius: 12px;
     overflow: hidden;
     aspect-ratio: 4 / 3;
+    cursor: pointer;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     transition: transform 0.3s ease;
 }
@@ -986,6 +987,19 @@ html::after {
     background-image: linear-gradient(rgba(139, 21, 56, 0.5), rgba(139, 21, 56, 0.5)), url('images/pexels-photo-2375264-2375264.jpg');
 }
 
+.sevilla-button.landmarks-button {
+    background-image: linear-gradient(rgba(139, 21, 56, 0.6), rgba(139, 21, 56, 0.6)), url('images/interesting-facts-about-spain-1200x675.webp');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.55);
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.65);
+}
+
+.sevilla-button.landmarks-button:hover {
+    background-image: linear-gradient(rgba(139, 21, 56, 0.5), rgba(139, 21, 56, 0.5)), url('images/interesting-facts-about-spain-1200x675.webp');
+}
 
 .ready-spain-section {
     background: #ffffff;

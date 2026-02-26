@@ -240,6 +240,16 @@ function initializePopups() {
         if (trigger) {
             event.preventDefault();
             openModal(trigger);
+            return;
+        }
+
+        const heroCard = event.target.closest('.grid-image');
+        if (heroCard) {
+            const cardTrigger = heroCard.querySelector('.image-icon.popup-trigger');
+            if (cardTrigger) {
+                event.preventDefault();
+                openModal(cardTrigger);
+            }
         }
     });
 
