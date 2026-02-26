@@ -857,6 +857,21 @@ body {
     background-image: linear-gradient(rgba(139, 21, 56, 0.5), rgba(139, 21, 56, 0.5)), url('images/11-spanish-food-facts-1701166967.jpg');
 }
 
+
+.sevilla-button.flamenco-button {
+    background-image: linear-gradient(rgba(139, 21, 56, 0.6), rgba(139, 21, 56, 0.6)), url('images/R.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.55);
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.65);
+}
+
+.sevilla-button.flamenco-button:hover {
+    background-image: linear-gradient(rgba(139, 21, 56, 0.5), rgba(139, 21, 56, 0.5)), url('images/R.jpg');
+}
+
 .ready-spain-section {
     background: #ffffff;
     padding: 30px 40px 20px;
