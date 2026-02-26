@@ -165,6 +165,17 @@ function initializePopups() {
         titleEl.textContent = trigger.dataset.title || 'More info';
         bodyEl.textContent = trigger.dataset.body || '';
 
+        const popupImage = document.getElementById('popupImage');
+        if (popupImage) {
+            if (trigger.dataset.image){
+                popupImage.src=trigger.dataset.image;
+                popupImage.style.display='block';
+            }else {
+                popupImage.style.display ='none';
+            }
+        }
+       
+
         const linkUrl = trigger.dataset.link;
         if (linkUrl) {
             bodyEl.appendChild(document.createElement('br'));
@@ -239,3 +250,4 @@ function initializePopups() {
         }
     });
 }
+
