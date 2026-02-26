@@ -887,6 +887,20 @@ body {
     background-image: linear-gradient(rgba(139, 21, 56, 0.5), rgba(139, 21, 56, 0.5)), url('images/What-to-do-in-Seville-Spain-walk-along-the-river.webp');
 }
 
+.sevilla-button.language-button {
+    background-image: linear-gradient(rgba(139, 21, 56, 0.6), rgba(139, 21, 56, 0.6)), url('images/languages-spoken-in-spain.webp');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.55);
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.65);
+}
+
+.sevilla-button.language-button:hover {
+    background-image: linear-gradient(rgba(139, 21, 56, 0.5), rgba(139, 21, 56, 0.5)), url('images/languages-spoken-in-spain.webp');
+}
+
 .ready-spain-section {
     background: #ffffff;
     padding: 30px 40px 20px;
