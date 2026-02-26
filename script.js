@@ -129,6 +129,19 @@ function initializePopups() {
 
         titleEl.textContent = trigger.dataset.title || 'More info';
         bodyEl.textContent = trigger.dataset.body || '';
+
+        const linkUrl = trigger.dataset.link;
+        if (linkUrl) {
+            bodyEl.appendChild(document.createElement('br'));
+            bodyEl.appendChild(document.createElement('br'));
+
+            const link = document.createElement('a');
+            link.href = linkUrl;
+            link.target = '_blank';
+            link.rel = 'noopener noreferrer';
+            link.textContent = trigger.dataset.linkText || linkUrl;
+            bodyEl.appendChild(link);
+        }
         modal.classList.add('is-open');
         modal.setAttribute('aria-hidden', 'false');
 
