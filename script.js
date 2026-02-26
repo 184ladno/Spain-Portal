@@ -27,6 +27,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     initializePopups();
+    applySharedLandmarksText();
 });
 
 function initializePortal() {
@@ -237,5 +238,48 @@ function initializePopups() {
         if (event.key === 'Escape' && modal.classList.contains('is-open')) {
             closeModal();
         }
+    });
+}
+
+const SharedText = `Key Landmarks to Include in Your Walking Tour
+Royal Alcazar of Seville
+🟢 Highlights: A UNESCO World Heritage site with exquisite Moorish architecture, beautiful gardens, and a historic royal palace.
+⭐ Rating: 9.4/10 (36,780 reviews)
+📌 Address: Patio de Banderas street, Seville, 41004
+⏰ Open Hours: 09:30 – 19:00 daily
+☎️ Phone: 954 50 23 24
+✉️ Email: actividadespatronato-alcazarsevilla.es
+
+Plaza de España
+🟢 Highlights: Stunning semi-circular plaza built for the 1929 Ibero-American Exposition, adorned with ceramic-tiled alcoves representing Spanish provinces.
+⭐ Rating: 9.6/10 (45,463 reviews)
+📌 Address: Avenida de Isabel la Catolica, Seville, 41004
+☎️ Phone: 955 47 12 32
+
+Seville Cathedral & Giralda Tower
+🟢 Highlights: One of the largest Gothic cathedrals in the world with a famous bell tower offering panoramic city views.
+⭐ Rating: 9.2/10 (27,276 reviews)
+📌 Address: Constitucion sq, Seville, 41004
+⏰ Open Hours: Monday to Saturday 11:00–18:00, Sunday 14:30–19:00
+☎️ Phone: 902 09 96 92
+✉️ Email: info@catedraldesevilla.es
+
+Real Maestranza de Caballería Bullring
+🟢 Highlights: Historic bullring showcasing Andalusian tradition and architecture.
+⭐ Rating: 8.4/10 (34 reviews)
+📌 Address: Cristobal Colon avenue 12, Seville, 41001
+⏰ Open Hours: 09:30 – 21:30 daily
+☎️ Phone: 954 21 03 15
+✉️ Email: realmaestranza@terra.es
+
+Don Fadrique Tower & Torre del Oro
+🟢 Highlights: Medieval defensive towers with significant historic value along Seville’s riverfront.
+📌 Don Fadrique Address: Santa Clara, 65, Seville, 41002
+☎️ Phone: 955 47 13 02`;
+
+function applySharedLandmarksText() {
+    const landmarksButtons = document.querySelectorAll('.popup-trigger[data-title="Sevilla Landmarks"]');
+    landmarksButtons.forEach(button => {
+        button.dataset.body = SharedText;
     });
 }

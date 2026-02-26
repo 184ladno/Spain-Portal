@@ -735,7 +735,7 @@ html::after {
 
 .popup-card {
     position: relative;
-    width: min(760px, 92vw);
+    width: min(1320px, 99vw);
     padding: 28px;
     border-radius: 16px;
     background: #ffffff;
@@ -753,7 +753,7 @@ html::after {
 }
 
 .popup-card #popupBody {
-    font-size: 15px;
+    font-size: 17px;
     line-height: 1.6;
     color: #555;
     white-space: pre-line;
