@@ -7,7 +7,12 @@
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     color: #ffffff;
-    background: #0a0a0a;
+    background-color: #0a0a0a;
+    background-image: linear-gradient(rgba(10, 10, 10, 0.45), rgba(10, 10, 10, 0.45)), url('images/Spain-Map-Flag.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
     text-align: center;
 }
 
@@ -360,7 +365,7 @@ html::after {
 
 /* Portal Page Styles */
 .portal-page {
-    background: #ffffff;
+    background: rgba(255, 255, 255, 0.94);
     min-height: 100vh;
     color: #333;
 }
@@ -545,7 +550,11 @@ html::after {
 
 /* Hero Section */
 .hero-section {
-    background: #8B1538;
+    background-color: #8B1538;
+    background-image: linear-gradient(rgba(139, 21, 56, 0.72), rgba(139, 21, 56, 0.72)), url('images/blank-map-brand-wikimedia-commons-road-language.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     padding: 80px 40px;
     color: #ffffff;
     text-align: center;
