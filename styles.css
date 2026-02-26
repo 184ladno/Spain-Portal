@@ -844,7 +844,7 @@ body {
     background-image: linear-gradient(rgba(139, 21, 56, 0.5), rgba(139, 21, 56, 0.5)), url('images/OIP.webp');
 }
 
-.sevilla-button.food-stops-button {
+.sevilla-button.food-button {
     background-image: linear-gradient(rgba(139, 21, 56, 0.6), rgba(139, 21, 56, 0.6)), url('images/11-spanish-food-facts-1701166967.jpg');
     background-repeat: no-repeat;
     background-position: center;
@@ -854,7 +854,7 @@ body {
     text-shadow: 0 2px 6px rgba(0, 0, 0, 0.65);
 }
 
-.sevilla-button.food-stops-button:hover {
+.sevilla-button.food-button:hover {
     background-image: linear-gradient(rgba(139, 21, 56, 0.5), rgba(139, 21, 56, 0.5)), url('images/11-spanish-food-facts-1701166967.jpg');
 }
 
