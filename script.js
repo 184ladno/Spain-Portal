@@ -122,6 +122,41 @@ function initializePopups() {
     const closeButtons = modal.querySelectorAll('[data-popup-close]');
     const closeButton = modal.querySelector('.popup-close');
 
+    function toEmbedUrl(url) {
+        if (!url) {
+            return '';
+        }
+
+        try {
+            const parsed = new URL(url);
+            const hostname = parsed.hostname.replace('www.', '');
+
+            if (hostname === 'youtube.com') {
+                if (parsed.pathname === '/watch') {
+                    const videoId = parsed.searchParams.get('v');
+                    if (videoId) {
+                        return `https://www.youtube.com/embed/${videoId}`;
+                    }
+                }
+
+                if (parsed.pathname.startsWith('/embed/')) {
+                    return url;
+                }
+            }
+
+            if (hostname === 'youtu.be') {
+                const videoId = parsed.pathname.replace('/', '');
+                if (videoId) {
+                    return `https://www.youtube.com/embed/${videoId}`;
+                }
+            }
+        } catch (error) {
+            return url;
+        }
+
+        return url;
+    }
+
     function openModal(trigger) {
         if (!titleEl || !bodyEl) {
             return;
@@ -141,6 +176,26 @@ function initializePopups() {
             link.rel = 'noopener noreferrer';
             link.textContent = trigger.dataset.linkText || linkUrl;
             bodyEl.appendChild(link);
+        }
+
+        const videoUrl = trigger.dataset.video;
+        if (videoUrl) {
+            bodyEl.appendChild(document.createElement('br'));
+            bodyEl.appendChild(document.createElement('br'));
+
+            const iframe = document.createElement('iframe');
+            iframe.width = '560';
+            iframe.height = '315';
+            iframe.src = toEmbedUrl(videoUrl);
+            iframe.title = 'YouTube video player';
+            iframe.frameBorder = '0';
+            iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+            iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+            iframe.allowFullscreen = true;
+            iframe.style.width = '100%';
+            iframe.style.maxWidth = '560px';
+            iframe.style.display = 'block';
+            bodyEl.appendChild(iframe);
         }
         modal.classList.add('is-open');
         modal.setAttribute('aria-hidden', 'false');
