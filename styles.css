@@ -751,7 +751,19 @@ html::after {
     font-size: 22px;
     margin-bottom: 12px;
 }
+.popup-images {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+}
 
+.popup-images img {
+    width:100%;
+    flex: 1;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    border-radius: 8px;
+}
 .popup-card #popupBody {
     font-size: 17px;
     line-height: 1.6;
