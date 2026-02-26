@@ -552,7 +552,7 @@ body.portal-page::after {
 /* Hero Section */
 .hero-section {
     background-color: #8B1538;
-    background-image: linear-gradient(rgba(139, 21, 56, 0.6), rgba(139, 21, 56, 0.6)), url('images/the-azulejos-are-the-typical-ornaments-of-portuguese-and-spanish-architecture-and-consist-of-a-richly-decorated-ceramic-tile-W2D25K.jpg');
+    background-image: linear-gradient(rgba(139, 21, 56, 0.6), rgba(139, 21, 56, 0.6)), url('images/bg\,f8f8f8-flat\,750x\,075\,f-pad\,750x1000\,f8f8f8.u2.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -670,12 +670,25 @@ body.portal-page::after {
     overflow: hidden;
     aspect-ratio: 4 / 3;
     cursor: pointer;
+    border: 1px solid rgba(255, 255, 255, 0.55);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     transition: transform 0.3s ease;
 }
 
+.grid-image::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(rgba(139, 21, 56, 0.35), rgba(139, 21, 56, 0.35));
+    pointer-events: none;
+}
+
 .grid-image:hover {
     transform: translateY(-5px);
+}
+
+.grid-image:hover::after {
+    background: linear-gradient(rgba(139, 21, 56, 0.25), rgba(139, 21, 56, 0.25));
 }
 
 .grid-image img {
