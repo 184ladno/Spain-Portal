@@ -197,6 +197,17 @@ function initializePopups() {
             iframe.style.display = 'block';
             bodyEl.appendChild(iframe);
         }
+
+        const emergencyText = trigger.dataset.emergency;
+        if (emergencyText) {
+            bodyEl.appendChild(document.createElement('br'));
+
+            const emergencyNotice = document.createElement('p');
+            emergencyNotice.className = 'emergency-alert';
+            emergencyNotice.textContent = emergencyText;
+            bodyEl.appendChild(emergencyNotice);
+        }
+
         modal.classList.add('is-open');
         modal.setAttribute('aria-hidden', 'false');
 
