@@ -557,7 +557,7 @@ body.portal-page::after {
 /* Hero Section */
 .hero-section {
     background-color: #8B1538;
-    background-image: linear-gradient(rgba(140, 21, 20, 0.35), rgba(140, 21, 20, 0.35)), url('images/bg\,f8f8f8-flat\,750x\,075\,f-pad\,750x1000\,f8f8f8.u2\ copy.jpg');
+    background-image:linear-gradient(rgba(192, 85, 117, 0.7), rgba(139, 21, 56, 0.562)), url('images/bg\,f8f8f8-flat\,750x\,075\,f-pad\,750x1000\,f8f8f8.u2\ copy.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -603,17 +603,32 @@ body.portal-page::after {
     margin-bottom: 24px;
     line-height: 1.2;
     animation: fadeIn 1s ease-out;
+    color: white;
+    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.7);
 }
 
 .hero-subtitle {
-    font-size: 20px;
+    font-size: 30px;
     line-height: 1.6;
     max-width: 800px;
     margin: 0 auto;
     opacity: 0.95;
     animation: fadeIn 1s ease-out 0.2s both;
+    color: white;
+    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.7);
 }
 
+.hero-text {
+    font-size: 32px;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto;
+    opacity: 0.95;
+    animation: fadeIn 1s ease-out 0.2s both;
+    color:white;
+    color: white;
+    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.7);
+}
 .hero-cta {
     display: inline-flex;
     align-items: center;
@@ -870,6 +885,10 @@ body.portal-page::after {
     position: relative;
     padding-left: 56px;
     padding-right: 56px;
+    line-height: 1.6;
+    color: white;
+    text-shadow: 0 4px 12px rgba(255, 147, 165, 0.3);
+}
 }
 
 .sevilla-section .page-header::before,
