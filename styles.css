@@ -154,8 +154,8 @@ body.portal-page::after {
 /* Login Page Styles */
 .login-page {
     min-height: 100vh;
-    background-color: #f8f8f8;
-    background-image: url('images/bg\,f8f8f8-flat\,750x\,075\,f-pad\,750x1000\,f8f8f8.u2.jpg');
+    background-color: #f3c0c0;
+    background-image: linear-gradient(rgba(192, 85, 117, 0.7), rgba(139, 21, 56, 0.562)),url('images/bg\,f8f8f8-flat\,750x\,075\,f-pad\,750x1000\,f8f8f8.u2.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -165,6 +165,7 @@ body.portal-page::after {
     padding: 20px;
     position: relative;
     overflow: hidden;
+    opacity: 0.95;
 }
 
 .landing-page {
@@ -213,11 +214,13 @@ body.portal-page::after {
     display: flex;
     justify-content: center;
     padding: 80px 20px 100px;
-    background: #ffffff;
+    background: rgba(179, 78, 95, 0.753);
+    border-radius: 16px;
 }
 
+
 .login-card {
-    background: #ffffff;
+    background: rgb(255, 243, 245);
     backdrop-filter: blur(10px);
     border: 1px solid rgba(139, 21, 56, 0.2);
     border-radius: 16px;
@@ -554,7 +557,7 @@ body.portal-page::after {
 /* Hero Section */
 .hero-section {
     background-color: #8B1538;
-    background-image: linear-gradient(rgba(139, 21, 56, 0.35), rgba(139, 21, 56, 0.35)), url('images/bg\,f8f8f8-flat\,750x\,075\,f-pad\,750x1000\,f8f8f8.u2\ copy.jpg');
+    background-image: linear-gradient(rgba(140, 21, 20, 0.35), rgba(140, 21, 20, 0.35)), url('images/bg\,f8f8f8-flat\,750x\,075\,f-pad\,750x1000\,f8f8f8.u2\ copy.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
