@@ -155,7 +155,7 @@ body.portal-page::after {
 .login-page {
     min-height: 100vh;
     background-color: #f8f8f8;
-    background-image: url('images/connected-bg.jpg');
+    background-image: url('images/bg\,f8f8f8-flat\,750x\,075\,f-pad\,750x1000\,f8f8f8.u2.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -554,7 +554,7 @@ body.portal-page::after {
 /* Hero Section */
 .hero-section {
     background-color: #8B1538;
-    background-image: linear-gradient(rgba(139, 21, 56, 0.35), rgba(139, 21, 56, 0.35)), url('images/connected-bg.jpg');
+    background-image: linear-gradient(rgba(139, 21, 56, 0.35), rgba(139, 21, 56, 0.35)), url('images/bg\,f8f8f8-flat\,750x\,075\,f-pad\,750x1000\,f8f8f8.u2\ copy.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
