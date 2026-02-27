@@ -154,10 +154,11 @@ body.portal-page::after {
 /* Login Page Styles */
 .login-page {
     min-height: 100vh;
-    background: #ffffff;
-    background-image: 
-        linear-gradient(90deg, transparent 0%, rgba(139, 21, 56, 0.02) 50%, transparent 100%),
-        radial-gradient(circle at 20% 50%, rgba(139, 21, 56, 0.05) 0%, transparent 50%);
+    background-color: #f8f8f8;
+    background-image: url('images/connected-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -553,7 +554,7 @@ body.portal-page::after {
 /* Hero Section */
 .hero-section {
     background-color: #8B1538;
-    background-image: linear-gradient(rgba(139, 21, 56, 0.6), rgba(139, 21, 56, 0.6)), url('images/bg\,f8f8f8-flat\,750x\,075\,f-pad\,750x1000\,f8f8f8.u2.jpg');
+    background-image: linear-gradient(rgba(139, 21, 56, 0.35), rgba(139, 21, 56, 0.35)), url('images/connected-bg.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -1277,6 +1278,15 @@ body.portal-page::after {
     font-size: 30px;
     color: #666;
     line-height: 1.7;
+}
+
+.connected-section {
+    padding: 72px 40px;
+    background-color: #f8f8f8;
+    background-image: url('images/connected-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 .connected-section .section-heading {
