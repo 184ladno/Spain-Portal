@@ -82,6 +82,15 @@
             </svg>
             Personal Details
         </button>
+        <button class="nav-item" data-page="reflective">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4 19.5V4.5C4 3.94772 4.44772 3.5 5 3.5H15.5L20 8V19.5C20 20.0523 19.5523 20.5 19 20.5H5C4.44772 20.5 4 20.0523 4 19.5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M15 3.5V8.5H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M8 12H16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M8 16H13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Reflective Diary
+        </button>
     </nav>
 
     <!-- Main Content -->
@@ -1011,6 +1020,31 @@
                     <ul class="details-list" id="documentList">
                         <li class="details-empty">No documents uploaded yet.</li>
                     </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Reflective Diary Page -->
+        <div id="reflective" class="page-content">
+            <div class="page-header">
+                <h1>Reflective Diary</h1>
+                <p>Capture daily reflections, key learnings, and actions for your Spain trip</p>
+            </div>
+
+            <div class="details-grid reflective-grid">
+                <div class="details-card">
+                    <h2>Today’s Reflection Prompt</h2>
+                    <ul class="details-list">
+                        <li>What did I learn today during the trip?</li>
+                        <li>What challenged me and how did I respond?</li>
+                        <li>What is one action I will take tomorrow?</li>
+                    </ul>
+                </div>
+
+                <div class="details-card reflective-entry-card">
+                    <h2>Diary Entry</h2>
+                    <label class="reflective-label" for="reflectiveEntry">Write your reflection below</label>
+                    <textarea id="reflectiveEntry" class="reflective-textarea" placeholder="Example: Today I improved my confidence speaking with local people and learned new Spanish phrases..."></textarea>
                 </div>
             </div>
         </div>
