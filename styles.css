@@ -1108,7 +1108,7 @@ body.portal-page::after {
     align-items: center;
     gap: 28px;
     position: relative;
-    left: 350px;
+    justify-content: center;
 }
 
 .ready-spain-image {
