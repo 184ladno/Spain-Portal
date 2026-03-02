@@ -774,6 +774,11 @@ body.portal-page::after {
     pointer-events: auto;
 }
 
+.popup-card {
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
 .popup-backdrop {
     position: absolute;
     inset: 0;
@@ -888,7 +893,6 @@ body.portal-page::after {
     line-height: 1.6;
     color: white;
     text-shadow: 0 4px 12px rgba(255, 147, 165, 0.3);
-}
 }
 
 .sevilla-section .page-header::before,

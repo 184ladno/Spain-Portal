@@ -195,7 +195,19 @@ function initializePopups() {
                 }
             }
         });
-        
+        modal.classList.add('is-open');
+        modal.setAttribute('aria-hidden','false');
+
+        const popupCard=modal.querySelector('.popup-card');
+        if (popupCard) {
+            popupCard.scrollTop=0;
+        }
+
+        if (closeButton) {
+            closeButton.focus()
+        }
+    
+
        
 
         const linkUrl = trigger.dataset.link;
@@ -283,6 +295,7 @@ function initializePopups() {
     });
 }
 
+
 const SharedText = `Key Landmarks to Include in Your Walking Tour
 Royal Alcazar of Seville
 🟢 Highlights: A UNESCO World Heritage site with exquisite Moorish architecture, beautiful gardens, and a historic royal palace.
@@ -325,3 +338,14 @@ function applySharedLandmarksText() {
         button.dataset.body = SharedText;
     });
 }
+
+const modalBody = document.querySelector('.modal-body');
+
+// Scroll to bottom
+modalBody.scrollTop = modalBody.scrollHeight;
+
+// Scroll to top
+modalBody.scrollTop = 0;
+
+// Smooth scroll to an element inside
+document.getElementById('section3').scrollIntoView({ behavior: 'smooth' });
