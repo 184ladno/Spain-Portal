@@ -1048,10 +1048,68 @@
                     </ul>
                 </div>
 
-                <div class="details-card reflective-entry-card">
+               <div class="details-card reflective-entry-card">
+                <style>
+                .details-card reflective-entry-card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1.25rem;max-width:700px;margin:1rem auto}
+                .details-card reflective-entry-card h2{font-size:18px;font-weight:500;color:var(--color-text-primary);margin:0 0 4px}
+                .details-card reflective-entry-card label{font-size:13px;color:var(--color-text-secondary);display:block;margin-bottom:10px}
+                .entry-input-wrapper:focus-within{box-shadow:0 0 0 2px #8B153840;border-color:#8B1538}
+                .entry-input-wrapper{border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);overflow:hidden;background:var(--color-background-primary)}
+                .entry-input-wrapper textarea{width:100%;min-height:180px;padding:12px 14px;border:none;outline:none;resize:none;font-size:14px;color:var(--color-text-primary);background:transparent;font-family:var(--font-sans);line-height:1.6}
+                .entry-toolbar{display:flex;align-items:center;gap:8px;padding:6px 10px;border-top:0.5px solid var(--color-border-tertiary);background:var(--color-background-secondary)}
+                .plus-btn{width:30px;height:30px;border-radius:50%;border:1px solid #8B153880;background:var(--color-background-primary);color:#8B1538;font-size:20px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+                .plus-btn:hover{background:#8B153815}
+                .preview{display:flex;flex-wrap:wrap;gap:4px;flex:1}
+                .preview img{width:40px;height:40px;object-fit:cover;border-radius:4px;border:0.5px solid var(--color-border-tertiary)}
+                .preview .file-tag{display:inline-flex;align-items:center;gap:4px;padding:2px 8px;background:var(--color-background-primary);border:0.5px solid var(--color-border-secondary);border-radius:4px;font-size:12px;color:var(--color-text-secondary)}
+                .preview .file-tag .remove{cursor:pointer;color:var(--color-text-tertiary);font-size:14px;line-height:1}
+                .preview .file-tag .remove:hover{color:var(--color-text-primary)}
+                </style>
                     <h2>Diary Entry</h2>
                     <label class="reflective-label" for="reflectiveEntry">Write your reflection below</label>
-                    <textarea id="reflectiveEntry" class="reflective-textarea" placeholder="Example: Today I improved my confidence speaking with local people and learned new Spanish phrases..."></textarea>
+                    <div class="entry-input-wrapper">
+                        <textarea id="reflectiveEntry" class="reflective-textarea" placeholder="Example: Today I improved my confidence speaking with local people and learned new Spanish phrases..."></textarea>
+                        <div class="entry-toolbar">
+                            <button class="plus-btn" id="plusBtn" title="Attach photo or file">+</button>
+                            <input type="file" id="attachInput" multiple accept="image/*,video/*,.pdf,.doc,.docx,.txt" style="display:none">
+                            <div class="preview" id="previewArea"></div>
+                        </div>
+                        <script>
+                        const btn = document.getElementById('plusBtn');
+                        const input = document.getElementById('attachInput');
+                        const preview = document.getElementById('previewArea');
+                        let attached = [];
+
+                        btn.addEventListener('click', () => input.click());
+
+                        input.addEventListener('change', function() {
+                        const files = Array.from(this.files || []);
+                        files.forEach(file => {
+                            attached.push(file);
+                            if (file.type.startsWith('image/')) {
+                            const reader = new FileReader();
+                            reader.onload = e => {
+                                const img = document.createElement('img');
+                                img.src = e.target.result;
+                                img.title = file.name;
+                                preview.appendChild(img);
+                            };
+                            reader.readAsDataURL(file);
+                            } else {
+                            const tag = document.createElement('span');
+                            tag.className = 'file-tag';
+                            tag.innerHTML = file.name + '<span class="remove">x</span>';
+                            tag.querySelector('.remove').addEventListener('click', () => {
+                                attached = attached.filter(f => f !== file);
+                                tag.remove();
+                            });
+                            preview.appendChild(tag);
+                            }
+                        });
+                        this.value = '';
+                        });
+                        </script>
+                    </div>
                 </div>
             </div>
         </div>
