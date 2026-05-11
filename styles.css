@@ -2435,3 +2435,42 @@ body.portal-page::after {
     }
 }
 
+.nav-item-edit {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 16px 24px;
+    background: transparent;
+    border: none;
+    border-bottom: 3px solid transparent;
+    font-size: 20px;
+    font-weight: 500;
+    color: #666;
+    cursor: pointer;
+    transition: all 0.3s;
+    position: relative;
+    animation: fadeIn 0.8s ease-out;
+}
+
+.nav-item-edit svg {
+    width: 25px;
+    height: 25px;
+}
+
+.nav-item-edit:hover {
+    color: #8B1538;
+    background: rgba(139, 21, 56, 0.05);
+}
+
+.portal-nav-edit {
+    background: #ffffff;
+    padding: 0 40px;
+    display: flex;
+    gap: 200px;
+    border-bottom: 1px solid #e0e0e0;
+    animation: slideInDown 0.7s ease-out;
+    align-content: center;
+    justify-content: center;
+    margin-top: -30px;
+}
+
