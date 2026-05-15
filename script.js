@@ -349,24 +349,3 @@ modalBody.scrollTop = 0;
 
 // Smooth scroll to an element inside
 document.getElementById('section3').scrollIntoView({ behavior: 'smooth' });
-
-    const navItems = document.querySelectorAll('.nav-item-edit');
-    const pageContents = document.querySelectorAll('.page-content-edit');
-    
-    navItems.forEach(item => {
-        item.addEventListener('click', function() {
-            const targetPage = this.getAttribute('data-page');
-            
-            // Update active nav item
-            navItems.forEach(nav => nav.classList.remove('active'));
-            this.classList.add('active');
-            
-            // Show target page
-            pageContents.forEach(page => {
-                page.classList.remove('active');
-                if (page.id === targetPage) {
-                    page.classList.add('active');
-                }
-            });
-        });
-    });
