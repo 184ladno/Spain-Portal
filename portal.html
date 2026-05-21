@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" href="images/11849502.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body class="portal-page">
     <!-- Header -->
@@ -43,10 +44,7 @@
             Overview
         </button>
         <button class="nav-item" data-page="flights">
-            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M21 16V8C21 6.9 20.1 6 19 6H5C3.9 6 3 6.9 3 8V16C3 17.1 3.9 18 5 18H19C20.1 18 21 17.1 21 16Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M3 10L12 15L21 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
+             <i style="font-size:24px" class="fa">&#xf072;</i>
             Flights
         </button>
         <button class="nav-item" data-page="hotels">
@@ -1125,10 +1123,8 @@
             </div> 
             <nav class="portal-nav-edit active"> 
                 <button class="nav-item-edit active" data-page="flights-edit">
-                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M21 16V8C21 6.9 20.1 6 19 6H5C3.9 6 3 6.9 3 8V16C3 17.1 3.9 18 5 18H19C20.1 18 21 17.1 21 16Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M3 10L12 15L21 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
+                    <i style="font-size:24px" class="fa">&#xf072;</i>
+                    
                     Flights
                 </button>
                 <button class="nav-item-edit" data-page="hotels-edit">
@@ -1174,19 +1170,51 @@
                     <p>Modify flight details, timings, and booking information</p>
                 </div>
                 <div class="edit-form">
-                    <label for="flightNumber">Flight Number</label>
+                    <h2>Outbound Flight</h2>
+
+                    <label for="date">Date</label>
                     <br>
-                    <input type="text" id="flightNumber" name="flightNumber" placeholder="Enter flight number">
+                    <input type="date" id="date" name="date">
                     <br>
 
                     <label for="departureTime">Departure Time</label>
                     <br>
-                    <input type="datetime-local" id="departureTime" name="departureTime">
+                    <input type="time" id="departureTime" name="departureTime">
                     <br>
 
                     <label for="arrivalTime">Arrival Time</label>
                     <br>
-                    <input type="datetime-local" id="arrivalTime" name="arrivalTime">
+                    <input type="time" id="arrivalTime" name="arrivalTime">
+                    <br>
+                    
+                    <label for="departure place">Departure Place</label>
+                    <br>
+                    <input type="text" id="departurePlace" name="departurePlace" placeholder="Enter departure place">
+                    <br>
+                    
+                    <label for="departureTerminal">Departure Terminal</label>
+                    <br>
+                    <input type="text" id="departureTerminal" name="departureTerminal" placeholder="Enter departure terminal">
+                    <br>
+
+                    <label for="duration">Flight Duration</label>
+                    <br>
+                    <input type="text" id="duration" name="duration" placeholder="Enter flight duration (e.g., 2h 30m)">
+                    <br>
+
+                    <label for="arrivalPlace">Arrival Place</label> 
+                    <br>
+                    <input type="text" id="arrivalPlace" name="arrivalPlace" placeholder="Enter arrival place">
+                    <br>
+
+                    <label for="arrivalTerminal">Arrival Terminal</label>
+                    <br>
+                    <input type="text" id="arrivalTerminal" name="arrivalTerminal" placeholder="Enter arrival terminal">
+                    <br>
+
+                    <label for="flightNumber">Flight Number</label>
+                    <br>
+                    <input type="text" id="flightNumber" name="flightNumber" placeholder="Enter flight number">
                     <br>
 
                     <label for="airline">Airline</label>
@@ -1194,52 +1222,71 @@
                     <input type="text" id="airline" name="airline" placeholder="Enter airline name">
                     <br>
 
+                    <label for="seats">Seat Assignment</label>
+                    <br>
+                    <input type="text" id="seats" name="seats" placeholder="Enter seat number">
+                    <br>
+
+                    <h2>Return Flight</h2>
+                    
+                    <label for="date">Date</label>
+                    <br>
+                    <input type="date" id="date" name="date">
+                    <br>
+
+                    <label for="departureTime">Departure Time</label>
+                    <br>
+                    <input type="time" id="departureTime" name="departureTime">
+                    <br>
+
+                    <label for="arrivalTime">Arrival Time</label>
+                    <br>
+                    <input type="time" id="arrivalTime" name="arrivalTime">
+                    <br>
+                    
+                    <label for="departure place">Departure Place</label>
+                    <br>
+                    <input type="text" id="departurePlace" name="departurePlace" placeholder="Enter departure place">
+                    <br>
+                    
+                    <label for="departureTerminal">Departure Terminal</label>
+                    <br>
+                    <input type="text" id="departureTerminal" name="departureTerminal" placeholder="Enter departure terminal">
+                    <br>
+
+                    <label for="duration">Flight Duration</label>
+                    <br>
+                    <input type="text" id="duration" name="duration" placeholder="Enter flight duration (e.g., 2h 30m)">
+                    <br>
+                    
+                    <label for="arrivalPlace">Arrival Place</label> 
+                    <br>
+                    <input type="text" id="arrivalPlace" name="arrivalPlace" placeholder="Enter arrival place">
+                    <br>
+
+                    <label for="arrivalTerminal">Arrival Terminal</label>
+                    <br>
+                    <input type="text" id="arrivalTerminal" name="arrivalTerminal" placeholder="Enter arrival terminal">
+                    <br>
+
+                    <label for="flightNumber">Flight Number</label>
+                    <br>
+                    <input type="text" id="flightNumber" name="flightNumber" placeholder="Enter flight number">
+                    <br>
+
+                    <label for="airline">Airline</label>
+                    <br>
+                    <input type="text" id="airline" name="airline" placeholder="Enter airline name">
+                    <br>
+
+                    <label for="seats">Seat Assignment</label>
+                    <br>
+                    <input type="text" id="seats" name="seats" placeholder="Enter seat number">
+                    <br>
+                    <br>
+
                     <button type="submit" class="save-button">Save Changes</button>
                 </div>
-            </div>
-            <div id="hotels-edit" class="page-content-edit">
-                <div class="page-header">
-                    <h1>Edit Hotels Information</h1>
-                    <p>Update hotel names, addresses, and check-in/check-out times</p>
-                </div>
-                    <div class="edit-form">
-                        <label for="hotelName">Hotel Name</label>
-                        <br>
-                        <input type="text" id="hotelName" name="hotelName" placeholder="Enter hotel name">
-                        <br>
-
-                        <label for="hotelAddress">Hotel Address</label>
-                        <br>
-                        <input type="text" id="hotelAddress" name="hotelAddress" placeholder="Enter hotel address">
-                        <br>
-
-                        <label for="checkIn">Check-in Time</label>
-                        <br>    
-                        <input type="datetime-local" id="checkIn" name="checkIn">
-                        <br>
-
-                        <label for="checkOut">Check-out Time</label>
-                        <br>
-                        <input type="datetime-local" id="checkOut" name="checkOut">
-                        <br>
-
-                        <label for="room-type">Room Type</label>
-                        <br>
-                        <input type="text" id="room-type" name="room-type" placeholder="Enter room type">
-                        <br>
-
-                        <label for="amenities">Amenities</label>
-                        <br>
-                        <input type="text" id="amenities" name="amenities" placeholder="Enter amenities">
-                        <br>
-
-                        <label for="contact">Contact</label>
-                        <br>
-                        <input type="text" id="contact" name="contact" placeholder="Enter phone number or email for hotel contact">
-                        <br>
-
-                        <button type="submit" class="save-button">Save Changes</button>
-                    </div>
             </div>
             <div id="itinerary-edit" class="page-content-edit">
                 <div class="page-header">
