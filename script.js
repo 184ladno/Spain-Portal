@@ -349,3 +349,5 @@ modalBody.scrollTop = 0;
 
 // Smooth scroll to an element inside
 document.getElementById('section3').scrollIntoView({ behavior: 'smooth' });
+
+portal-nav.scrollwidth
