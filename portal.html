@@ -1169,127 +1169,130 @@
                     <h1>Edit Flights Information</h1>
                     <p>Modify flight details, timings, and booking information</p>
                 </div>
-                <div class="edit-form">
-                    <h2>Outbound Flight</h2>
+                <div class="edit-form" id="flight-edit-sections">
+                    <div class="outbound-flight">
+                        <h2>Outbound Flight</h2>
 
-                    <label for="outbounddate">Date</label>
-                    <br>
-                    <input type="date" id="o_date" name="date">
-                    <br>
+                        <label for="outbounddate">Date</label>
+                        <br>
+                        <input type="date" id="o_date" name="date">
+                        <br>
 
-                    <label for="departureTime">Departure Time</label>
-                    <br>
-                    <input type="time" id="o_departureTime" name="departureTime">
-                    <br>
+                        <label for="departureTime">Departure Time</label>
+                        <br>
+                        <input type="time" id="o_departureTime" name="departureTime">
+                        <br>
 
-                    <label for="arrivalTime">Arrival Time</label>
-                    <br>
-                    <input type="time" id="o_arrivalTime" name="arrivalTime">
-                    <br>
-                    
-                    <label for="departure place">Departure Place</label>
-                    <br>
-                    <input type="text" id="o_departurePlace" name="departurePlace" placeholder="Enter departure place">
-                    <br>
-                    
-                    <label for="departureTerminal">Departure Terminal</label>
-                    <br>
-                    <input type="number" id="o_departureTerminal" name="departureTerminal" placeholder="Enter departure terminal">
-                    <br>
+                        <label for="arrivalTime">Arrival Time</label>
+                        <br>
+                        <input type="time" id="o_arrivalTime" name="arrivalTime">
+                        <br>
+                        
+                        <label for="departure place">Departure Place</label>
+                        <br>
+                        <input type="text" id="o_departurePlace" name="departurePlace" placeholder="Enter departure place">
+                        <br>
+                        
+                        <label for="departureTerminal">Departure Terminal</label>
+                        <br>
+                        <input type="number" id="o_departureTerminal" name="departureTerminal" placeholder="Enter departure terminal">
+                        <br>
 
-                    <label for="duration">Flight Duration</label>
-                    <br>
-                    <input type="text" id="o_duration" name="duration" placeholder="Enter flight duration (e.g., 2h 30m)">
-                    <br>
+                        <label for="duration">Flight Duration</label>
+                        <br>
+                        <input type="text" id="o_duration" name="duration" placeholder="Enter flight duration (e.g., 2h 30m)">
+                        <br>
 
-                    <label for="arrivalPlace">Arrival Place</label> 
-                    <br>
-                    <input type="text" id="o_arrivalPlace" name="arrivalPlace" placeholder="Enter arrival place">
-                    <br>
+                        <label for="arrivalPlace">Arrival Place</label> 
+                        <br>
+                        <input type="text" id="o_arrivalPlace" name="arrivalPlace" placeholder="Enter arrival place">
+                        <br>
 
-                    <label for="arrivalTerminal">Arrival Terminal</label>
-                    <br>
-                    <input type="number" id="o_arrivalTerminal" name="arrivalTerminal" placeholder="Enter arrival terminal">
-                    <br>
+                        <label for="arrivalTerminal">Arrival Terminal</label>
+                        <br>
+                        <input type="number" id="o_arrivalTerminal" name="arrivalTerminal" placeholder="Enter arrival terminal">
+                        <br>
 
-                    <label for="flightNumber">Flight Number</label>
-                    <br>
-                    <input type="text" id="o_flightNumber" name="flightNumber" placeholder="Enter flight number">
-                    <br>
+                        <label for="flightNumber">Flight Number</label>
+                        <br>
+                        <input type="text" id="o_flightNumber" name="flightNumber" placeholder="Enter flight number">
+                        <br>
 
-                    <label for="aircraft">Aircraft</label>
-                    <br>
-                    <input type="text" id="o_aircraft" name="aircraft" placeholder="Enter aircraft name">
-                    <br>
+                        <label for="aircraft">Aircraft</label>
+                        <br>
+                        <input type="text" id="o_aircraft" name="aircraft" placeholder="Enter aircraft name">
+                        <br>
 
-                    <label for="seats">Seat Assignment</label>
-                    <br>
-                    <input type="text" id="o_seats" name="seats" placeholder="Enter seat number">
-                    <br>
-                    <br>
+                        <label for="seats">Seat Assignment</label>
+                        <br>
+                        <input type="text" id="o_seats" name="seats" placeholder="Enter seat number">
+                        <br>
+                        <br>
 
-                    <button type="submit" class="save-button" onclick="updateOutboundFlight()">Save Changes</button>
-                    <br>
+                        <button type="submit" class="save-button" onclick="updateOutboundFlight()">Save Changes</button>
+                        <br>
+                    </div>
+                    <div class="return-flight-edit">
+                        <h2>Return Flight</h2>
+                        
+                        <label for="returndate">Date</label>
+                        <br>
+                        <input type="date" id="r_date" name="returndate">
+                        <br>
 
-                    <h2>Return Flight</h2>
-                    
-                    <label for="returndate">Date</label>
-                    <br>
-                    <input type="date" id="r_date" name="returndate">
-                    <br>
+                        <label for="departureTime">Departure Time</label>
+                        <br>
+                        <input type="time" id="r_departureTime" name="departureTime">
+                        <br>
 
-                    <label for="departureTime">Departure Time</label>
-                    <br>
-                    <input type="time" id="r_departureTime" name="departureTime">
-                    <br>
+                        <label for="arrivalTime">Arrival Time</label>
+                        <br>
+                        <input type="time" id="r_arrivalTime" name="arrivalTime">
+                        <br>
+                        
+                        <label for="departure place">Departure Place</label>
+                        <br>
+                        <input type="text" id="r_departurePlace" name="departurePlace" placeholder="Enter departure place">
+                        <br>
+                        
+                        <label for="departureTerminal">Departure Terminal</label>
+                        <br>
+                        <input type="number" id="r_departureTerminal" name="departureTerminal" placeholder="Enter departure terminal">
+                        <br>
 
-                    <label for="arrivalTime">Arrival Time</label>
-                    <br>
-                    <input type="time" id="r_arrivalTime" name="arrivalTime">
-                    <br>
-                    
-                    <label for="departure place">Departure Place</label>
-                    <br>
-                    <input type="text" id="r_departurePlace" name="departurePlace" placeholder="Enter departure place">
-                    <br>
-                    
-                    <label for="departureTerminal">Departure Terminal</label>
-                    <br>
-                    <input type="number" id="r_departureTerminal" name="departureTerminal" placeholder="Enter departure terminal">
-                    <br>
+                        <label for="duration">Flight Duration</label>
+                        <br>
+                        <input type="text" id="r_duration" name="duration" placeholder="Enter flight duration (e.g., 2h 30m)">
+                        <br>
+                        
+                        <label for="arrivalPlace">Arrival Place</label> 
+                        <br>
+                        <input type="text" id="r_arrivalPlace" name="arrivalPlace" placeholder="Enter arrival place">
+                        <br>
 
-                    <label for="duration">Flight Duration</label>
-                    <br>
-                    <input type="text" id="r_duration" name="duration" placeholder="Enter flight duration (e.g., 2h 30m)">
-                    <br>
-                    
-                    <label for="arrivalPlace">Arrival Place</label> 
-                    <br>
-                    <input type="text" id="r_arrivalPlace" name="arrivalPlace" placeholder="Enter arrival place">
-                    <br>
+                        <label for="arrivalTerminal">Arrival Terminal</label>
+                        <br>
+                        <input type="number" id="r_arrivalTerminal" name="arrivalTerminal" placeholder="Enter arrival terminal">
+                        <br>
 
-                    <label for="arrivalTerminal">Arrival Terminal</label>
-                    <br>
-                    <input type="number" id="r_arrivalTerminal" name="arrivalTerminal" placeholder="Enter arrival terminal">
-                    <br>
+                        <label for="flightNumber">Flight Number</label>
+                        <br>
+                        <input type="text" id="r_flightNumber" name="flightNumber" placeholder="Enter flight number">
+                        <br>
 
-                    <label for="flightNumber">Flight Number</label>
-                    <br>
-                    <input type="text" id="r_flightNumber" name="flightNumber" placeholder="Enter flight number">
-                    <br>
+                        <label for="aircraft">Aircraft</label>
+                        <br>
+                        <input type="text" id="r_aircraft" name="aircraft" placeholder="Enter aircraft name">
+                        <br>
 
-                    <label for="aircraft">Aircraft</label>
-                    <br>
-                    <input type="text" id="r_aircraft" name="aircraft" placeholder="Enter aircraft name">
-                    <br>
+                        <label for="seats">Seat Assignment</label>
+                        <br>
+                        <input type="text" id="r_seats" name="seats" placeholder="Enter seat number">
+                        <br>
+                        <br>
 
-                    <label for="seats">Seat Assignment</label>
-                    <br>
-                    <input type="text" id="r_seats" name="seats" placeholder="Enter seat number">
-                    <br>
-                    <br>
-
-                    <button type="submit" class="save-button" onclick="updateReturnFlight()">Save Changes</button>
+                        <button type="submit" class="save-button" onclick="updateReturnFlight()">Save Changes</button>
+                    </div>
                 </div>
             </div>
             <div id="hotel-edit" class="page-content-edit">

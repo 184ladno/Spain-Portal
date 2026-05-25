@@ -2474,3 +2474,14 @@ body.portal-page::after {
     margin-top: -30px;
 }
 
+#flights-edit-sections {
+    width: 500px;
+    border: 1px solid black;
+}
+.outbound-flight-edit {
+    width: 300px;
+    border: 1px solid red;
+}
+.return-flight-edit {
+    border: 1px solid green;
+}
