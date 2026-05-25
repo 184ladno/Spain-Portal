@@ -1169,7 +1169,7 @@
                     <h1>Edit Flights Information</h1>
                     <p>Modify flight details, timings, and booking information</p>
                 </div>
-                <div class="edit-form" id="flight-edit-sections">
+                <div class="edit-form two-columns">
                     <div class="outbound-flight">
                         <h2>Outbound Flight</h2>
 
@@ -1187,12 +1187,12 @@
                         <br>
                         <input type="time" id="o_arrivalTime" name="arrivalTime">
                         <br>
-                        
+                            
                         <label for="departure place">Departure Place</label>
                         <br>
                         <input type="text" id="o_departurePlace" name="departurePlace" placeholder="Enter departure place">
                         <br>
-                        
+
                         <label for="departureTerminal">Departure Terminal</label>
                         <br>
                         <input type="number" id="o_departureTerminal" name="departureTerminal" placeholder="Enter departure terminal">
@@ -1232,9 +1232,9 @@
                         <button type="submit" class="save-button" onclick="updateOutboundFlight()">Save Changes</button>
                         <br>
                     </div>
-                    <div class="return-flight-edit">
+                    <div class="return-flight">
                         <h2>Return Flight</h2>
-                        
+
                         <label for="returndate">Date</label>
                         <br>
                         <input type="date" id="r_date" name="returndate">
@@ -1249,12 +1249,12 @@
                         <br>
                         <input type="time" id="r_arrivalTime" name="arrivalTime">
                         <br>
-                        
+
                         <label for="departure place">Departure Place</label>
                         <br>
                         <input type="text" id="r_departurePlace" name="departurePlace" placeholder="Enter departure place">
                         <br>
-                        
+
                         <label for="departureTerminal">Departure Terminal</label>
                         <br>
                         <input type="number" id="r_departureTerminal" name="departureTerminal" placeholder="Enter departure terminal">
@@ -1264,7 +1264,7 @@
                         <br>
                         <input type="text" id="r_duration" name="duration" placeholder="Enter flight duration (e.g., 2h 30m)">
                         <br>
-                        
+
                         <label for="arrivalPlace">Arrival Place</label> 
                         <br>
                         <input type="text" id="r_arrivalPlace" name="arrivalPlace" placeholder="Enter arrival place">
