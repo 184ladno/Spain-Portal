@@ -298,41 +298,41 @@
                         </div>
                         <div class="flight-title">
                             <h2>Outbound Flight</h2>
-                            <p class="flight-date" id="outbound-date">June 15, 2026</p>
+                            <p class="flight-date" id="o-date">June 15, 2026</p>
                         </div>
                     </div>
                     <div class="flight-details">
                         <div class="flight-route">
                             <div class="route-point">
-                                <div class="route-time">09:30</div>
+                                <div class="route-time" id="o-departureTime">09:30</div>
                                 <div class="route-location">
-                                    <strong>London Heathrow (LHR)</strong>
-                                    <p>Terminal 5</p>
+                                    <strong id="o-departurePlace">London Heathrow (LHR)</strong>
+                                    <p>Terminal</p> <p id="o-departureTerminal">5</p>
                                 </div>
                             </div>
                             <div class="route-line">
-                                <div class="route-duration">2h 35m</div>
+                                <div class="route-duration" id="o-duration">2h 35m</div>
                             </div>
                             <div class="route-point">
-                                <div class="route-time">13:05</div>
+                                <div class="route-time" id="o-arrivalTime">13:05</div>
                                 <div class="route-location">
-                                    <strong>Barcelona El Prat (BCN)</strong>
-                                    <p>Terminal 1</p>
+                                    <strong id="o-arrivalPlace">Barcelona El Prat (BCN)</strong>
+                                    <p>Terminal</p> <p id="o-arrivalTerminal">1</p>
                                 </div>
                             </div>
                         </div>
                         <div class="flight-info">
                             <div class="info-item">
                                 <span class="info-label">Flight Number:</span>
-                                <span class="info-value">BA 478</span>
+                                <span class="info-value" id="o-flightNumber">BA 478</span>
                             </div>
                             <div class="info-item">
                                 <span class="info-label">Aircraft:</span>
-                                <span class="info-value">Airbus A320</span>
+                                <span class="info-value" id="o-aircraft">Airbus A320</span>
                             </div>
                             <div class="info-item">
                                 <span class="info-label">Seat Assignment:</span>
-                                <span class="info-value">Check-in opens 24h before</span>
+                                <span class="info-value" id="o-seats">Check-in opens 24h before</span>
                             </div>
                         </div>
                     </div>
@@ -354,35 +354,35 @@
                     <div class="flight-details">
                         <div class="flight-route">
                             <div class="route-point">
-                                <div class="route-time">20:20</div>
+                                <div class="route-time" id="r-departureTime">20:20</div>
                                 <div class="route-location">
-                                    <strong>Madrid Barajas (MAD)</strong>
-                                    <p>Terminal 4</p>
+                                    <strong id="r-departurePlace">Madrid Barajas (MAD)</strong>
+                                    <p>Terminal</p> <p id="r-departureTerminal">4</p>
                                 </div>
                             </div>
                             <div class="route-line">
-                                <div class="route-duration">2h 25m</div>
+                                <div class="route-duration" id="r-duration">2h 25m</div>
                             </div>
                             <div class="route-point">
-                                <div class="route-time">22:45</div>
+                                <div class="route-time" id="r-arrivalTime">22:45</div>
                                 <div class="route-location">
-                                    <strong>London Heathrow (LHR)</strong>
-                                    <p>Terminal 5</p>
+                                    <strong id="r-arrivalPlace">London Heathrow (LHR)</strong>
+                                    <p>Terminal</p> <p id="r-arrivalTerminal">5</p>
                                 </div>
                             </div>
                         </div>
                         <div class="flight-info">
                             <div class="info-item">
                                 <span class="info-label">Flight Number:</span>
-                                <span class="info-value">BA 491</span>
+                                <span class="info-value" id="r-flightNumber">BA 491</span>
                             </div>
                             <div class="info-item">
                                 <span class="info-label">Aircraft:</span>
-                                <span class="info-value">Airbus A320</span>
+                                <span class="info-value" id="r-aircraft">Airbus A320</span>
                             </div>
                             <div class="info-item">
                                 <span class="info-label">Seat Assignment:</span>
-                                <span class="info-value">Check-in opens 24h before</span>
+                                <span class="info-value" id="r-seats">Check-in opens 24h before</span>
                             </div>
                         </div>
                     </div>
@@ -1174,114 +1174,114 @@
 
                     <label for="outbounddate">Date</label>
                     <br>
-                    <input type="date" id="outbounddate" name="outbounddate">
+                    <input type="date" id="o_date" name="date">
                     <br>
 
                     <label for="departureTime">Departure Time</label>
                     <br>
-                    <input type="time" id="departureTime" name="departureTime">
+                    <input type="time" id="o_departureTime" name="departureTime">
                     <br>
 
                     <label for="arrivalTime">Arrival Time</label>
                     <br>
-                    <input type="time" id="arrivalTime" name="arrivalTime">
+                    <input type="time" id="o_arrivalTime" name="arrivalTime">
                     <br>
                     
                     <label for="departure place">Departure Place</label>
                     <br>
-                    <input type="text" id="departurePlace" name="departurePlace" placeholder="Enter departure place">
+                    <input type="text" id="o_departurePlace" name="departurePlace" placeholder="Enter departure place">
                     <br>
                     
                     <label for="departureTerminal">Departure Terminal</label>
                     <br>
-                    <input type="text" id="departureTerminal" name="departureTerminal" placeholder="Enter departure terminal">
+                    <input type="number" id="o_departureTerminal" name="departureTerminal" placeholder="Enter departure terminal">
                     <br>
 
                     <label for="duration">Flight Duration</label>
                     <br>
-                    <input type="text" id="duration" name="duration" placeholder="Enter flight duration (e.g., 2h 30m)">
+                    <input type="text" id="o_duration" name="duration" placeholder="Enter flight duration (e.g., 2h 30m)">
                     <br>
 
                     <label for="arrivalPlace">Arrival Place</label> 
                     <br>
-                    <input type="text" id="arrivalPlace" name="arrivalPlace" placeholder="Enter arrival place">
+                    <input type="text" id="o_arrivalPlace" name="arrivalPlace" placeholder="Enter arrival place">
                     <br>
 
                     <label for="arrivalTerminal">Arrival Terminal</label>
                     <br>
-                    <input type="text" id="arrivalTerminal" name="arrivalTerminal" placeholder="Enter arrival terminal">
+                    <input type="number" id="o_arrivalTerminal" name="arrivalTerminal" placeholder="Enter arrival terminal">
                     <br>
 
                     <label for="flightNumber">Flight Number</label>
                     <br>
-                    <input type="text" id="flightNumber" name="flightNumber" placeholder="Enter flight number">
+                    <input type="text" id="o_flightNumber" name="flightNumber" placeholder="Enter flight number">
                     <br>
 
                     <label for="airline">Airline</label>
                     <br>
-                    <input type="text" id="airline" name="airline" placeholder="Enter airline name">
+                    <input type="text" id="o_airline" name="airline" placeholder="Enter airline name">
                     <br>
 
                     <label for="seats">Seat Assignment</label>
                     <br>
-                    <input type="text" id="seats" name="seats" placeholder="Enter seat number">
+                    <input type="text" id="o_seats" name="seats" placeholder="Enter seat number">
                     <br>
 
                     <h2>Return Flight</h2>
                     
                     <label for="returndate">Date</label>
                     <br>
-                    <input type="date" id="returndate" name="returndate">
+                    <input type="date" id="r_date" name="returndate">
                     <br>
 
                     <label for="departureTime">Departure Time</label>
                     <br>
-                    <input type="time" id="departureTime" name="departureTime">
+                    <input type="time" id="r_departureTime" name="departureTime">
                     <br>
 
                     <label for="arrivalTime">Arrival Time</label>
                     <br>
-                    <input type="time" id="arrivalTime" name="arrivalTime">
+                    <input type="time" id="r_arrivalTime" name="arrivalTime">
                     <br>
                     
                     <label for="departure place">Departure Place</label>
                     <br>
-                    <input type="text" id="departurePlace" name="departurePlace" placeholder="Enter departure place">
+                    <input type="text" id="r_departurePlace" name="departurePlace" placeholder="Enter departure place">
                     <br>
                     
                     <label for="departureTerminal">Departure Terminal</label>
                     <br>
-                    <input type="text" id="departureTerminal" name="departureTerminal" placeholder="Enter departure terminal">
+                    <input type="number" id="r_departureTerminal" name="departureTerminal" placeholder="Enter departure terminal">
                     <br>
 
                     <label for="duration">Flight Duration</label>
                     <br>
-                    <input type="text" id="duration" name="duration" placeholder="Enter flight duration (e.g., 2h 30m)">
+                    <input type="text" id="r_duration" name="duration" placeholder="Enter flight duration (e.g., 2h 30m)">
                     <br>
                     
                     <label for="arrivalPlace">Arrival Place</label> 
                     <br>
-                    <input type="text" id="arrivalPlace" name="arrivalPlace" placeholder="Enter arrival place">
+                    <input type="text" id="r_arrivalPlace" name="arrivalPlace" placeholder="Enter arrival place">
                     <br>
 
                     <label for="arrivalTerminal">Arrival Terminal</label>
                     <br>
-                    <input type="text" id="arrivalTerminal" name="arrivalTerminal" placeholder="Enter arrival terminal">
+                    <input type="number" id="r_arrivalTerminal" name="arrivalTerminal" placeholder="Enter arrival terminal">
                     <br>
 
                     <label for="flightNumber">Flight Number</label>
                     <br>
-                    <input type="text" id="flightNumber" name="flightNumber" placeholder="Enter flight number">
+                    <input type="text" id="r_flightNumber" name="flightNumber" placeholder="Enter flight number">
                     <br>
 
-                    <label for="airline">Airline</label>
+                    <label for="aircraft">Aircraft</label>
                     <br>
-                    <input type="text" id="airline" name="airline" placeholder="Enter airline name">
+                    <input type="text" id="r_aircraft" name="aircraft" placeholder="Enter aircraft name">
                     <br>
 
                     <label for="seats">Seat Assignment</label>
                     <br>
-                    <input type="text" id="seats" name="seats" placeholder="Enter seat number">
+                    <input type="text" id="r_seats" name="seats" placeholder="Enter seat number">
                     <br>
                     <br>
 

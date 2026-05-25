@@ -354,9 +354,46 @@ portal-nav.scrollwidth
 portal-nav-edit.scrollwidth
 
 function updateflight() {
-    let outboundDate = document.getElementById("outbounddate").value;
-    document.getElementById("outbound-date").textContent = outboundDate;
-    let returnDate = document.getElementById("returndate").value;
-    document.getElementById("return-date").textContent = returnDate;
-
+    let outboundDate = document.getElementById("o_date").value;
+    document.getElementById("o-date").textContent = outboundDate;
+    let outbounddeparturePlace = document.getElementById("o_departurePlace").value;
+    document.getElementById("o-departurePlace").textContent = outbounddeparturePlace;
+    let outboundarrivalPlace = document.getElementById("o_arrivalPlace").value;
+    document.getElementById("o-arrivalPlace").textContent = outboundarrivalPlace;
+    let outbounddepartureterminal = document.getElementById("o_departureTerminal").value;
+    document.getElementById("o-departureTerminal").textContent = outbounddepartureterminal;
+    let outboundarrivalterminal = document.getElementById("o_arrivalTerminal").value;
+    document.getElementById("o-arrivalTerminal").textContent = outboundarrivalterminal;
+    let outbounddepartureTime = document.getElementById("o_departureTime").value;
+    document.getElementById("o-departureTime").textContent = outbounddepartureTime;
+    let outboundarrivalTime = document.getElementById("o_arrivalTime").value;
+    document.getElementById("o-arrivalTime").textContent = outboundarrivalTime;
+    let outboundflightNumber = document.getElementById("o_flightNumber").value;
+    document.getElementById("o-flightNumber").textContent = outboundflightNumber;
+    let outboundaircraft = document.getElementById("o_aircraft").value;
+    document.getElementById("o-aircraft").textContent = outboundaircraft;
+    let outboundseatAssignment = document.getElementById("o_seats").value;
+    document.getElementById("o-seats").textContent = outboundseatAssignment;
+    let returndate = document.getElementById("r_date").value;
+    document.getElementById("r-date").textContent = returndate;
+    let returndeparturePlace = document.getElementById("r_departurePlace").value;
+    document.getElementById("r-departurePlace").textContent = returndeparturePlace;
+    let returnarrivalPlace = document.getElementById("r_arrivalPlace").value;
+    document.getElementById("r-arrivalPlace").textContent = returnarrivalPlace;
+    let returndepartureterminal = document.getElementById("r_departureTerminal").value;
+    document.getElementById("r-departureTerminal").textContent = returndepartureterminal;
+    let returnarrivalterminal = document.getElementById("r_arrivalTerminal").value;
+    document.getElementById("r-arrivalTerminal").textContent = returnarrivalterminal;
+    let returndepartureTime = document.getElementById("r_departureTime").value;
+    document.getElementById("r-departureTime").textContent = returndepartureTime;
+    let returnarrivalTime = document.getElementById("r_arrivalTime").value;
+    document.getElementById("r-arrivalTime").textContent = returnarrivalTime;
+    let returnflightNumber = document.getElementById("r_flightNumber").value;
+    document.getElementById("r-flightNumber").textContent = returnflightNumber;
+    let returnaircraft = document.getElementById("r_aircraft").value;
+    document.getElementById("r-aircraft").textContent = returnaircraft;
+    let returnseatAssignment = document.getElementById("r_seats").value;
+    document.getElementById("r-seats").textContent = returnseatAssignment;
   }
+
+
