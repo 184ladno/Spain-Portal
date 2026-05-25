@@ -298,7 +298,7 @@
                         </div>
                         <div class="flight-title">
                             <h2>Outbound Flight</h2>
-                            <p class="flight-date">June 15, 2026</p>
+                            <p class="flight-date" id="outbound-date">June 15, 2026</p>
                         </div>
                     </div>
                     <div class="flight-details">
@@ -348,7 +348,7 @@
                         </div>
                         <div class="flight-title">
                             <h2>Return Flight</h2>
-                            <p class="flight-date">June 22, 2026</p>
+                            <p class="flight-date" id="return-date">June 22, 2026</p>
                         </div>
                     </div>
                     <div class="flight-details">
@@ -1121,7 +1121,7 @@
                 <h1>Editing area</h1>
                 <p>Edit other sections</p>
             </div> 
-            <nav class="portal-nav-edit active"> 
+            <nav class="portal-nav-edit"> 
                 <button class="nav-item-edit active" data-page="flights-edit">
                     <i style="font-size:24px" class="fa">&#xf072;</i>
                     
@@ -1172,9 +1172,9 @@
                 <div class="edit-form">
                     <h2>Outbound Flight</h2>
 
-                    <label for="date">Date</label>
+                    <label for="outbounddate">Date</label>
                     <br>
-                    <input type="date" id="date" name="date">
+                    <input type="date" id="outbounddate" name="outbounddate">
                     <br>
 
                     <label for="departureTime">Departure Time</label>
@@ -1229,9 +1229,9 @@
 
                     <h2>Return Flight</h2>
                     
-                    <label for="date">Date</label>
+                    <label for="returndate">Date</label>
                     <br>
-                    <input type="date" id="date" name="date">
+                    <input type="date" id="returndate" name="returndate">
                     <br>
 
                     <label for="departureTime">Departure Time</label>
@@ -1285,7 +1285,41 @@
                     <br>
                     <br>
 
-                    <button type="submit" class="save-button">Save Changes</button>
+                    <button type="submit" class="save-button" onclick="updateflight()">Save Changes</button>
+                </div>
+            </div>
+            <div id="hotel-edit" class="page-content-edit">
+                <div class="page-header">
+                    <h1>Edit Hotel Information</h1>
+                    <p>Update hotel name, address, contact details, and check-in/out times</p>
+                </div>
+                <div class="edit-form">
+                    <label for="hotelName">Hotel Name</label>
+                    <br>
+                    <input type="text" id="hotelName" name="hotelName" placeholder="Enter hotel name">
+                    <br>
+
+                    <label for="hotelAddress">Hotel Address</label>
+                    <br>
+                    <input type="text" id="hotelAddress" name="hotelAddress" placeholder="Enter hotel address">
+                    <br>
+
+                    <label for="hotelContact">Hotel Contact Details</label>
+                    <br>
+                    <input type="text" id="hotelContact" name="hotelContact" placeholder="Enter hotel contact information (phone/email)">
+                    <br>
+
+                    <label for="checkIn">Check-in Time</label>
+                    <br>
+                    <input type="time" id="checkIn" name="checkIn">
+                    <br>
+
+                    <label for="checkOut">Check-out Time</label>
+                    <br>
+                    <input type="time" id="checkOut" name="checkOut">
+                    <br>
+
+                    <button type="submit" class="save-button" onclick="updateHotel()">Save Changes</button>
                 </div>
             </div>
             <div id="itinerary-edit" class="page-content-edit">
@@ -1304,7 +1338,7 @@
                     <textarea id="activityDescription" name="activityDescription" placeholder="Describe the activity for this day"></textarea>
                     <br>
 
-                    <button type="submit" class="save-button">Save Changes</button>
+                    <button type="submit" class="save-button" onclick="updateItinerary()">Save Changes</button>
                 </div>
             </div>
             <div id="transport-edit" class="page-content-edit">
@@ -1332,7 +1366,7 @@
                     <textarea id="transportRules" name="transportRules" placeholder="Describe any specific rules or instructions for this transport"></textarea>
                     <br>
 
-                    <button type="submit" class="save-button">Save Changes</button>
+                    <button type="submit" class="save-button" onclick="updatetransport()">Save Changes</button>
                 </div>
             </div>
             <div id="personal-edit" class="page-content-edit">
@@ -1354,7 +1388,7 @@
                     <br>
                     <input type="text" id="emergencyContact" name="emergencyContact" placeholder="Enter emergency contact information">
                     <br>
-                    <button type="submit" class="save-button">Save Changes</button>
+                    <button type="submit" class="save-button" onclick="updatePersonal()">Save Changes</button>
                 </div>
             </div>
         </div>

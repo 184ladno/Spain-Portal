@@ -351,3 +351,12 @@ modalBody.scrollTop = 0;
 document.getElementById('section3').scrollIntoView({ behavior: 'smooth' });
 
 portal-nav.scrollwidth
+portal-nav-edit.scrollwidth
+
+function updateflight() {
+    let outboundDate = document.getElementById("outbounddate").value;
+    document.getElementById("outbound-date").textContent = outboundDate;
+    let returnDate = document.getElementById("returndate").value;
+    document.getElementById("return-date").textContent = returnDate;
+
+  }
