@@ -353,7 +353,7 @@ document.getElementById('section3').scrollIntoView({ behavior: 'smooth' });
 portal-nav.scrollwidth
 portal-nav-edit.scrollwidth
 
-function updateflight() {
+function updateOutboundFlight() {
     let outboundDate = document.getElementById("o_date").value;
     document.getElementById("o-date").textContent = outboundDate;
     let outbounddeparturePlace = document.getElementById("o_departurePlace").value;
@@ -374,6 +374,8 @@ function updateflight() {
     document.getElementById("o-aircraft").textContent = outboundaircraft;
     let outboundseatAssignment = document.getElementById("o_seats").value;
     document.getElementById("o-seats").textContent = outboundseatAssignment;
+}
+function updateReturnFlight() {
     let returndate = document.getElementById("r_date").value;
     document.getElementById("r-date").textContent = returndate;
     let returndeparturePlace = document.getElementById("r_departurePlace").value;

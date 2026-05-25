@@ -348,7 +348,7 @@
                         </div>
                         <div class="flight-title">
                             <h2>Return Flight</h2>
-                            <p class="flight-date" id="return-date">June 22, 2026</p>
+                            <p class="flight-date" id="r-date">June 22, 2026</p>
                         </div>
                     </div>
                     <div class="flight-details">
@@ -1217,14 +1217,18 @@
                     <input type="text" id="o_flightNumber" name="flightNumber" placeholder="Enter flight number">
                     <br>
 
-                    <label for="airline">Airline</label>
+                    <label for="aircraft">Aircraft</label>
                     <br>
-                    <input type="text" id="o_airline" name="airline" placeholder="Enter airline name">
+                    <input type="text" id="o_aircraft" name="aircraft" placeholder="Enter aircraft name">
                     <br>
 
                     <label for="seats">Seat Assignment</label>
                     <br>
                     <input type="text" id="o_seats" name="seats" placeholder="Enter seat number">
+                    <br>
+                    <br>
+
+                    <button type="submit" class="save-button" onclick="updateOutboundFlight()">Save Changes</button>
                     <br>
 
                     <h2>Return Flight</h2>
@@ -1285,7 +1289,7 @@
                     <br>
                     <br>
 
-                    <button type="submit" class="save-button" onclick="updateflight()">Save Changes</button>
+                    <button type="submit" class="save-button" onclick="updateReturnFlight()">Save Changes</button>
                 </div>
             </div>
             <div id="hotel-edit" class="page-content-edit">
