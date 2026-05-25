@@ -339,19 +339,25 @@ function applySharedLandmarksText() {
     });
 }
 
-const modalBody = document.querySelector('.modal-body');
+const navButtons = document.querySelectorAll(".nav-item-edit");
 
-// Scroll to bottom
-modalBody.scrollTop = modalBody.scrollHeight;
+navButtons.forEach(function(button) {
+  button.addEventListener("click", function() {
+    
+    // Remove active from all buttons
+    navButtons.forEach(btn => btn.classList.remove("active"));
+    
+    // Add active to the clicked one
+    this.classList.add("active");
 
-// Scroll to top
-modalBody.scrollTop = 0;
+    // Hide all pages
+    document.querySelectorAll(".page-edit").forEach(page => page.style.display = "none");
 
-// Smooth scroll to an element inside
-document.getElementById('section3').scrollIntoView({ behavior: 'smooth' });
-
-portal-nav.scrollwidth
-portal-nav-edit.scrollwidth
+    // Show the matching page
+    const targetPage = this.getAttribute("data-page");
+    document.getElementById(targetPage).style.display = "block";
+  });
+});
 
 function updateOutboundFlight() {
     let outboundDate = document.getElementById("o_date").value;

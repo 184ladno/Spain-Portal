@@ -2462,6 +2462,12 @@ body.portal-page::after {
     background: rgba(139, 21, 56, 0.05);
 }
 
+.nav-item-edit.active {
+    color: #8B1538;
+    background: rgba(139, 21, 56, 0.1);
+    border-bottom-color: #8B1538;
+}
+
 .portal-nav-edit {
     background: #ffffff;
     padding: 0 40px;
