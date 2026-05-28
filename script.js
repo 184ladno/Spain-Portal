@@ -871,3 +871,30 @@ function applyItineraryChanges() {
         container.appendChild(dayEl);
     });
 }
+
+const Database = require('better-sqlite3');
+const bcrypt = require('bcryptjs');
+
+const db = new Database('./database.db');
+
+// Create tables
+db.exec(`
+  CREATE TABLE IF NOT EXISTS users (
+    id         INTEGER PRIMARY KEY AUTOINCREMENT,
+    name       TEXT NOT NULL,
+    email      TEXT UNIQUE NOT NULL,
+    phone_number TEXT NOT NULL,
+    password   TEXT NOT NULL,
+    role       TEXT NOT NULL DEFAULT 'user',
+    created_at TEXT DEFAULT (datetime('now')),
+    hotel TEXT NOT NULL,
+    room_number TEXT NOT NULL,
+    check_in TEXT NOT NULL,
+    check_out TEXT NOT NULL,
+    flight TEXT NOT NULL,
+    departure_time TEXT NOT NULL,
+    arrival_time TEXT NOT NULL,
+    group_name TEXT NOT NULL
+
+  );
+`);
