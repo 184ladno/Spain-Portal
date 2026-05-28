@@ -1674,22 +1674,18 @@
             </div>
             <div id="itinerary-edit" class="page-edit" style="display:none">
                 <div class="page-header">
-                    <h1>Edit Itinerary Information</h1>
-                    <p>Change daily activities, timings, and locations</p>
+                    <h1>Edit Itinerary</h1>
+                    <p>Select a day to edit its activities</p>
                 </div>
-                <div class="edit-form">
-                    <label for="dayNumber">Day Number</label>
-                    <br>
-                    <input type="number" id="dayNumber" name="dayNumber" placeholder="Enter day number">
-                    <br>
 
-                    <label for="activityDescription">Activity Description</label>
-                    <br>
-                    <textarea id="activityDescription" name="activityDescription" placeholder="Describe the activity for this day"></textarea>
-                    <br>
+                <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:20px;" id="day-selector"></div>
 
-                    <button type="submit" class="save-button" onclick="updateItinerary()">Save Changes</button>
-                </div>
+                <button class="save-button" onclick="addDay()">+ Add Day</button>
+
+                <div id="day-editor" style="margin-top:20px;"></div>
+
+                <br>
+                <button class="save-button" onclick="applyItineraryChanges()">Save All Changes</button>
             </div>
             <div id="transport-edit" class="page-edit" style="display:none">
                 <div class="page-header">

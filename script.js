@@ -342,21 +342,14 @@ function applySharedLandmarksText() {
 const navButtons = document.querySelectorAll(".nav-item-edit");
 
 navButtons.forEach(function(button) {
-  button.addEventListener("click", function() {
-    
-    // Remove active from all buttons
-    navButtons.forEach(btn => btn.classList.remove("active"));
-    
-    // Add active to the clicked one
-    this.classList.add("active");
-
-    // Hide all pages
-    document.querySelectorAll(".page-edit").forEach(page => page.style.display = "none");
-
-    // Show the matching page
-    const targetPage = this.getAttribute("data-page");
-    document.getElementById(targetPage).style.display = "block";
-  });
+    button.addEventListener("click", function() {
+        navButtons.forEach(btn => btn.classList.remove("active"));
+        this.classList.add("active");
+        document.querySelectorAll(".page-edit").forEach(page => page.style.display = "none");
+        const targetPage = this.getAttribute("data-page");
+        document.getElementById(targetPage).style.display = "block";
+        if (targetPage === 'itinerary-edit') initItineraryEditor();
+    });
 });
 
 function updateOutboundFlight() {
@@ -710,3 +703,171 @@ document.addEventListener('click', function(event) {
         closeAddEditModal();
     }
 });
+let itineraryData = [];
+let selectedDay = 0;
+
+function initItineraryEditor() {
+    const liveDays = document.querySelectorAll('.itinerary-day');
+    itineraryData = [];
+
+    liveDays.forEach(function(day) {
+        const title = day.querySelector('.day-info h2')?.textContent || '';
+        const subtitle = day.querySelector('.day-info p')?.textContent || '';
+        const activities = [];
+
+        day.querySelectorAll('.schedule-item').forEach(function(item) {
+            activities.push({
+                time: item.querySelector('.schedule-time')?.textContent || '',
+                name: item.querySelector('strong')?.textContent || '',
+                description: item.querySelector('p')?.textContent || ''
+            });
+        });
+
+        itineraryData.push({ title, subtitle, activities });
+    });
+
+    selectedDay = 0;
+    renderDaySelector();
+    renderDayEditor();
+}
+
+function renderDaySelector() {
+    const selector = document.getElementById('day-selector');
+    selector.innerHTML = '';
+
+    itineraryData.forEach(function(day, index) {
+        const btn = document.createElement('button');
+        btn.textContent = 'Day ' + (index + 1);
+        btn.style = `
+            padding: 8px 16px;
+            border-radius: 6px;
+            border: 1px solid #8B1538;
+            background: ${index === selectedDay ? '#8B1538' : 'white'};
+            color: ${index === selectedDay ? 'white' : '#8B1538'};
+            cursor: pointer;
+            font-size: 14px;
+        `;
+        btn.onclick = function() {
+            selectedDay = index;
+            renderDaySelector();
+            renderDayEditor();
+        };
+        selector.appendChild(btn);
+    });
+}
+
+function renderDayEditor() {
+    const container = document.getElementById('day-editor');
+    const day = itineraryData[selectedDay];
+
+    if (!day) {
+        container.innerHTML = '<p>No day selected.</p>';
+        return;
+    }
+
+    container.innerHTML = `
+        <div style="border:1px solid #ccc; border-radius:8px; padding:16px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+                <h3 style="margin:0;">Day ${selectedDay + 1}</h3>
+                <button onclick="removeDay(${selectedDay})"
+                    style="background:#8B1538; color:white; border:none; padding:6px 12px; border-radius:6px; cursor:pointer;">
+                    Remove Day
+                </button>
+            </div>
+
+            <label>Day Title</label><br>
+            <input type="text" value="${day.title}"
+                oninput="itineraryData[${selectedDay}].title = this.value"
+                style="width:100%; margin-bottom:8px; padding:6px; border:1px solid #ccc; border-radius:4px;">
+
+            <label>Subtitle</label><br>
+            <input type="text" value="${day.subtitle}"
+                oninput="itineraryData[${selectedDay}].subtitle = this.value"
+                style="width:100%; margin-bottom:16px; padding:6px; border:1px solid #ccc; border-radius:4px;">
+
+            <strong>Activities</strong>
+
+            ${day.activities.map((act, actIndex) => `
+                <div style="border:1px solid #eee; border-radius:6px; padding:10px; margin-top:10px;">
+                    <label>Time</label><br>
+                    <input type="time" value="${act.time}"
+                        oninput="itineraryData[${selectedDay}].activities[${actIndex}].time = this.value"
+                        style="margin-bottom:6px; padding:5px; border:1px solid #ccc; border-radius:4px;">
+                    <br>
+                    <label>Activity Name</label><br>
+                    <input type="text" value="${act.name}"
+                        oninput="itineraryData[${selectedDay}].activities[${actIndex}].name = this.value"
+                        style="width:100%; margin-bottom:6px; padding:6px; border:1px solid #ccc; border-radius:4px;">
+                    <label>Description</label><br>
+                    <input type="text" value="${act.description}"
+                        oninput="itineraryData[${selectedDay}].activities[${actIndex}].description = this.value"
+                        style="width:100%; margin-bottom:6px; padding:6px; border:1px solid #ccc; border-radius:4px;">
+                    <button onclick="removeActivity(${actIndex})"
+                        style="background:#ccc; border:none; padding:4px 10px; border-radius:4px; cursor:pointer; font-size:12px;">
+                        Remove Activity
+                    </button>
+                </div>
+            `).join('')}
+
+            <button onclick="addActivity()"
+                style="margin-top:12px; background:none; border:1px solid #8B1538; color:#8B1538; padding:6px 14px; border-radius:6px; cursor:pointer;">
+                + Add Activity
+            </button>
+        </div>
+    `;
+}
+
+function addDay() {
+    itineraryData.push({ title: 'New Day', subtitle: '', activities: [] });
+    selectedDay = itineraryData.length - 1;
+    renderDaySelector();
+    renderDayEditor();
+}
+
+function removeDay(index) {
+    itineraryData.splice(index, 1);
+    selectedDay = Math.max(0, selectedDay - 1);
+    renderDaySelector();
+    renderDayEditor();
+}
+
+function addActivity() {
+    itineraryData[selectedDay].activities.push({ time: '', name: '', description: '' });
+    renderDayEditor();
+}
+
+function removeActivity(actIndex) {
+    itineraryData[selectedDay].activities.splice(actIndex, 1);
+    renderDayEditor();
+}
+
+function applyItineraryChanges() {
+    const container = document.querySelector('.itinerary-container');
+    container.innerHTML = '';
+
+    itineraryData.forEach(function(day, index) {
+        const dayEl = document.createElement('div');
+        dayEl.className = 'itinerary-day';
+        dayEl.innerHTML = `
+            <div class="day-header">
+                <div class="day-number">Day ${index + 1}</div>
+                <div class="day-info">
+                    <h2>${day.title}</h2>
+                    <p>${day.subtitle}</p>
+                </div>
+            </div>
+            <div class="day-schedule">
+                ${day.activities.map(act => `
+                    <div class="schedule-item">
+                        <div class="schedule-time">${act.time}</div>
+                        <div class="schedule-content">
+                            <strong>${act.name}</strong>
+                            <p>${act.description}</p>
+                        </div>
+                    </div>
+                `).join('')}
+            </div>
+        `;
+        container.appendChild(dayEl);
+    });
+}
