@@ -372,6 +372,8 @@ function updateOutboundFlight() {
     document.getElementById("o-arrivalTerminal").textContent = outboundarrivalterminal;
     let outbounddepartureTime = document.getElementById("o_departureTime").value;
     document.getElementById("o-departureTime").textContent = outbounddepartureTime;
+    let duration= document.getElementById("o_duration").value;
+    document.getElementById("o-duration").textContent = duration;
     let outboundarrivalTime = document.getElementById("o_arrivalTime").value;
     document.getElementById("o-arrivalTime").textContent = outboundarrivalTime;
     let outboundflightNumber = document.getElementById("o_flightNumber").value;
@@ -392,6 +394,8 @@ function updateReturnFlight() {
     document.getElementById("r-departureTerminal").textContent = returndepartureterminal;
     let returnarrivalterminal = document.getElementById("r_arrivalTerminal").value;
     document.getElementById("r-arrivalTerminal").textContent = returnarrivalterminal;
+    let returnduration= document.getElementById("r_duration").value;
+    document.getElementById("r-duration").textContent = returnduration;
     let returndepartureTime = document.getElementById("r_departureTime").value;
     document.getElementById("r-departureTime").textContent = returndepartureTime;
     let returnarrivalTime = document.getElementById("r_arrivalTime").value;
@@ -404,4 +408,44 @@ function updateReturnFlight() {
     document.getElementById("r-seats").textContent = returnseatAssignment;
   }
 
+function updateHotel1() {
+    let hotelName = document.getElementById("hotelName_1").value;
+    document.getElementById("hotelName-1").textContent = hotelName;
+    let hotelLocation = document.getElementById("hotelLocation_1").value;
+    document.getElementById("hotelLocation-1").textContent = hotelLocation;
+    let hotelStay = document.getElementById("hotelStay_1").value;
+    document.getElementById("hotelStay-1").textContent = hotelStay;
+    let hotelAddress = document.getElementById("hotelAddress_1").value;
+    document.getElementById("hotelAddress-1").textContent = hotelAddress;
+    let checkIn = document.getElementById("checkIn_1").value;
+    document.getElementById("checkIn-1").textContent = checkIn;
+    let checkOut = document.getElementById("checkOut_1").value;
+    document.getElementById("checkOut-1").textContent = checkOut;
+    let hotelroom = document.getElementById("hotelRoom_1").value;
+    document.getElementById("hotelRoom-1").textContent = hotelroom;
+    let hotelamenities = document.getElementById("hotelAmenities_1").value;
+    document.getElementById("hotelAmenities-1").textContent = hotelamenities;
+    let hotelContact = document.getElementById("hotelContact_1").value;
+    document.getElementById("hotelContact-1").textContent = hotelContact;
+}
 
+function updateHotel2() {
+    let hotelName = document.getElementById("hotelName_2").value;
+    document.getElementById("hotelName-2").textContent = hotelName;
+    let hotelLocation = document.getElementById("hotelLocation_2").value;
+    document.getElementById("hotelLocation-2").textContent = hotelLocation;
+    let hotelStay = document.getElementById("hotelStay_2").value;
+    document.getElementById("hotelStay-2").textContent = hotelStay;
+    let hotelAddress = document.getElementById("hotelAddress_2").value;
+    document.getElementById("hotelAddress-2").textContent = hotelAddress;
+    let checkIn = document.getElementById("checkIn_2").value;
+    document.getElementById("checkIn-2").textContent = checkIn;
+    let checkOut = document.getElementById("checkOut_2").value;
+    document.getElementById("checkOut-2").textContent = checkOut;
+    let hotelroom = document.getElementById("hotelRoom_2").value;
+    document.getElementById("hotelRoom-2").textContent = hotelroom;
+    let hotelamenities = document.getElementById("hotelAmenities_2").value;
+    document.getElementById("hotelAmenities-2").textContent = hotelamenities;
+    let hotelContact = document.getElementById("hotelContact_2").value;
+    document.getElementById("hotelContact-2").textContent = hotelContact;
+}

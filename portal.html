@@ -421,38 +421,38 @@
                                 </svg>
                             </div>
                             <div>
-                                <h2>Hotel Barcelona Center</h2>
-                                <p class="hotel-location">Barcelona, Spain</p>
+                                <h2 id="hotelName-1">Hotel Barcelona Center</h2>
+                                <p class="hotel-location" id="hotelLocation-1">Barcelona, Spain</p>
                             </div>
                         </div>
                         <div class="hotel-details">
-                            <div class="hotel-period">
+                            <div class="hotel-period" id="hotelStay-1">
                                 <strong>Stay Period:</strong> June 15 - June 18, 2026 (3 nights)
                             </div>
                             <div class="hotel-info-grid">
                                 <div class="hotel-info-item">
                                     <span class="info-label">Address:</span>
-                                    <span class="info-value">Carrer de la Diputació, 142, 08015 Barcelona</span>
+                                    <span class="info-value" id="hotelAddress-1">Carrer de la Diputació, 142, 08015 Barcelona</span>
                                 </div>
                                 <div class="hotel-info-item">
                                     <span class="info-label">Check-in:</span>
-                                    <span class="info-value">15:00</span>
+                                    <span class="info-value" id="checkIn-1">15:00</span>
                                 </div>
                                 <div class="hotel-info-item">
                                     <span class="info-label">Check-out:</span>
-                                    <span class="info-value">11:00</span>
+                                    <span class="info-value" id="checkOut-1">11:00</span>
                                 </div>
                                 <div class="hotel-info-item">
                                     <span class="info-label">Room Type:</span>
-                                    <span class="info-value">Triple rooms (3 students per room)</span>
+                                    <span class="info-value" id="hotelRoom-1">Triple rooms (3 students per room)</span>
                                 </div>
                                 <div class="hotel-info-item">
                                     <span class="info-label">Amenities:</span>
-                                    <span class="info-value">Free WiFi, Breakfast included, 24/7 reception</span>
+                                    <span class="info-value" id="hotelAmenities-1">Free WiFi, Breakfast included, 24/7 reception</span>
                                 </div>
                                 <div class="hotel-info-item">
                                     <span class="info-label">Contact:</span>
-                                    <span class="info-value">+34 93 123 4567</span>
+                                    <span class="info-value" id="hotelContact-1">+34 93 123 4567</span>
                                 </div>
                             </div>
                         </div>
@@ -472,38 +472,38 @@
                                 </svg>
                             </div>
                             <div>
-                                <h2>Hotel Madrid Central</h2>
-                                <p class="hotel-location">Madrid, Spain</p>
+                                <h2 id="hotelName-2">Hotel Madrid Central</h2>
+                                <p class="hotel-location" id="hotelLocation-2">Madrid, Spain</p>
                             </div>
                         </div>
                         <div class="hotel-details">
-                            <div class="hotel-period">
+                            <div class="hotel-period" id="hotelStay-2">
                                 <strong>Stay Period:</strong> June 18 - June 22, 2026 (4 nights)
                             </div>
                             <div class="hotel-info-grid">
                                 <div class="hotel-info-item">
                                     <span class="info-label">Address:</span>
-                                    <span class="info-value">Calle de Gran Vía, 45, 28013 Madrid</span>
+                                    <span class="info-value" id="hotelAddress-2">Calle de Gran Vía, 45, 28013 Madrid</span>
                                 </div>
                                 <div class="hotel-info-item">
                                     <span class="info-label">Check-in:</span>
-                                    <span class="info-value">15:00</span>
+                                    <span class="info-value" id="checkIn-2">15:00</span>
                                 </div>
                                 <div class="hotel-info-item">
                                     <span class="info-label">Check-out:</span>
-                                    <span class="info-value">11:00</span>
+                                    <span class="info-value" id="checkOut-2">11:00</span>
                                 </div>
                                 <div class="hotel-info-item">
                                     <span class="info-label">Room Type:</span>
-                                    <span class="info-value">Triple rooms (3 students per room)</span>
+                                    <span class="info-value" id="hotelRoom-2">Triple rooms (3 students per room)</span>
                                 </div>
                                 <div class="hotel-info-item">
                                     <span class="info-label">Amenities:</span>
-                                    <span class="info-value">Free WiFi, Breakfast included, Fitness center</span>
+                                    <span class="info-value" id="hotelAmenities-2">Free WiFi, Breakfast included, Fitness center</span>
                                 </div>
                                 <div class="hotel-info-item">
                                     <span class="info-label">Contact:</span>
-                                    <span class="info-value">+34 91 987 6543</span>
+                                    <span class="info-value" id="hotelContact-2">+34 91 987 6543</span>
                                 </div>
                             </div>
                         </div>
@@ -1300,33 +1300,106 @@
                     <h1>Edit Hotel Information</h1>
                     <p>Update hotel name, address, contact details, and check-in/out times</p>
                 </div>
-                <div class="edit-form">
-                    <label for="hotelName">Hotel Name</label>
-                    <br>
-                    <input type="text" id="hotelName" name="hotelName" placeholder="Enter hotel name">
-                    <br>
+                <div class="edit-form two-columns">
+                    <div class="hotel-1">
+                        <h2>Hotel 1</h2>
+                        <label for="hotelName">Hotel Name</label>
+                        <br>
+                        <input type="text" id="hotelName_1" name="hotelName" placeholder="Enter hotel name">
+                        <br>
 
-                    <label for="hotelAddress">Hotel Address</label>
-                    <br>
-                    <input type="text" id="hotelAddress" name="hotelAddress" placeholder="Enter hotel address">
-                    <br>
+                        <label for="hotelLocation">Hotel Location</label>
+                        <br>
+                        <input type="text" id="hotelLocation_1" name="hotelLocation" placeholder="Enter hotel location">
+                        <br>
 
-                    <label for="hotelContact">Hotel Contact Details</label>
-                    <br>
-                    <input type="text" id="hotelContact" name="hotelContact" placeholder="Enter hotel contact information (phone/email)">
-                    <br>
+                        <label for="hotelStay">Stay Period</label>
+                        <br>
+                        <input type="text" id="hotelStay_1" name="hotelStay" placeholder="Enter stay period (e.g., June 18-22 (5 nights))">
+                        <br>
 
-                    <label for="checkIn">Check-in Time</label>
-                    <br>
-                    <input type="time" id="checkIn" name="checkIn">
-                    <br>
+                        <label for="hotelAddress">Hotel Address</label>
+                        <br>
+                        <input type="text" id="hotelAddress_1" name="hotelAddress" placeholder="Enter hotel address">
+                        <br>
 
-                    <label for="checkOut">Check-out Time</label>
-                    <br>
-                    <input type="time" id="checkOut" name="checkOut">
-                    <br>
+                        <label for="checkIn">Check-in Time</label>
+                        <br>
+                        <input type="time" id="checkIn_1" name="checkIn">
+                        <br>
 
-                    <button type="submit" class="save-button" onclick="updateHotel()">Save Changes</button>
+                        <label for="checkOut">Check-out Time</label>
+                        <br>
+                        <input type="time" id="checkOut_1" name="checkOut">
+                        <br>
+
+                        <label for="hotelroom">Room Type</label>
+                        <br>
+                        <input type="text" id="hotelRoom_1" name="hotelRoom" placeholder="Enter room type">
+                        <br>
+
+                        <label for="hotelamenities">Amenities</label>
+                        <br>
+                        <input type="text" id="hotelAmenities_1" name="hotelAmenities" placeholder="Enter hotel amenities">
+                        <br>
+
+                        <label for="hotelContact">Hotel Contact</label>
+                        <br>
+                        <input type="text" id="hotelContact_1" name="hotelContact" placeholder="Enter hotel contact information (phone/email)">
+                        <br>
+
+                        <button type="submit" class="save-button" onclick="updateHotel1()">Save Changes</button>
+                    </div>
+
+                    <div class="hotel-2">
+                        <h2>Hotel 2</h2>
+                        <label for="hotelName">Hotel Name</label>
+                        <br>
+                        <input type="text" id="hotelName_2" name="hotelName" placeholder="Enter hotel name">
+                        <br>
+
+                        <label for="hotelLocation">Hotel Location</label>
+                        <br>
+                        <input type="text" id="hotelLocation_2" name="hotelLocation" placeholder="Enter hotel location">
+                        <br>
+
+                        <label for="hotelStay">Stay Period</label>
+                        <br>
+                        <input type="text" id="hotelStay_2" name="hotelStay" placeholder="Enter stay period (e.g., June 18-22 (5 nights))">
+                        <br>
+
+                        <label for="hotelAddress">Hotel Address</label>
+                        <br>
+                        <input type="text" id="hotelAddress_2" name="hotelAddress" placeholder="Enter hotel address">
+                        <br>
+
+                        <label for="checkIn">Check-in Time</label>
+                        <br>
+                        <input type="time" id="checkIn_2" name="checkIn">
+                        <br>
+
+                        <label for="checkOut">Check-out Time</label>
+                        <br>
+                        <input type="time" id="checkOut_2" name="checkOut">
+                        <br>
+
+                        <label for="hotelroom">Room Type</label>
+                        <br>
+                        <input type="text" id="hotelRoom_2" name="hotelRoom" placeholder="Enter room type">
+                        <br>
+
+                        <label for="hotelamenities">Amenities</label>
+                        <br>
+                        <input type="text" id="hotelAmenities_2" name="hotelAmenities" placeholder="Enter hotel amenities">
+                        <br>
+
+                        <label for="hotelContact">Hotel Contact</label>
+                        <br>
+                        <input type="text" id="hotelContact_2" name="hotelContact" placeholder="Enter hotel contact information (phone/email)">
+                        <br>
+
+                        <button type="submit" class="save-button" onclick="updateHotel2()">Save Changes</button>
+                    </div>
                 </div>
             </div>
             <div id="itinerary-edit" class="page-edit" style="display:none">
