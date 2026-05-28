@@ -444,13 +444,13 @@ function updateHotel2() {
 }
 
 let itineraryData = [];
+let selectedDay = 0;
 
 function initItineraryEditor() {
-    // Pull existing days from the live itinerary page
     const liveDays = document.querySelectorAll('.itinerary-day');
     itineraryData = [];
 
-    liveDays.forEach(function(day, index) {
+    liveDays.forEach(function(day) {
         const title = day.querySelector('.day-info h2')?.textContent || '';
         const subtitle = day.querySelector('.day-info p')?.textContent || '';
         const activities = [];
@@ -466,81 +466,119 @@ function initItineraryEditor() {
         itineraryData.push({ title, subtitle, activities });
     });
 
-    renderItineraryEditor();
+    selectedDay = 0;
+    renderDaySelector();
+    renderDayEditor();
 }
 
-function renderItineraryEditor() {
-    const container = document.getElementById('itinerary-edit-container');
-    container.innerHTML = '';
+function renderDaySelector() {
+    const selector = document.getElementById('day-selector');
+    selector.innerHTML = '';
 
-    itineraryData.forEach(function(day, dayIndex) {
-        const dayBlock = document.createElement('div');
-        dayBlock.className = 'edit-day-block';
-        dayBlock.style = 'border:1px solid #ccc; border-radius:8px; padding:16px; margin-bottom:16px;';
+    itineraryData.forEach(function(day, index) {
+        const btn = document.createElement('button');
+        btn.textContent = 'Day ' + (index + 1);
+        btn.style = `
+            padding: 8px 16px;
+            border-radius: 6px;
+            border: 1px solid #8B1538;
+            background: ${index === selectedDay ? '#8B1538' : 'white'};
+            color: ${index === selectedDay ? 'white' : '#8B1538'};
+            cursor: pointer;
+            font-size: 14px;
+        `;
+        btn.onclick = function() {
+            selectedDay = index;
+            renderDaySelector();
+            renderDayEditor();
+        };
+        selector.appendChild(btn);
+    });
+}
 
-        dayBlock.innerHTML = `
+function renderDayEditor() {
+    const container = document.getElementById('day-editor');
+    const day = itineraryData[selectedDay];
+
+    if (!day) {
+        container.innerHTML = '<p>No day selected.</p>';
+        return;
+    }
+
+    container.innerHTML = `
+        <div style="border:1px solid #ccc; border-radius:8px; padding:16px;">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
-                <h3 style="margin:0;">Day ${dayIndex + 1}</h3>
-                <button onclick="removeDay(${dayIndex})" style="background:#8B1538; color:white; border:none; padding:6px 12px; border-radius:6px; cursor:pointer;">Remove Day</button>
+                <h3 style="margin:0;">Day ${selectedDay + 1}</h3>
+                <button onclick="removeDay(${selectedDay})"
+                    style="background:#8B1538; color:white; border:none; padding:6px 12px; border-radius:6px; cursor:pointer;">
+                    Remove Day
+                </button>
             </div>
 
             <label>Day Title</label><br>
-            <input type="text" value="${day.title}" oninput="itineraryData[${dayIndex}].title = this.value"
+            <input type="text" value="${day.title}"
+                oninput="itineraryData[${selectedDay}].title = this.value"
                 style="width:100%; margin-bottom:8px; padding:6px; border:1px solid #ccc; border-radius:4px;">
 
             <label>Subtitle</label><br>
-            <input type="text" value="${day.subtitle}" oninput="itineraryData[${dayIndex}].subtitle = this.value"
-                style="width:100%; margin-bottom:12px; padding:6px; border:1px solid #ccc; border-radius:4px;">
+            <input type="text" value="${day.subtitle}"
+                oninput="itineraryData[${selectedDay}].subtitle = this.value"
+                style="width:100%; margin-bottom:16px; padding:6px; border:1px solid #ccc; border-radius:4px;">
 
             <strong>Activities</strong>
-            <div id="activities-${dayIndex}">
-                ${day.activities.map((act, actIndex) => `
-                    <div style="border:1px solid #eee; border-radius:6px; padding:10px; margin-top:8px;">
-                        <label>Time</label><br>
-                        <input type="time" value="${act.time}" oninput="itineraryData[${dayIndex}].activities[${actIndex}].time = this.value"
-                            style="margin-bottom:6px; padding:5px; border:1px solid #ccc; border-radius:4px;">
-                        <br>
-                        <label>Activity Name</label><br>
-                        <input type="text" value="${act.name}" oninput="itineraryData[${dayIndex}].activities[${actIndex}].name = this.value"
-                            style="width:100%; margin-bottom:6px; padding:6px; border:1px solid #ccc; border-radius:4px;">
-                        <label>Description</label><br>
-                        <input type="text" value="${act.description}" oninput="itineraryData[${dayIndex}].activities[${actIndex}].description = this.value"
-                            style="width:100%; margin-bottom:6px; padding:6px; border:1px solid #ccc; border-radius:4px;">
-                        <button onclick="removeActivity(${dayIndex}, ${actIndex})"
-                            style="background:#ccc; border:none; padding:4px 10px; border-radius:4px; cursor:pointer; font-size:12px;">Remove Activity</button>
-                    </div>
-                `).join('')}
-            </div>
-            <button onclick="addActivity(${dayIndex})"
-                style="margin-top:10px; background:none; border:1px solid #8B1538; color:#8B1538; padding:6px 12px; border-radius:6px; cursor:pointer;">+ Add Activity</button>
-        `;
 
-        container.appendChild(dayBlock);
-    });
+            ${day.activities.map((act, actIndex) => `
+                <div style="border:1px solid #eee; border-radius:6px; padding:10px; margin-top:10px;">
+                    <label>Time</label><br>
+                    <input type="time" value="${act.time}"
+                        oninput="itineraryData[${selectedDay}].activities[${actIndex}].time = this.value"
+                        style="margin-bottom:6px; padding:5px; border:1px solid #ccc; border-radius:4px;">
+                    <br>
+                    <label>Activity Name</label><br>
+                    <input type="text" value="${act.name}"
+                        oninput="itineraryData[${selectedDay}].activities[${actIndex}].name = this.value"
+                        style="width:100%; margin-bottom:6px; padding:6px; border:1px solid #ccc; border-radius:4px;">
+                    <label>Description</label><br>
+                    <input type="text" value="${act.description}"
+                        oninput="itineraryData[${selectedDay}].activities[${actIndex}].description = this.value"
+                        style="width:100%; margin-bottom:6px; padding:6px; border:1px solid #ccc; border-radius:4px;">
+                    <button onclick="removeActivity(${actIndex})"
+                        style="background:#ccc; border:none; padding:4px 10px; border-radius:4px; cursor:pointer; font-size:12px;">
+                        Remove Activity
+                    </button>
+                </div>
+            `).join('')}
+
+            <button onclick="addActivity()"
+                style="margin-top:12px; background:none; border:1px solid #8B1538; color:#8B1538; padding:6px 14px; border-radius:6px; cursor:pointer;">
+                + Add Activity
+            </button>
+        </div>
+    `;
 }
 
 function addDay() {
-    itineraryData.push({
-        title: 'New Day',
-        subtitle: '',
-        activities: []
-    });
-    renderItineraryEditor();
+    itineraryData.push({ title: 'New Day', subtitle: '', activities: [] });
+    selectedDay = itineraryData.length - 1;
+    renderDaySelector();
+    renderDayEditor();
 }
 
-function removeDay(dayIndex) {
-    itineraryData.splice(dayIndex, 1);
-    renderItineraryEditor();
+function removeDay(index) {
+    itineraryData.splice(index, 1);
+    selectedDay = Math.max(0, selectedDay - 1);
+    renderDaySelector();
+    renderDayEditor();
 }
 
-function addActivity(dayIndex) {
-    itineraryData[dayIndex].activities.push({ time: '', name: '', description: '' });
-    renderItineraryEditor();
+function addActivity() {
+    itineraryData[selectedDay].activities.push({ time: '', name: '', description: '' });
+    renderDayEditor();
 }
 
-function removeActivity(dayIndex, actIndex) {
-    itineraryData[dayIndex].activities.splice(actIndex, 1);
-    renderItineraryEditor();
+function removeActivity(actIndex) {
+    itineraryData[selectedDay].activities.splice(actIndex, 1);
+    renderDayEditor();
 }
 
 function applyItineraryChanges() {

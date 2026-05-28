@@ -1403,15 +1403,18 @@
                 </div>
             </div>
             <div id="itinerary-edit" class="page-edit" style="display:none">
-                 <div class="page-header">
+                <div class="page-header">
                     <h1>Edit Itinerary</h1>
-                    <p>Add, remove, and edit days and activities</p>
+                    <p>Select a day to edit its activities</p>
                 </div>
 
-                <div id="itinerary-edit-container"></div>
+                <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:20px;" id="day-selector"></div>
 
                 <button class="save-button" onclick="addDay()">+ Add Day</button>
-                <br><br>
+
+                <div id="day-editor" style="margin-top:20px;"></div>
+
+                <br>
                 <button class="save-button" onclick="applyItineraryChanges()">Save All Changes</button>
             </div>
             <div id="transport-edit" class="page-edit" style="display:none">
