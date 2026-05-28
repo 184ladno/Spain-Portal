@@ -372,6 +372,8 @@ function updateOutboundFlight() {
     document.getElementById("o-arrivalTerminal").textContent = outboundarrivalterminal;
     let outbounddepartureTime = document.getElementById("o_departureTime").value;
     document.getElementById("o-departureTime").textContent = outbounddepartureTime;
+    let duration= document.getElementById("o_duration").value;
+    document.getElementById("o-duration").textContent = duration;
     let outboundarrivalTime = document.getElementById("o_arrivalTime").value;
     document.getElementById("o-arrivalTime").textContent = outboundarrivalTime;
     let outboundflightNumber = document.getElementById("o_flightNumber").value;
@@ -392,6 +394,8 @@ function updateReturnFlight() {
     document.getElementById("r-departureTerminal").textContent = returndepartureterminal;
     let returnarrivalterminal = document.getElementById("r_arrivalTerminal").value;
     document.getElementById("r-arrivalTerminal").textContent = returnarrivalterminal;
+    let returnduration= document.getElementById("r_duration").value;
+    document.getElementById("r-duration").textContent = returnduration;
     let returndepartureTime = document.getElementById("r_departureTime").value;
     document.getElementById("r-departureTime").textContent = returndepartureTime;
     let returnarrivalTime = document.getElementById("r_arrivalTime").value;
@@ -404,4 +408,305 @@ function updateReturnFlight() {
     document.getElementById("r-seats").textContent = returnseatAssignment;
   }
 
+function updateHotel1() {
+    let hotelName = document.getElementById("hotelName_1").value;
+    document.getElementById("hotelName-1").textContent = hotelName;
+    let hotelLocation = document.getElementById("hotelLocation_1").value;
+    document.getElementById("hotelLocation-1").textContent = hotelLocation;
+    let hotelStay = document.getElementById("hotelStay_1").value;
+    document.getElementById("hotelStay-1").textContent = hotelStay;
+    let hotelAddress = document.getElementById("hotelAddress_1").value;
+    document.getElementById("hotelAddress-1").textContent = hotelAddress;
+    let checkIn = document.getElementById("checkIn_1").value;
+    document.getElementById("checkIn-1").textContent = checkIn;
+    let checkOut = document.getElementById("checkOut_1").value;
+    document.getElementById("checkOut-1").textContent = checkOut;
+    let hotelroom = document.getElementById("hotelRoom_1").value;
+    document.getElementById("hotelRoom-1").textContent = hotelroom;
+    let hotelamenities = document.getElementById("hotelAmenities_1").value;
+    document.getElementById("hotelAmenities-1").textContent = hotelamenities;
+    let hotelContact = document.getElementById("hotelContact_1").value;
+    document.getElementById("hotelContact-1").textContent = hotelContact;
+}
 
+function updateHotel2() {
+    let hotelName = document.getElementById("hotelName_2").value;
+    document.getElementById("hotelName-2").textContent = hotelName;
+    let hotelLocation = document.getElementById("hotelLocation_2").value;
+    document.getElementById("hotelLocation-2").textContent = hotelLocation;
+    let hotelStay = document.getElementById("hotelStay_2").value;
+    document.getElementById("hotelStay-2").textContent = hotelStay;
+    let hotelAddress = document.getElementById("hotelAddress_2").value;
+    document.getElementById("hotelAddress-2").textContent = hotelAddress;
+    let checkIn = document.getElementById("checkIn_2").value;
+    document.getElementById("checkIn-2").textContent = checkIn;
+    let checkOut = document.getElementById("checkOut_2").value;
+    document.getElementById("checkOut-2").textContent = checkOut;
+    let hotelroom = document.getElementById("hotelRoom_2").value;
+    document.getElementById("hotelRoom-2").textContent = hotelroom;
+    let hotelamenities = document.getElementById("hotelAmenities_2").value;
+    document.getElementById("hotelAmenities-2").textContent = hotelamenities;
+    let hotelContact = document.getElementById("hotelContact_2").value;
+    document.getElementById("hotelContact-2").textContent = hotelContact;
+}
+
+// Student Details Functions
+function viewStudentDetails(button) {
+    // Get the row data
+    const row = button.closest('tr');
+    const cells = row.querySelectorAll('td');
+    
+    // Extract student data from the row
+    const studentData = {
+        id: cells[0].textContent,
+        name: cells[1].textContent,
+        group: cells[2].textContent,
+        outboundFlight: cells[3].textContent,
+        returnFlight: cells[4].textContent,
+        hotelName: cells[5].textContent,
+        roomNumber: cells[6].textContent,
+        checkIn: cells[7].textContent,
+        checkOut: cells[8].textContent,
+        email: cells[10].textContent,
+        emergencyContact: cells[11].textContent
+    };
+
+    // Populate the modal
+    document.getElementById('modalStudentName').textContent = studentData.name;
+    document.getElementById('modalStudentID').textContent = studentData.id;
+    document.getElementById('modalStudentGroup').textContent = studentData.group;
+    document.getElementById('modalStudentEmail').textContent = studentData.email;
+    document.getElementById('modalEmergencyContact').textContent = studentData.emergencyContact;
+    
+    document.getElementById('modalOutboundFlight').textContent = studentData.outboundFlight;
+    document.getElementById('modalReturnFlight').textContent = studentData.returnFlight;
+    document.getElementById('modalOutboundSeat').textContent = 'A' + Math.floor(Math.random() * 20 + 1);
+    document.getElementById('modalReturnSeat').textContent = 'B' + Math.floor(Math.random() * 20 + 1);
+    
+    document.getElementById('modalHotelName').textContent = studentData.hotelName;
+    document.getElementById('modalRoomNumber').textContent = studentData.roomNumber;
+    document.getElementById('modalCheckIn').textContent = studentData.checkIn;
+    document.getElementById('modalCheckOut').textContent = studentData.checkOut;
+    document.getElementById('modalHotelContact').textContent = '+34 123 456 789 / hotel@email.com';
+    
+    document.getElementById('modalPassword').textContent = '•••••••••';
+    document.getElementById('modalPassword').classList.add('password-hidden');
+    document.getElementById('modalPassword').classList.remove('password-visible');
+    
+    // Show the modal
+    document.getElementById('studentDetailModal').style.display = 'flex';
+}
+
+function closeStudentModal() {
+    document.getElementById('studentDetailModal').style.display = 'none';
+}
+
+function togglePasswordVisibility() {
+    const passwordSpan = document.getElementById('modalPassword');
+    const btn = event.target;
+    
+    if (passwordSpan.classList.contains('password-hidden')) {
+        // Show password
+        passwordSpan.textContent = 'Spain@2026Pass123';
+        passwordSpan.classList.remove('password-hidden');
+        passwordSpan.classList.add('password-visible');
+        btn.textContent = 'Hide Password';
+    } else {
+        // Hide password
+        passwordSpan.textContent = '•••••••••';
+        passwordSpan.classList.add('password-hidden');
+        passwordSpan.classList.remove('password-visible');
+        btn.textContent = 'Show Password';
+    }
+}
+
+
+
+function resetPassword() {
+    if (confirm('Are you sure you want to reset this student\'s password? A new temporary password will be generated.')) {
+        const newPassword = 'Temp' + Math.random().toString(36).substr(2, 9).toUpperCase();
+        document.getElementById('modalPassword').textContent = newPassword;
+        document.getElementById('modalPassword').classList.remove('password-hidden');
+        document.getElementById('modalPassword').classList.add('password-visible');
+        document.querySelector('.toggle-password-btn').textContent = 'Hide Password';
+        alert('Password reset successfully. New temporary password: ' + newPassword);
+    }
+}
+
+function exportStudentData() {
+    // Create CSV content
+    let csv = 'Student ID,Name,Group,Outbound Flight,Return Flight,Hotel,Room,Check-in,Check-out,Email,Emergency Contact\n';
+    
+    const rows = document.querySelectorAll('.student-details-table tbody tr');
+    rows.forEach(row => {
+        const cells = row.querySelectorAll('td');
+        const rowData = Array.from(cells).slice(0, -1).map(cell => {
+            const text = cell.textContent.trim();
+            return `"${text}"`;
+        }).join(',');
+        csv += rowData + '\n';
+    });
+    
+    // Create and download file
+    const element = document.createElement('a');
+    element.setAttribute('href', 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv));
+    element.setAttribute('download', 'student_details_' + new Date().toISOString().split('T')[0] + '.csv');
+    element.style.display = 'none';
+    document.body.appendChild(element);
+    element.click();
+    document.body.removeChild(element);
+    
+    alert('Student data exported successfully!');
+}
+
+// Close modal when clicking outside of it
+document.addEventListener('click', function(event) {
+    const modal = document.getElementById('studentDetailModal');
+    if (modal && event.target === modal) {
+        closeStudentModal();
+    }
+});
+
+// Add/Edit Student Modal Functions
+function openAddStudentModal() {
+    // Reset form for adding new student
+    document.getElementById('addEditStudentForm').reset();
+    document.getElementById('addEditStudentForm').dataset.mode = 'add';
+    document.getElementById('addEditStudentForm').dataset.studentId = '';
+    
+    document.getElementById('addEditModalTitle').textContent = 'Add New Student';
+    document.getElementById('formStudentID').disabled = false;
+    document.getElementById('formPortalPassword').placeholder = 'Create password';
+    document.getElementById('formPortalPassword').required = true;
+    
+    document.getElementById('addEditStudentModal').style.display = 'flex';
+}
+
+function closeAddEditModal() {
+    document.getElementById('addEditStudentModal').style.display = 'none';
+    document.getElementById('addEditStudentForm').reset();
+}
+
+// Handle form submission
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('addEditStudentForm');
+    if (form) {
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            saveStudentData();
+        });
+    }
+});
+
+function saveStudentData() {
+    const mode = document.getElementById('addEditStudentForm').dataset.mode;
+    const studentID = document.getElementById('formStudentID').value.trim();
+    const studentName = document.getElementById('formStudentName').value.trim();
+    const studentEmail = document.getElementById('formStudentEmail').value.trim();
+    const studentGroup = document.getElementById('formStudentGroup').value.trim();
+    const emergencyContact = document.getElementById('formEmergencyContact').value.trim();
+    const password = document.getElementById('formPortalPassword').value.trim();
+    const outboundFlight = document.getElementById('formOutboundFlight').value.trim();
+    const returnFlight = document.getElementById('formReturnFlight').value.trim();
+    const hotel = document.getElementById('formHotel').value;
+    const roomNumber = document.getElementById('formRoomNumber').value.trim();
+    const checkIn = document.getElementById('formCheckIn').value;
+    const checkOut = document.getElementById('formCheckOut').value;
+
+    // Validate required fields
+    if (!studentID || !studentName || !studentEmail || !studentGroup || !emergencyContact || !outboundFlight || !returnFlight || !hotel || !roomNumber || !checkIn || !checkOut) {
+        alert('Please fill in all required fields');
+        return;
+    }
+
+    if (mode === 'add' && !password) {
+        alert('Password is required for new students');
+        return;
+    }
+
+    // Generate a password mask
+    const passwordMask = '•••••••••';
+
+    if (mode === 'add') {
+        // Add new student row
+        const tableBody = document.getElementById('studentTableBody');
+        const newRow = document.createElement('tr');
+        newRow.innerHTML = `
+            <td>${studentID}</td>
+            <td>${studentName}</td>
+            <td>${studentGroup}</td>
+            <td>${outboundFlight}</td>
+            <td>${returnFlight}</td>
+            <td>${hotel}</td>
+            <td>${roomNumber}</td>
+            <td>${checkIn}</td>
+            <td>${checkOut}</td>
+            <td><span class="password-mask">${passwordMask}</span></td>
+            <td>${studentEmail}</td>
+            <td>${emergencyContact}</td>
+            <td><button class="view-btn" onclick="viewStudentDetails(this)">View</button></td>
+        `;
+        tableBody.appendChild(newRow);
+
+        // Update summary statistics
+        updateStudentStats();
+
+        alert(`Student ${studentName} (${studentID}) has been added successfully!\nTemporary Password: ${password}`);
+    } else {
+        // Update existing student row
+        const rows = document.querySelectorAll('.student-details-table tbody tr');
+        let found = false;
+
+        rows.forEach(row => {
+            const cells = row.querySelectorAll('td');
+            if (cells[0].textContent === studentID) {
+                cells[1].textContent = studentName;
+                cells[2].textContent = studentGroup;
+                cells[3].textContent = outboundFlight;
+                cells[4].textContent = returnFlight;
+                cells[5].textContent = hotel;
+                cells[6].textContent = roomNumber;
+                cells[7].textContent = checkIn;
+                cells[8].textContent = checkOut;
+                cells[10].textContent = studentEmail;
+                cells[11].textContent = emergencyContact;
+                found = true;
+            }
+        });
+
+        if (found) {
+            alert(`Student ${studentName} (${studentID}) has been updated successfully!`);
+        }
+    }
+
+    closeAddEditModal();
+}
+
+function updateStudentStats() {
+    const rows = document.querySelectorAll('.student-details-table tbody tr');
+    const totalStudents = rows.length;
+    let hotel1Count = 0;
+    let hotel2Count = 0;
+
+    rows.forEach(row => {
+        const cells = row.querySelectorAll('td');
+        const hotel = cells[5].textContent;
+        if (hotel === 'Hotel 1') {
+            hotel1Count++;
+        } else if (hotel === 'Hotel 2') {
+            hotel2Count++;
+        }
+    });
+
+    document.getElementById('totalStudents').textContent = totalStudents;
+    document.getElementById('hotel1Count').textContent = hotel1Count;
+    document.getElementById('hotel2Count').textContent = hotel2Count;
+}
+
+// Close add/edit modal when clicking outside of it
+document.addEventListener('click', function(event) {
+    const modal = document.getElementById('addEditStudentModal');
+    if (modal && event.target === modal) {
+        closeAddEditModal();
+    }
+});
