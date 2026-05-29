@@ -1,0 +1,27 @@
+version: "3.8"
+
+services:
+  web:
+    build: .
+    ports:
+      - "8080:80"
+    depends_on:
+      - api
+    volumes:
+      - ./images:/usr/share/nginx/html/images:ro
+    networks:
+      - spain-net
+
+  api:
+    image: typicode/json-server:0.17
+    command: ["json-server", "--watch", "/data/db.json", "--host", "0.0.0.0", "--port", "3000"]
+    volumes:
+      - ./data/db.json:/data/db.json:ro
+    ports:
+      - "3000:3000"
+    networks:
+      - spain-net
+
+networks:
+  spain-net:
+    driver: bridge
