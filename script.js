@@ -1,5 +1,6 @@
 const STORAGE_KEY = 'spainPortalDatabase';
 const CURRENT_USER_KEY = 'spainPortalCurrentUser';
+const ITINERARY_KEY = 'spainPortalItinerary';
 
 const defaultDatabase = {
     teachers: [
@@ -133,6 +134,30 @@ function getDatabase() {
 
 function saveDatabase(db) {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(db));
+}
+
+function saveItineraryToStorage() {
+    try {
+        localStorage.setItem(ITINERARY_KEY, JSON.stringify(itineraryData || []));
+    } catch (e) {
+        console.error('Failed to save itinerary to storage', e);
+    }
+}
+
+function loadItineraryFromStorage() {
+    try {
+        const raw = localStorage.getItem(ITINERARY_KEY);
+        if (!raw) return false;
+        const data = JSON.parse(raw);
+        if (!Array.isArray(data)) return false;
+        itineraryData = data;
+        // Update the live DOM with stored itinerary
+        applyItineraryChanges();
+        return true;
+    } catch (e) {
+        console.error('Failed to load itinerary from storage', e);
+        return false;
+    }
 }
 
 function normalizeLoginName(value) {
@@ -344,6 +369,8 @@ function initializePortal() {
 
     renderStudentTable();
     bindStudentFilters();
+    // Load saved itinerary (if any) so edits persist and appear in the live itinerary
+    loadItineraryFromStorage();
 
     if (documentInput && documentList) {
         documentInput.addEventListener('change', function() {
@@ -909,7 +936,7 @@ function resetPassword() {
 }
 
 function exportStudentData() {
-    // Create CSV content
+
     let csv = 'Student ID,Name,Group,Outbound Flight,Return Flight,Hotel,Room,Check-in,Check-out,Email,Emergency Contact\n';
     
     const rows = document.querySelectorAll('.student-details-table tbody tr');
@@ -922,7 +949,7 @@ function exportStudentData() {
         csv += rowData + '\n';
     });
     
-    // Create and download file
+
     const element = document.createElement('a');
     element.setAttribute('href', 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv));
     element.setAttribute('download', 'student_details_' + new Date().toISOString().split('T')[0] + '.csv');
@@ -934,7 +961,6 @@ function exportStudentData() {
     alert('Student data exported successfully!');
 }
 
-// Close modal when clicking outside of it
 document.addEventListener('click', function(event) {
     const modal = document.getElementById('studentDetailModal');
     if (modal && event.target === modal) {
@@ -942,9 +968,7 @@ document.addEventListener('click', function(event) {
     }
 });
 
-// Add/Edit Student Modal Functions
 function openAddStudentModal() {
-    // Reset form for adding new student
     document.getElementById('addEditStudentForm').reset();
     document.getElementById('addEditStudentForm').dataset.mode = 'add';
     document.getElementById('addEditStudentForm').dataset.studentId = '';
@@ -1081,7 +1105,7 @@ function updateStudentStats() {
     document.getElementById('hotel2Count').textContent = hotel2Count;
 }
 
-// Close add/edit modal when clicking outside of it
+
 document.addEventListener('click', function(event) {
     const modal = document.getElementById('addEditStudentModal');
     if (modal && event.target === modal) {
@@ -1092,24 +1116,33 @@ let itineraryData = [];
 let selectedDay = 0;
 
 function initItineraryEditor() {
-    const liveDays = document.querySelectorAll('.itinerary-day');
+    // Prefer persisted itinerary when available so editor edits don't get
+    // overwritten by the original static DOM markup.
     itineraryData = [];
+    const loaded = loadItineraryFromStorage();
+    if (loaded) {
+        console.log('initItineraryEditor: loaded itinerary from storage, items=', itineraryData.length);
+    } else {
+        const liveDays = document.querySelectorAll('.itinerary-day');
+        console.log('initItineraryEditor: found liveDays', liveDays.length);
 
-    liveDays.forEach(function(day) {
-        const title = day.querySelector('.day-info h2')?.textContent || '';
-        const subtitle = day.querySelector('.day-info p')?.textContent || '';
-        const activities = [];
+        liveDays.forEach(function(day) {
+            const title = day.querySelector('.day-info h2')?.textContent || '';
+            const subtitle = day.querySelector('.day-info p')?.textContent || '';
+            const activities = [];
 
-        day.querySelectorAll('.schedule-item').forEach(function(item) {
-            activities.push({
-                time: item.querySelector('.schedule-time')?.textContent || '',
-                name: item.querySelector('strong')?.textContent || '',
-                description: item.querySelector('p')?.textContent || ''
+            day.querySelectorAll('.schedule-item').forEach(function(item) {
+                activities.push({
+                    time: item.querySelector('.schedule-time')?.textContent || '',
+                    name: item.querySelector('strong')?.textContent || '',
+                    description: item.querySelector('p')?.textContent || ''
+                });
             });
-        });
 
-        itineraryData.push({ title, subtitle, activities });
-    });
+            itineraryData.push({ title, subtitle, activities });
+        });
+        console.log('initItineraryEditor: read from DOM, items=', itineraryData.length);
+    }
 
     selectedDay = 0;
     renderDaySelector();
@@ -1144,6 +1177,7 @@ function renderDaySelector() {
 function renderDayEditor() {
     const container = document.getElementById('day-editor');
     const day = itineraryData[selectedDay];
+    console.log('renderDayEditor: selectedDay=', selectedDay, 'day=', day);
 
     if (!day) {
         container.innerHTML = '<p>No day selected.</p>';
@@ -1207,6 +1241,7 @@ function addDay() {
     selectedDay = itineraryData.length - 1;
     renderDaySelector();
     renderDayEditor();
+    console.log('addDay: itineraryData length now', itineraryData.length);
 }
 
 function removeDay(index) {
@@ -1227,59 +1262,63 @@ function removeActivity(actIndex) {
 }
 
 function applyItineraryChanges() {
-    const container = document.querySelector('.itinerary-container');
-    container.innerHTML = '';
+    console.log('applyItineraryChanges called. itineraryData length=', Array.isArray(itineraryData) ? itineraryData.length : 'not-array');
+    const containers = Array.from(document.querySelectorAll('.itinerary-container'));
+    if (containers.length === 0) {
+        console.error('applyItineraryChanges: no .itinerary-container elements found in DOM');
+        return;
+    }
 
-    itineraryData.forEach(function(day, index) {
-        const dayEl = document.createElement('div');
-        dayEl.className = 'itinerary-day';
-        dayEl.innerHTML = `
-            <div class="day-header">
-                <div class="day-number">Day ${index + 1}</div>
-                <div class="day-info">
-                    <h2>${day.title}</h2>
-                    <p>${day.subtitle}</p>
-                </div>
-            </div>
-            <div class="day-schedule">
-                ${day.activities.map(act => `
-                    <div class="schedule-item">
-                        <div class="schedule-time">${act.time}</div>
-                        <div class="schedule-content">
-                            <strong>${act.name}</strong>
-                            <p>${act.description}</p>
-                        </div>
+    containers.forEach((container, cIndex) => {
+        console.log(`applyItineraryChanges: updating container ${cIndex} (parent id=${container.parentElement?.id || 'none'})`);
+        container.innerHTML = '';
+
+        itineraryData.forEach(function(day, index) {
+            const dayEl = document.createElement('div');
+            dayEl.className = 'itinerary-day';
+            dayEl.innerHTML = `
+                <div class="day-header">
+                    <div class="day-number">Day ${index + 1}</div>
+                    <div class="day-info">
+                        <h2>${day.title}</h2>
+                        <p>${day.subtitle}</p>
                     </div>
-                `).join('')}
-            </div>
-        `;
-        container.appendChild(dayEl);
+                </div>
+                <div class="day-schedule">
+                    ${day.activities.map(act => `
+                        <div class="schedule-item">
+                            <div class="schedule-time">${act.time}</div>
+                            <div class="schedule-content">
+                                <strong>${act.name}</strong>
+                                <p>${act.description}</p>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+            container.appendChild(dayEl);
+            // Ensure the new day is visible even if CSS animation rules target only first N children
+            try {
+                dayEl.style.opacity = '1';
+            } catch (e) {
+                /* ignore */
+            }
+        });
+
+        console.log(`applyItineraryChanges: container ${cIndex} now has ${container.querySelectorAll('.itinerary-day').length} days`);
     });
+
+    // Persist the currently applied itinerary so it remains after navigation/refresh
+    saveItineraryToStorage();
+
+    // Try to switch the main portal to the Itinerary page so changes are visible immediately
+    try {
+        const mainItineraryNav = document.querySelector('.nav-item[data-page="itinerary"]');
+        if (mainItineraryNav) mainItineraryNav.click();
+    } catch (e) {
+        console.warn('Could not switch to itinerary tab automatically', e);
+    }
 }
 
-const Database = require('better-sqlite3');
-const bcrypt = require('bcryptjs');
-
-const db = new Database('./database.db');
-
-// Create tables
-db.exec(`
-  CREATE TABLE IF NOT EXISTS users (
-    id         INTEGER PRIMARY KEY AUTOINCREMENT,
-    name       TEXT NOT NULL,
-    email      TEXT UNIQUE NOT NULL,
-    phone_number TEXT NOT NULL,
-    password   TEXT NOT NULL,
-    role       TEXT NOT NULL DEFAULT 'user',
-    created_at TEXT DEFAULT (datetime('now')),
-    hotel TEXT NOT NULL,
-    room_number TEXT NOT NULL,
-    check_in TEXT NOT NULL,
-    check_out TEXT NOT NULL,
-    flight TEXT NOT NULL,
-    departure_time TEXT NOT NULL,
-    arrival_time TEXT NOT NULL,
-    group_name TEXT NOT NULL
-
-  );
-`);
+// Server-side database code removed — this file is client-side only.
+// If you need a server-backed DB, create a separate Node.js backend file.
