@@ -995,26 +995,24 @@
 
             <div class="details-grid">
                 <div class="details-card">
-                    <h2>Student Profile</h2>
+                    <h2>Profile</h2>
                     <div class="details-row">
                         <span class="details-label">Full Name</span>
                         <span class="details-value" id="fullNameDisplay">Student Name</span>
                     </div>
                     <div class="details-row">
                         <span class="details-label">Student Group</span>
-                        <span class="details-value">Barcelona Cohort A</span>
-                    </div>
-                    <div class="details-row">
-                        <span class="details-label">Emergency Contact</span>
-                        <span class="details-value">Parent/Guardian on file</span>
-                    </div>
+                    <span class="details-value" id="studentGroupDisplay">Barcelona Cohort A</span>
                 </div>
+                <div class="details-row">
+                    <span class="details-label">Emergency Contact</span>
+                    <span class="details-value" id="emergencyContactDisplay">Parent/Guardian on file</span>
+                </div>
+            </div>
 
-                <div class="details-card">
-                    <h2>Group Members</h2>
-                    <ul class="details-list">
-                        <li>Amira El-Sayed</li>
-                        <li>Jonas Keller</li>
+            <div class="details-card">
+                <h2>Group Members</h2>
+                <ul class="details-list" id="groupMembersList">
                         <li>Rita Nair</li>
                         <li>Mateo Silva</li>
                     </ul>
@@ -1287,7 +1285,7 @@
                         </div>
                         <div class="detail-section">
                             <h3>Account Security</h3>
-                            <p><strong>Password:</strong> <button class="toggle-password-btn" onclick="togglePasswordVisibility()">Show Password</button> <span id="modalPassword" class="password-hidden">•••••••••</span></p>
+                            <p><strong>Password:</strong> <button class="toggle-password-btn" onclick="togglePasswordVisibility(event)">Show Password</button> <span id="modalPassword" class="password-hidden">•••••••••</span></p>
                             <p><strong>Last Login:</strong> <span id="modalLastLogin">2026-05-28 14:32</span></p>
                         </div>
                     </div>
