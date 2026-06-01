@@ -40,6 +40,122 @@ document.addEventListener('DOMContentLoaded', function() {
     window.addEventListener('resize', updatePortalSideLinesStart);
 });
 
+const STORAGE_KEY_DB = 'spainPortalDatabase';
+const STORAGE_KEY_CURRENT_USER = 'spainPortalCurrentUser';
+let appDatabase = null;
+
+const initialDatabase = {
+    teachers: [
+        {
+            id: 'T001',
+            username: 'teacher',
+            password: 'teacher123',
+            role: 'teacher',
+            name: 'Ms. Harper',
+            email: 'harper@school.com'
+        }
+    ],
+    students: [
+        {
+            id: 'S001',
+            username: 'Assia Johnson',
+            password: 'assia123',
+            role: 'student',
+            name: 'Assia Johnson',
+            email: 'assia.johnson@student.com',
+            group: 'Barcelona Cohort A'
+        }
+    ],
+    itinerary: []
+};
+
+function initializeDatabase() {
+    const storedDb = localStorage.getItem(STORAGE_KEY_DB);
+    if (storedDb) {
+        try {
+            appDatabase = JSON.parse(storedDb);
+            return;
+        } catch (error) {
+            console.warn('Failed to parse saved database, resetting to initial database.', error);
+        }
+    }
+
+    appDatabase = JSON.parse(JSON.stringify(initialDatabase));
+    saveDatabase(appDatabase);
+}
+
+function getDatabase() {
+    if (!appDatabase) {
+        initializeDatabase();
+    }
+    return appDatabase;
+}
+
+function saveDatabase(db) {
+    appDatabase = db;
+    localStorage.setItem(STORAGE_KEY_DB, JSON.stringify(db));
+}
+
+function normalizeLoginName(value) {
+    return (value || '')
+        .toString()
+        .trim()
+        .toLowerCase()
+        .replace(/\s+/g, ' ');
+}
+
+function findUser(identifier, role) {
+    const db = getDatabase();
+    const normalizedIdentifier = normalizeLoginName(identifier);
+    const users = role === 'teacher' ? db.teachers : db.students;
+
+    return users.find(user => {
+        const normalizedUsername = normalizeLoginName(user.username);
+        const normalizedName = normalizeLoginName(user.name);
+        const normalizedEmail = normalizeLoginName(user.email);
+        return normalizedIdentifier === normalizedUsername || normalizedIdentifier === normalizedName || normalizedIdentifier === normalizedEmail;
+    });
+}
+
+function loginUser(username, password, role) {
+    const user = findUser(username, role);
+    if (!user || user.password !== password) {
+        return null;
+    }
+
+    // Save login time to database in case the portal shows it later
+    const db = getDatabase();
+    const list = role === 'teacher' ? db.teachers : db.students;
+    const storedUser = list.find(entry => entry.id === user.id);
+    if (storedUser) {
+        storedUser.lastLogin = new Date().toISOString().slice(0, 16).replace('T', ' ');
+        saveDatabase(db);
+    }
+
+    return user;
+}
+
+function setCurrentUser(user) {
+    localStorage.setItem(STORAGE_KEY_CURRENT_USER, JSON.stringify(user));
+}
+
+function getLoggedInUserData() {
+    const storedUser = localStorage.getItem(STORAGE_KEY_CURRENT_USER);
+    if (!storedUser) {
+        return null;
+    }
+    try {
+        return JSON.parse(storedUser);
+    } catch (error) {
+        console.warn('Failed to parse current user.', error);
+        return null;
+    }
+}
+
+function clearCurrentUser() {
+    localStorage.removeItem(STORAGE_KEY_CURRENT_USER);
+}
+
 function updatePortalSideLinesStart() {
     if (!document.body.classList.contains('portal-page')) {
         return;
@@ -82,6 +198,8 @@ function initializePortal() {
         fullNameSection.textContent = displayName;
     }
 
+    const isTeacher = currentUserData && currentUserData.role === 'teacher';
+
     // Navigation functionality
     const navItems = document.querySelectorAll('.nav-item');
     const pageContents = document.querySelectorAll('.page-content');
@@ -90,7 +208,7 @@ function initializePortal() {
         item.addEventListener('click', function() {
             const targetPage = this.getAttribute('data-page');
 
-            if (targetPage === 'editing' && currentUserData && currentUserData.role !== 'teacher') {
+            if (targetPage === 'editing' && !isTeacher) {
                 alert('Only teachers can access the editing area.');
                 return;
             }
@@ -111,12 +229,8 @@ function initializePortal() {
     
     // Set initial active page based on URL hash or fall back to the first tab
     const hash = window.location.hash.substring(1);
-    const initialPage = hash || (navItems[0] ? navItems[0].getAttribute('data-page') : null);
+    let initialPage = hash || (navItems[0] ? navItems[0].getAttribute('data-page') : null);
     let activated = false;
-
-    if (!isTeacher && initialPage === 'editing') {
-        initialPage = 'overview';
-    }
 
     if (!isTeacher && initialPage === 'editing') {
         initialPage = 'overview';
@@ -1030,7 +1144,7 @@ function initItineraryEditor() {
     selectedDay = 0;
     renderDaySelector();
     renderDayEditor();
-}
+
 
 function renderDaySelector() {
     const selector = document.getElementById('day-selector');
@@ -1182,3 +1296,4 @@ function applyItineraryChanges() {
         container.appendChild(dayEl);
     });
 }
+    )}    
