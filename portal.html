@@ -91,6 +91,16 @@
             </svg>
             Reflective Diary
         </button>
+        <button class="nav-item" data-page="student-details">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M17 21H19C20.1046 21 21 20.1046 21 19V1H3V19C3 20.1046 3.89543 21 5 21H7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M16 5H8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M16 9H8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M16 13H8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M8 17H16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Student Details
+        </button>
         <button class="nav-item" data-page="editing">
            <span class="glyphicon glyphicon-pencil"></span>
             Editing area
@@ -985,26 +995,24 @@
 
             <div class="details-grid">
                 <div class="details-card">
-                    <h2>Student Profile</h2>
+                    <h2>Profile</h2>
                     <div class="details-row">
                         <span class="details-label">Full Name</span>
                         <span class="details-value" id="fullNameDisplay">Student Name</span>
                     </div>
                     <div class="details-row">
                         <span class="details-label">Student Group</span>
-                        <span class="details-value">Barcelona Cohort A</span>
-                    </div>
-                    <div class="details-row">
-                        <span class="details-label">Emergency Contact</span>
-                        <span class="details-value">Parent/Guardian on file</span>
-                    </div>
+                    <span class="details-value" id="studentGroupDisplay">Barcelona Cohort A</span>
                 </div>
+                <div class="details-row">
+                    <span class="details-label">Emergency Contact</span>
+                    <span class="details-value" id="emergencyContactDisplay">Parent/Guardian on file</span>
+                </div>
+            </div>
 
-                <div class="details-card">
-                    <h2>Group Members</h2>
-                    <ul class="details-list">
-                        <li>Amira El-Sayed</li>
-                        <li>Jonas Keller</li>
+            <div class="details-card">
+                <h2>Group Members</h2>
+                <ul class="details-list" id="groupMembersList">
                         <li>Rita Nair</li>
                         <li>Mateo Silva</li>
                     </ul>
@@ -1113,6 +1121,266 @@
                         });
                         </script>
                     </div>
+                </div>
+            </div>
+        </div>
+        <div id="student-details" class="page-content">
+            <div class="page-header">
+                <h1>Student Details Overview</h1>
+                <p>View all students with their flight bookings, hotel assignments, and account information</p>
+            </div>
+            <div class="student-details-container">
+                <div class="student-details-filters">
+                    <input type="text" id="studentSearchInput" placeholder="Search student name or ID..." class="search-input">
+                    <select id="hotelFilter" class="filter-select">
+                        <option value="">Filter by Hotel</option>
+                        <option value="Hotel 1">Hotel 1</option>
+                        <option value="Hotel 2">Hotel 2</option>
+                    </select>
+                    <button class="export-button" onclick="exportStudentData()">Export Data</button>
+                    <button class="add-student-button" onclick="openAddStudentModal()">+ Add Student</button>
+                </div>
+                <div class="table-wrapper">
+                    <table class="student-details-table">
+                        <thead>
+                            <tr>
+                                <th>Student ID</th>
+                                <th>Name</th>
+                                <th>Group</th>
+                                <th>Outbound Flight</th>
+                                <th>Return Flight</th>
+                                <th>Hotel</th>
+                                <th>Room</th>
+                                <th>Check-in</th>
+                                <th>Check-out</th>
+                                <th>Portal Password</th>
+                                <th>Email</th>
+                                <th>Emergency Contact</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="studentTableBody">
+                            <tr>
+                                <td>S001</td>
+                                <td>Assia Johnson</td>
+                                <td>Barcelona Cohort A</td>
+                                <td>BA2641 (09:00 - 12:30)</td>
+                                <td>BA2642 (15:00 - 17:45)</td>
+                                <td>Hotel 1</td>
+                                <td>302</td>
+                                <td>14:00</td>
+                                <td>11:00</td>
+                                <td><span class="password-mask">•••••••••</span></td>
+                                <td>assia.johnson@student.com</td>
+                                <td>+44 121 XXXX XXX</td>
+                                <td><button class="view-btn" onclick="viewStudentDetails(this)">View</button></td>
+                            </tr>
+                            <tr>
+                                <td>S002</td>
+                                <td>Emily Smith</td>
+                                <td>Barcelona Cohort A</td>
+                                <td>BA2641 (09:00 - 12:30)</td>
+                                <td>BA2642 (15:00 - 17:45)</td>
+                                <td>Hotel 1</td>
+                                <td>303</td>
+                                <td>14:00</td>
+                                <td>11:00</td>
+                                <td><span class="password-mask">•••••••••</span></td>
+                                <td>emily.smith@student.com</td>
+                                <td>+44 121 XXXX XXX</td>
+                                <td><button class="view-btn" onclick="viewStudentDetails(this)">View</button></td>
+                            </tr>
+                            <tr>
+                                <td>S003</td>
+                                <td>Marcus Taylor</td>
+                                <td>Sevilla Cohort B</td>
+                                <td>BA2641 (09:00 - 12:30)</td>
+                                <td>BA2642 (15:00 - 17:45)</td>
+                                <td>Hotel 2</td>
+                                <td>205</td>
+                                <td>14:00</td>
+                                <td>11:00</td>
+                                <td><span class="password-mask">•••••••••</span></td>
+                                <td>marcus.taylor@student.com</td>
+                                <td>+44 121 XXXX XXX</td>
+                                <td><button class="view-btn" onclick="viewStudentDetails(this)">View</button></td>
+                            </tr>
+                            <tr>
+                                <td>S004</td>
+                                <td>Sophie Brown</td>
+                                <td>Sevilla Cohort B</td>
+                                <td>BA2641 (09:00 - 12:30)</td>
+                                <td>BA2642 (15:00 - 17:45)</td>
+                                <td>Hotel 2</td>
+                                <td>206</td>
+                                <td>14:00</td>
+                                <td>11:00</td>
+                                <td><span class="password-mask">•••••••••</span></td>
+                                <td>sophie.brown@student.com</td>
+                                <td>+44 121 XXXX XXX</td>
+                                <td><button class="view-btn" onclick="viewStudentDetails(this)">View</button></td>
+                            </tr>
+                            <tr>
+                                <td>S005</td>
+                                <td>James Wilson</td>
+                                <td>Madrid Cohort C</td>
+                                <td>BA2641 (09:00 - 12:30)</td>
+                                <td>BA2642 (15:00 - 17:45)</td>
+                                <td>Hotel 1</td>
+                                <td>304</td>
+                                <td>14:00</td>
+                                <td>11:00</td>
+                                <td><span class="password-mask">•••••••••</span></td>
+                                <td>james.wilson@student.com</td>
+                                <td>+44 121 XXXX XXX</td>
+                                <td><button class="view-btn" onclick="viewStudentDetails(this)">View</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="student-details-summary">
+                    <div class="summary-stat">
+                        <h3>Total Students</h3>
+                        <p id="totalStudents">5</p>
+                    </div>
+                    <div class="summary-stat">
+                        <h3>Hotel 1</h3>
+                        <p id="hotel1Count">3</p>
+                    </div>
+                    <div class="summary-stat">
+                        <h3>Hotel 2</h3>
+                        <p id="hotel2Count">2</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Student Detail Modal -->
+            <div id="studentDetailModal" class="student-modal" style="display:none;">
+                <div class="student-modal-content">
+                    <button class="student-modal-close" onclick="closeStudentModal()">&times;</button>
+                    <h2>Student Profile Details</h2>
+                    <div class="student-modal-body">
+                        <div class="detail-section">
+                            <h3>Basic Information</h3>
+                            <p><strong>Name:</strong> <span id="modalStudentName"></span></p>
+                            <p><strong>Student ID:</strong> <span id="modalStudentID"></span></p>
+                            <p><strong>Group:</strong> <span id="modalStudentGroup"></span></p>
+                            <p><strong>Email:</strong> <span id="modalStudentEmail"></span></p>
+                            <p><strong>Emergency Contact:</strong> <span id="modalEmergencyContact"></span></p>
+                        </div>
+                        <div class="detail-section">
+                            <h3>Flight Information</h3>
+                            <p><strong>Outbound:</strong> <span id="modalOutboundFlight"></span></p>
+                            <p><strong>Return:</strong> <span id="modalReturnFlight"></span></p>
+                            <p><strong>Seat (Outbound):</strong> <span id="modalOutboundSeat"></span></p>
+                            <p><strong>Seat (Return):</strong> <span id="modalReturnSeat"></span></p>
+                        </div>
+                        <div class="detail-section">
+                            <h3>Hotel Information</h3>
+                            <p><strong>Hotel Name:</strong> <span id="modalHotelName"></span></p>
+                            <p><strong>Room Number:</strong> <span id="modalRoomNumber"></span></p>
+                            <p><strong>Check-in Time:</strong> <span id="modalCheckIn"></span></p>
+                            <p><strong>Check-out Time:</strong> <span id="modalCheckOut"></span></p>
+                            <p><strong>Hotel Contact:</strong> <span id="modalHotelContact"></span></p>
+                        </div>
+                        <div class="detail-section">
+                            <h3>Account Security</h3>
+                            <p><strong>Password:</strong> <button class="toggle-password-btn" onclick="togglePasswordVisibility(event)">Show Password</button> <span id="modalPassword" class="password-hidden">•••••••••</span></p>
+                            <p><strong>Last Login:</strong> <span id="modalLastLogin">2026-05-28 14:32</span></p>
+                        </div>
+                    </div>
+                    <div class="student-modal-actions">
+                        <button class="reset-password-btn" onclick="resetPassword()">Reset Password</button>
+                        <button class="close-modal-btn" onclick="closeStudentModal()">Close</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Add/Edit Student Modal -->
+            <div id="addEditStudentModal" class="student-modal" style="display:none;">
+                <div class="student-modal-content">
+                    <button class="student-modal-close" onclick="closeAddEditModal()">&times;</button>
+                    <h2 id="addEditModalTitle">Add New Student</h2>
+                    <form id="addEditStudentForm" class="add-edit-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="formStudentID">Student ID</label>
+                                <input type="text" id="formStudentID" placeholder="e.g., S006" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="formStudentName">Full Name</label>
+                                <input type="text" id="formStudentName" placeholder="Enter student name" required>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="formStudentEmail">Email</label>
+                                <input type="email" id="formStudentEmail" placeholder="student@email.com" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="formStudentGroup">Group</label>
+                                <input type="text" id="formStudentGroup" placeholder="e.g., Barcelona Cohort A" required>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="formEmergencyContact">Emergency Contact</label>
+                                <input type="tel" id="formEmergencyContact" placeholder="Phone number" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="formPortalPassword">Portal Password</label>
+                                <input type="password" id="formPortalPassword" placeholder="Create password" required>
+                            </div>
+                        </div>
+
+                        <div class="form-divider">Flight Information</div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="formOutboundFlight">Outbound Flight</label>
+                                <input type="text" id="formOutboundFlight" placeholder="e.g., BA2641 (09:00 - 12:30)" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="formReturnFlight">Return Flight</label>
+                                <input type="text" id="formReturnFlight" placeholder="e.g., BA2642 (15:00 - 17:45)" required>
+                            </div>
+                        </div>
+
+                        <div class="form-divider">Hotel Information</div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="formHotel">Hotel</label>
+                                <select id="formHotel" required>
+                                    <option value="">Select Hotel</option>
+                                    <option value="Hotel 1">Hotel 1</option>
+                                    <option value="Hotel 2">Hotel 2</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="formRoomNumber">Room Number</label>
+                                <input type="text" id="formRoomNumber" placeholder="e.g., 302" required>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="formCheckIn">Check-in Time</label>
+                                <input type="time" id="formCheckIn" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="formCheckOut">Check-out Time</label>
+                                <input type="time" id="formCheckOut" required>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="submit" class="save-student-btn">Save Student</button>
+                            <button type="button" class="cancel-btn" onclick="closeAddEditModal()">Cancel</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -1467,7 +1735,7 @@
                     <button type="submit" class="save-button" onclick="updatePersonal()">Save Changes</button>
                 </div>
             </div>
-        </div>
+
     </main>
     <div class="popup-modal" id="popupModal" aria-hidden="true">
         <div class="popup-backdrop" data-popup-close></div>

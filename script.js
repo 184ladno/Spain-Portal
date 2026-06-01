@@ -1,5 +1,6 @@
 // Login functionality
 document.addEventListener('DOMContentLoaded', function() {
+    initializeDatabase();
     updatePortalSideLinesStart();
 
     const loginForm = document.getElementById('loginForm');
@@ -10,16 +11,21 @@ document.addEventListener('DOMContentLoaded', function() {
             
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
+            const role = document.getElementById('role') ? document.getElementById('role').value : 'student';
             
-            // Demo login - accept any username and password
-            if (username && password) {
-                // Store username in sessionStorage
-                sessionStorage.setItem('username', username);
-                // Redirect to portal
-                window.location.href = 'portal.html';
-            } else {
-                alert('Please enter both username and password');
+            if (!username || !password) {
+                alert('Please enter both name/username and password.');
+                return;
             }
+
+            const user = loginUser(username, password, role);
+            if (!user) {
+                alert('Invalid login. Use the correct name/username, password and role.');
+                return;
+            }
+
+            setCurrentUser(user);
+            window.location.href = 'portal.html';
         });
     }
     
@@ -51,35 +57,44 @@ function updatePortalSideLinesStart() {
 
 function initializePortal() {
     const isPublicPortal = document.body.classList.contains('public-portal');
+    const currentUserData = getLoggedInUserData();
 
-    // Check if user is logged in
-    const username = sessionStorage.getItem('username');
-    if (!username && !isPublicPortal) {
+    if (!currentUserData && !isPublicPortal) {
         window.location.href = 'login.html';
         return;
     }
 
-    const displayName = username || 'Guest';
-    
-    // Display username
+    const displayName = currentUserData ? (currentUserData.name || currentUserData.username) : 'Guest';
+
+    // Display username in the header
     const usernameDisplay = document.getElementById('usernameDisplay');
     if (usernameDisplay) {
         usernameDisplay.textContent = displayName;
     }
 
-    const fullNameDisplay = document.getElementById('fullNameDisplay');
-    if (fullNameDisplay) {
-        fullNameDisplay.textContent = displayName;
+    // Populate profile details and group members
+    if (currentUserData) {
+        populatePersonalDetails(currentUserData);
     }
-    
+
+    const fullNameSection = document.getElementById('fullNameDisplay');
+    if (fullNameSection) {
+        fullNameSection.textContent = displayName;
+    }
+
     // Navigation functionality
     const navItems = document.querySelectorAll('.nav-item');
     const pageContents = document.querySelectorAll('.page-content');
-    
+
     navItems.forEach(item => {
         item.addEventListener('click', function() {
             const targetPage = this.getAttribute('data-page');
-            
+
+            if (targetPage === 'editing' && currentUserData && currentUserData.role !== 'teacher') {
+                alert('Only teachers can access the editing area.');
+                return;
+            }
+
             // Update active nav item
             navItems.forEach(nav => nav.classList.remove('active'));
             this.classList.add('active');
@@ -99,12 +114,24 @@ function initializePortal() {
     const initialPage = hash || (navItems[0] ? navItems[0].getAttribute('data-page') : null);
     let activated = false;
 
-    navItems.forEach(item => {
-        if (item.getAttribute('data-page') === initialPage) {
-            item.click();
-            activated = true;
-        }
-    });
+    if (!isTeacher && initialPage === 'editing') {
+        initialPage = 'overview';
+    }
+
+    if (!isTeacher && initialPage === 'editing') {
+        initialPage = 'overview';
+    }
+
+    if (initialPage !== 'overview') {
+        navItems.forEach(item => {
+            if (item.getAttribute('data-page') === initialPage) {
+                item.click();
+                activated = true;
+            }
+        });
+    } else {
+        activated = true;
+    }
 
     const documentInput = document.getElementById('documentUpload');
     const documentList = document.getElementById('documentList');
@@ -120,14 +147,268 @@ function initializePortal() {
             documentList.innerHTML = files.map(file => `<li>${file.name}</li>`).join('');
         });
     }
+}
 
-    if (!activated && navItems[0]) {
-        navItems[0].click();
+function populatePersonalDetails(userData) {
+    const fullName = document.getElementById('fullNameDisplay');
+    const groupDisplay = document.getElementById('studentGroupDisplay');
+    const emergencyDisplay = document.getElementById('emergencyContactDisplay');
+    const groupMembersList = document.getElementById('groupMembersList');
+
+    if (fullName && userData) {
+        fullName.textContent = userData.name || userData.username;
+    }
+    if (groupDisplay) {
+        groupDisplay.textContent = userData.group || 'N/A';
+    }
+    if (emergencyDisplay) {
+        emergencyDisplay.textContent = userData.emergencyContact || 'Not available';
+    }
+
+    if (groupMembersList) {
+        if (userData.role === 'student') {
+            const studentsInGroup = getDatabase().students.filter(student => student.group === userData.group);
+            groupMembersList.innerHTML = studentsInGroup.map(student => `<li>${student.name}</li>`).join('') || '<li>No group members listed.</li>';
+        } else {
+            const students = getDatabase().students;
+            groupMembersList.innerHTML = students.map(student => `<li>${student.name}</li>`).join('');
+        }
     }
 }
 
+function bindStudentFilters() {
+    const searchInput = document.getElementById('studentSearchInput');
+    const hotelFilter = document.getElementById('hotelFilter');
+    if (searchInput) {
+        searchInput.addEventListener('input', applyStudentFilters);
+    }
+    if (hotelFilter) {
+        hotelFilter.addEventListener('change', applyStudentFilters);
+    }
+}
+
+function applyStudentFilters() {
+    const searchValue = document.getElementById('studentSearchInput')?.value.toLowerCase().trim() || '';
+    const hotelValue = document.getElementById('hotelFilter')?.value || '';
+    const rows = document.querySelectorAll('.student-details-table tbody tr');
+
+    rows.forEach(row => {
+        const cells = Array.from(row.querySelectorAll('td')).map(cell => cell.textContent.toLowerCase());
+        const matchesSearch = searchValue === '' || cells.some(text => text.includes(searchValue));
+        const matchesHotel = hotelValue === '' || row.querySelector('td:nth-child(6)')?.textContent === hotelValue;
+        row.style.display = matchesSearch && matchesHotel ? '' : 'none';
+    });
+}
+
+function renderStudentTable() {
+    const tableBody = document.getElementById('studentTableBody');
+    if (!tableBody) {
+        return;
+    }
+
+    const userData = getLoggedInUserData();
+    const allStudents = getDatabase().students;
+    const rows = [];
+    const visibleStudents = userData && userData.role === 'student'
+        ? allStudents.filter(student => normalizeLoginName(student.username) === normalizeLoginName(userData.username))
+        : allStudents;
+
+    visibleStudents.forEach(student => {
+        const row = document.createElement('tr');
+        row.dataset.username = student.username;
+        row.dataset.password = student.password || '';
+        row.dataset.studentId = student.id || '';
+        row.innerHTML = `
+            <td>${student.id || ''}</td>
+            <td>${student.name || ''}</td>
+            <td>${student.group || ''}</td>
+            <td>${student.outboundFlight || ''}</td>
+            <td>${student.returnFlight || ''}</td>
+            <td>${student.hotel || ''}</td>
+            <td>${student.roomNumber || ''}</td>
+            <td>${student.checkIn || ''}</td>
+            <td>${student.checkOut || ''}</td>
+            <td><span class="password-mask">•••••••••</span></td>
+            <td>${student.email || ''}</td>
+            <td>${student.emergencyContact || ''}</td>
+            <td>
+                <button class="view-btn" onclick="viewStudentDetails(this)">View</button>
+                ${userData && userData.role === 'teacher' ? `<button class="edit-btn" onclick="openEditStudentModal(this)">Edit</button>` : ''}
+            </td>
+        `;
+        rows.push(row);
+    });
+
+    tableBody.innerHTML = '';
+    rows.forEach(row => tableBody.appendChild(row));
+    updateStudentStats();
+}
+
+function openEditStudentModal(button) {
+    const row = button.closest('tr');
+    if (!row) {
+        return;
+    }
+
+    const student = findUser(row.dataset.username, 'student');
+    if (!student) {
+        return;
+    }
+
+    document.getElementById('addEditStudentForm').reset();
+    document.getElementById('addEditStudentForm').dataset.mode = 'edit';
+    document.getElementById('addEditStudentForm').dataset.studentId = student.id || '';
+    document.getElementById('addEditModalTitle').textContent = 'Edit Student Information';
+    document.getElementById('formStudentID').value = student.id || '';
+    document.getElementById('formStudentID').disabled = true;
+    document.getElementById('formStudentName').value = student.name || '';
+    document.getElementById('formStudentEmail').value = student.email || '';
+    document.getElementById('formStudentGroup').value = student.group || '';
+    document.getElementById('formEmergencyContact').value = student.emergencyContact || '';
+    document.getElementById('formPortalPassword').value = '';
+    document.getElementById('formPortalPassword').placeholder = 'Leave blank to keep current password';
+    document.getElementById('formPortalPassword').required = false;
+    document.getElementById('formOutboundFlight').value = student.outboundFlight || '';
+    document.getElementById('formReturnFlight').value = student.returnFlight || '';
+    document.getElementById('formHotel').value = student.hotel || '';
+    document.getElementById('formRoomNumber').value = student.roomNumber || '';
+    document.getElementById('formCheckIn').value = student.checkIn || '';
+    document.getElementById('formCheckOut').value = student.checkOut || '';
+
+    document.getElementById('addEditStudentModal').style.display = 'flex';
+}
+
+function populatePersonalDetails(userData) {
+    const fullName = document.getElementById('fullNameDisplay');
+    const groupDisplay = document.getElementById('studentGroupDisplay');
+    const emergencyDisplay = document.getElementById('emergencyContactDisplay');
+    const groupMembersList = document.getElementById('groupMembersList');
+
+    if (fullName && userData) {
+        fullName.textContent = userData.name || userData.username;
+    }
+    if (groupDisplay) {
+        groupDisplay.textContent = userData.group || 'N/A';
+    }
+    if (emergencyDisplay) {
+        emergencyDisplay.textContent = userData.emergencyContact || 'Not available';
+    }
+
+    if (groupMembersList) {
+        if (userData.role === 'student') {
+            const studentsInGroup = getDatabase().students.filter(student => student.group === userData.group);
+            groupMembersList.innerHTML = studentsInGroup.map(student => `<li>${student.name}</li>`).join('') || '<li>No group members listed.</li>';
+        } else {
+            const students = getDatabase().students;
+            groupMembersList.innerHTML = students.map(student => `<li>${student.name}</li>`).join('');
+        }
+    }
+}
+
+function bindStudentFilters() {
+    const searchInput = document.getElementById('studentSearchInput');
+    const hotelFilter = document.getElementById('hotelFilter');
+    if (searchInput) {
+        searchInput.addEventListener('input', applyStudentFilters);
+    }
+    if (hotelFilter) {
+        hotelFilter.addEventListener('change', applyStudentFilters);
+    }
+}
+
+function applyStudentFilters() {
+    const searchValue = document.getElementById('studentSearchInput')?.value.toLowerCase().trim() || '';
+    const hotelValue = document.getElementById('hotelFilter')?.value || '';
+    const rows = document.querySelectorAll('.student-details-table tbody tr');
+
+    rows.forEach(row => {
+        const cells = Array.from(row.querySelectorAll('td')).map(cell => cell.textContent.toLowerCase());
+        const matchesSearch = searchValue === '' || cells.some(text => text.includes(searchValue));
+        const matchesHotel = hotelValue === '' || row.querySelector('td:nth-child(6)')?.textContent === hotelValue;
+        row.style.display = matchesSearch && matchesHotel ? '' : 'none';
+    });
+}
+
+function renderStudentTable() {
+    const tableBody = document.getElementById('studentTableBody');
+    if (!tableBody) {
+        return;
+    }
+
+    const userData = getLoggedInUserData();
+    const allStudents = getDatabase().students;
+    const rows = [];
+    const visibleStudents = userData && userData.role === 'student'
+        ? allStudents.filter(student => normalizeLoginName(student.username) === normalizeLoginName(userData.username))
+        : allStudents;
+
+    visibleStudents.forEach(student => {
+        const row = document.createElement('tr');
+        row.dataset.username = student.username;
+        row.dataset.password = student.password || '';
+        row.dataset.studentId = student.id || '';
+        row.innerHTML = `
+            <td>${student.id || ''}</td>
+            <td>${student.name || ''}</td>
+            <td>${student.group || ''}</td>
+            <td>${student.outboundFlight || ''}</td>
+            <td>${student.returnFlight || ''}</td>
+            <td>${student.hotel || ''}</td>
+            <td>${student.roomNumber || ''}</td>
+            <td>${student.checkIn || ''}</td>
+            <td>${student.checkOut || ''}</td>
+            <td><span class="password-mask">•••••••••</span></td>
+            <td>${student.email || ''}</td>
+            <td>${student.emergencyContact || ''}</td>
+            <td>
+                <button class="view-btn" onclick="viewStudentDetails(this)">View</button>
+                ${userData && userData.role === 'teacher' ? `<button class="edit-btn" onclick="openEditStudentModal(this)">Edit</button>` : ''}
+            </td>
+        `;
+        rows.push(row);
+    });
+
+    tableBody.innerHTML = '';
+    rows.forEach(row => tableBody.appendChild(row));
+    updateStudentStats();
+}
+
+function openEditStudentModal(button) {
+    const row = button.closest('tr');
+    if (!row) {
+        return;
+    }
+
+    const student = findUser(row.dataset.username, 'student');
+    if (!student) {
+        return;
+    }
+
+    document.getElementById('addEditStudentForm').reset();
+    document.getElementById('addEditStudentForm').dataset.mode = 'edit';
+    document.getElementById('addEditStudentForm').dataset.studentId = student.id || '';
+    document.getElementById('addEditModalTitle').textContent = 'Edit Student Information';
+    document.getElementById('formStudentID').value = student.id || '';
+    document.getElementById('formStudentID').disabled = true;
+    document.getElementById('formStudentName').value = student.name || '';
+    document.getElementById('formStudentEmail').value = student.email || '';
+    document.getElementById('formStudentGroup').value = student.group || '';
+    document.getElementById('formEmergencyContact').value = student.emergencyContact || '';
+    document.getElementById('formPortalPassword').value = '';
+    document.getElementById('formPortalPassword').placeholder = 'Leave blank to keep current password';
+    document.getElementById('formPortalPassword').required = false;
+    document.getElementById('formOutboundFlight').value = student.outboundFlight || '';
+    document.getElementById('formReturnFlight').value = student.returnFlight || '';
+    document.getElementById('formHotel').value = student.hotel || '';
+    document.getElementById('formRoomNumber').value = student.roomNumber || '';
+    document.getElementById('formCheckIn').value = student.checkIn || '';
+    document.getElementById('formCheckOut').value = student.checkOut || '';
+
+    document.getElementById('addEditStudentModal').style.display = 'flex';
+}
+
 function logout() {
-    sessionStorage.removeItem('username');
+    clearCurrentUser();
     window.location.href = 'index.html';
 }
 
@@ -443,28 +724,308 @@ function updateHotel2() {
     document.getElementById("hotelContact-2").textContent = hotelContact;
 }
 
+// Student Details Functions
+function viewStudentDetails(button) {
+    const row = button.closest('tr');
+    const cells = row.querySelectorAll('td');
+    const password = row.dataset.password || '';
+
+    const studentData = {
+        id: cells[0].textContent,
+        name: cells[1].textContent,
+        group: cells[2].textContent,
+        outboundFlight: cells[3].textContent,
+        returnFlight: cells[4].textContent,
+        hotelName: cells[5].textContent,
+        roomNumber: cells[6].textContent,
+        checkIn: cells[7].textContent,
+        checkOut: cells[8].textContent,
+        email: cells[10].textContent,
+        emergencyContact: cells[11].textContent,
+        password
+    };
+
+    document.getElementById('modalStudentName').textContent = studentData.name;
+    document.getElementById('modalStudentID').textContent = studentData.id;
+    document.getElementById('modalStudentGroup').textContent = studentData.group;
+    document.getElementById('modalStudentEmail').textContent = studentData.email;
+    document.getElementById('modalEmergencyContact').textContent = studentData.emergencyContact;
+    
+    document.getElementById('modalOutboundFlight').textContent = studentData.outboundFlight;
+    document.getElementById('modalReturnFlight').textContent = studentData.returnFlight;
+    document.getElementById('modalOutboundSeat').textContent = 'A' + Math.floor(Math.random() * 20 + 1);
+    document.getElementById('modalReturnSeat').textContent = 'B' + Math.floor(Math.random() * 20 + 1);
+    
+    document.getElementById('modalHotelName').textContent = studentData.hotelName;
+    document.getElementById('modalRoomNumber').textContent = studentData.roomNumber;
+    document.getElementById('modalCheckIn').textContent = studentData.checkIn;
+    document.getElementById('modalCheckOut').textContent = studentData.checkOut;
+    document.getElementById('modalHotelContact').textContent = '+34 123 456 789 / hotel@email.com';
+    
+    const passwordSpan = document.getElementById('modalPassword');
+    passwordSpan.textContent = '•••••••••';
+    passwordSpan.dataset.value = studentData.password || '';
+    passwordSpan.classList.add('password-hidden');
+    passwordSpan.classList.remove('password-visible');
+    
+    document.getElementById('studentDetailModal').style.display = 'flex';
+}
+
+function closeStudentModal() {
+    document.getElementById('studentDetailModal').style.display = 'none';
+}
+
+function togglePasswordVisibility(event) {
+    const passwordSpan = document.getElementById('modalPassword');
+    const btn = event.target;
+    const actualPassword = passwordSpan.dataset.value || '';
+
+    if (passwordSpan.classList.contains('password-hidden')) {
+        passwordSpan.textContent = actualPassword || '•••••••••';
+        passwordSpan.classList.remove('password-hidden');
+        passwordSpan.classList.add('password-visible');
+        btn.textContent = 'Hide Password';
+    } else {
+        passwordSpan.textContent = '•••••••••';
+        passwordSpan.classList.add('password-hidden');
+        passwordSpan.classList.remove('password-visible');
+        btn.textContent = 'Show Password';
+    }
+}
+
+function resetPassword() {
+    if (confirm('Are you sure you want to reset this student\'s password? A new temporary password will be generated.')) {
+        const newPassword = 'Temp' + Math.random().toString(36).substr(2, 9).toUpperCase();
+        const studentID = document.getElementById('modalStudentID').textContent;
+        const db = getDatabase();
+        const student = db.students.find(user => user.id === studentID);
+
+        if (student) {
+            student.password = newPassword;
+            saveDatabase(db);
+        }
+
+        document.getElementById('modalPassword').textContent = newPassword;
+        document.getElementById('modalPassword').dataset.value = newPassword;
+        document.getElementById('modalPassword').classList.remove('password-hidden');
+        document.getElementById('modalPassword').classList.add('password-visible');
+        const toggleBtn = document.querySelector('.toggle-password-btn');
+        if (toggleBtn) {
+            toggleBtn.textContent = 'Hide Password';
+        }
+
+        document.querySelectorAll('.student-details-table tbody tr').forEach(row => {
+            if (row.querySelector('td')?.textContent === studentID) {
+                row.dataset.password = newPassword;
+            }
+        });
+
+        alert('Password reset successfully. New temporary password: ' + newPassword);
+    }
+}
+
+function exportStudentData() {
+
+    let csv = 'Student ID,Name,Group,Outbound Flight,Return Flight,Hotel,Room,Check-in,Check-out,Email,Emergency Contact\n';
+    
+    const rows = document.querySelectorAll('.student-details-table tbody tr');
+    rows.forEach(row => {
+        const cells = row.querySelectorAll('td');
+        const rowData = Array.from(cells).slice(0, -1).map(cell => {
+            const text = cell.textContent.trim();
+            return `"${text}"`;
+        }).join(',');
+        csv += rowData + '\n';
+    });
+    
+
+    const element = document.createElement('a');
+    element.setAttribute('href', 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv));
+    element.setAttribute('download', 'student_details_' + new Date().toISOString().split('T')[0] + '.csv');
+    element.style.display = 'none';
+    document.body.appendChild(element);
+    element.click();
+    document.body.removeChild(element);
+    
+    alert('Student data exported successfully!');
+}
+
+document.addEventListener('click', function(event) {
+    const modal = document.getElementById('studentDetailModal');
+    if (modal && event.target === modal) {
+        closeStudentModal();
+    }
+});
+
+function openAddStudentModal() {
+    document.getElementById('addEditStudentForm').reset();
+    document.getElementById('addEditStudentForm').dataset.mode = 'add';
+    document.getElementById('addEditStudentForm').dataset.studentId = '';
+    
+    document.getElementById('addEditModalTitle').textContent = 'Add New Student';
+    document.getElementById('formStudentID').disabled = false;
+    document.getElementById('formPortalPassword').placeholder = 'Create password';
+    document.getElementById('formPortalPassword').required = true;
+    
+    document.getElementById('addEditStudentModal').style.display = 'flex';
+}
+
+function closeAddEditModal() {
+    document.getElementById('addEditStudentModal').style.display = 'none';
+    document.getElementById('addEditStudentForm').reset();
+}
+
+// Handle form submission
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('addEditStudentForm');
+    if (form) {
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            saveStudentData();
+        });
+    }
+});
+
+function saveStudentData() {
+    const form = document.getElementById('addEditStudentForm');
+    const mode = form.dataset.mode;
+    const originalStudentId = form.dataset.studentId;
+    const studentID = document.getElementById('formStudentID').value.trim();
+    const studentName = document.getElementById('formStudentName').value.trim();
+    const studentEmail = document.getElementById('formStudentEmail').value.trim();
+    const studentGroup = document.getElementById('formStudentGroup').value.trim();
+    const emergencyContact = document.getElementById('formEmergencyContact').value.trim();
+    const password = document.getElementById('formPortalPassword').value.trim();
+    const outboundFlight = document.getElementById('formOutboundFlight').value.trim();
+    const returnFlight = document.getElementById('formReturnFlight').value.trim();
+    const hotel = document.getElementById('formHotel').value;
+    const roomNumber = document.getElementById('formRoomNumber').value.trim();
+    const checkIn = document.getElementById('formCheckIn').value;
+    const checkOut = document.getElementById('formCheckOut').value;
+
+    if (!studentID || !studentName || !studentEmail || !studentGroup || !emergencyContact || !outboundFlight || !returnFlight || !hotel || !roomNumber || !checkIn || !checkOut) {
+        alert('Please fill in all required fields');
+        return;
+    }
+
+    if (mode === 'add' && !password) {
+        alert('Password is required for new students');
+        return;
+    }
+
+    const db = getDatabase();
+
+    if (mode === 'add') {
+        if (db.students.some(user => user.id === studentID)) {
+            alert('A student with that ID already exists.');
+            return;
+        }
+
+        const newStudent = {
+            id: studentID,
+            username: studentName,
+            password,
+            role: 'student',
+            name: studentName,
+            email: studentEmail,
+            group: studentGroup,
+            emergencyContact,
+            outboundFlight,
+            returnFlight,
+            hotel,
+            roomNumber,
+            checkIn,
+            checkOut,
+            lastLogin: new Date().toISOString().slice(0, 16).replace('T', ' ')
+        };
+
+        db.students.push(newStudent);
+        saveDatabase(db);
+        renderStudentTable();
+        alert(`Student ${studentName} (${studentID}) has been added successfully!\nTemporary Password: ${password}`);
+    } else {
+        const student = db.students.find(user => user.id === originalStudentId);
+        if (!student) {
+            alert('Could not find the student to update.');
+            return;
+        }
+
+        student.name = studentName;
+        student.username = studentName;
+        student.email = studentEmail;
+        student.group = studentGroup;
+        student.emergencyContact = emergencyContact;
+        student.outboundFlight = outboundFlight;
+        student.returnFlight = returnFlight;
+        student.hotel = hotel;
+        student.roomNumber = roomNumber;
+        student.checkIn = checkIn;
+        student.checkOut = checkOut;
+        if (password) {
+            student.password = password;
+        }
+
+        saveDatabase(db);
+        renderStudentTable();
+        alert(`Student ${studentName} (${studentID}) has been updated successfully!`);
+    }
+
+    closeAddEditModal();
+}
+
+function updateStudentStats() {
+    const rows = document.querySelectorAll('.student-details-table tbody tr');
+    const totalStudents = rows.length;
+    let hotel1Count = 0;
+    let hotel2Count = 0;
+
+    rows.forEach(row => {
+        const cells = row.querySelectorAll('td');
+        const hotel = cells[5].textContent;
+        if (hotel === 'Hotel 1') {
+            hotel1Count++;
+        } else if (hotel === 'Hotel 2') {
+            hotel2Count++;
+        }
+    });
+
+    document.getElementById('totalStudents').textContent = totalStudents;
+    document.getElementById('hotel1Count').textContent = hotel1Count;
+    document.getElementById('hotel2Count').textContent = hotel2Count;
+}
+
+
+document.addEventListener('click', function(event) {
+    const modal = document.getElementById('addEditStudentModal');
+    if (modal && event.target === modal) {
+        closeAddEditModal();
+    }
+});
 let itineraryData = [];
 let selectedDay = 0;
 
 function initItineraryEditor() {
-    const liveDays = document.querySelectorAll('.itinerary-day');
+    // Prefer persisted itinerary when available so editor edits don't get
+    // overwritten by the original static DOM markup.
     itineraryData = [];
 
-    liveDays.forEach(function(day) {
-        const title = day.querySelector('.day-info h2')?.textContent || '';
-        const subtitle = day.querySelector('.day-info p')?.textContent || '';
-        const activities = [];
+        liveDays.forEach(function(day) {
+            const title = day.querySelector('.day-info h2')?.textContent || '';
+            const subtitle = day.querySelector('.day-info p')?.textContent || '';
+            const activities = [];
 
-        day.querySelectorAll('.schedule-item').forEach(function(item) {
-            activities.push({
-                time: item.querySelector('.schedule-time')?.textContent || '',
-                name: item.querySelector('strong')?.textContent || '',
-                description: item.querySelector('p')?.textContent || ''
+            day.querySelectorAll('.schedule-item').forEach(function(item) {
+                activities.push({
+                    time: item.querySelector('.schedule-time')?.textContent || '',
+                    name: item.querySelector('strong')?.textContent || '',
+                    description: item.querySelector('p')?.textContent || ''
+                });
             });
-        });
 
-        itineraryData.push({ title, subtitle, activities });
-    });
+            itineraryData.push({ title, subtitle, activities });
+        });
+        console.log('initItineraryEditor: read from DOM, items=', itineraryData.length);
+    }
 
     selectedDay = 0;
     renderDaySelector();
@@ -499,6 +1060,7 @@ function renderDaySelector() {
 function renderDayEditor() {
     const container = document.getElementById('day-editor');
     const day = itineraryData[selectedDay];
+    console.log('renderDayEditor: selectedDay=', selectedDay, 'day=', day);
 
     if (!day) {
         container.innerHTML = '<p>No day selected.</p>';
@@ -562,6 +1124,7 @@ function addDay() {
     selectedDay = itineraryData.length - 1;
     renderDaySelector();
     renderDayEditor();
+    console.log('addDay: itineraryData length now', itineraryData.length);
 }
 
 function removeDay(index) {
@@ -582,8 +1145,16 @@ function removeActivity(actIndex) {
 }
 
 function applyItineraryChanges() {
-    const container = document.querySelector('.itinerary-container');
-    container.innerHTML = '';
+    console.log('applyItineraryChanges called. itineraryData length=', Array.isArray(itineraryData) ? itineraryData.length : 'not-array');
+    const containers = Array.from(document.querySelectorAll('.itinerary-container'));
+    if (containers.length === 0) {
+        console.error('applyItineraryChanges: no .itinerary-container elements found in DOM');
+        return;
+    }
+
+    containers.forEach((container, cIndex) => {
+        console.log(`applyItineraryChanges: updating container ${cIndex} (parent id=${container.parentElement?.id || 'none'})`);
+        container.innerHTML = '';
 
     itineraryData.forEach(function(day, index) {
         const dayEl = document.createElement('div');

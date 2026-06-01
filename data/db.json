@@ -1,0 +1,32 @@
+{
+  "teachers": [
+    {
+      "id": "T001",
+      "username": "teacher",
+      "password": "teacher123",
+      "role": "teacher",
+      "name": "Ms. Harper",
+      "email": "harper@school.com"
+    }
+  ],
+  "students": [
+    {
+      "id": "S001",
+      "username": "Assia Johnson",
+      "password": "assia123",
+      "role": "student",
+      "name": "Assia Johnson",
+      "email": "assia.johnson@student.com",
+      "group": "Barcelona Cohort A"
+    }
+  ],
+  "itinerary": [
+    {
+      "title": "June 15 - Arrival in Barcelona",
+      "subtitle": "Travel Day",
+      "activities": [
+        { "time": "09:30", "name": "Departure from London Heathrow", "description": "Flight BA 478 to Barcelona" }
+      ]
+    }
+  ]
+}
