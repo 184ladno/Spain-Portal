@@ -3,3 +3,8 @@
 Dockerfile
 README.md
 *.md
+node_modules
+.vscode
+Dockerfile.dev
+docker-compose.override.yml
+*.log
