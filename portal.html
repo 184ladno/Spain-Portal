@@ -1685,34 +1685,6 @@
                 <br>
                 <button class="save-button" onclick="applyItineraryChanges()">Save All Changes</button>
             </div>
-            <div id="transport-edit" class="page-edit" style="display:none">
-                <div class="page-header">
-                    <h1>Edit Transport Information</h1>
-                    <p>Update transport modes, timings, and rules</p>
-                </div>
-                <div class="edit-form">
-                    <label for="transportMode">Transport Mode</label>
-                    <br>
-                    <select id="transportMode" name="transportMode">
-                        <option value="bus">Bus</option>
-                        <option value="train">Train</option>
-                        <option value="walk">Walk</option>
-                    </select>
-                    <br>
-
-                    <label for="transportTime">Transport Time</label>
-                    <br>
-                    <input type="datetime-local" id="transportTime" name="transportTime">
-                    <br>
-
-                    <label for="transportRules">Transport Rules</label>
-                    <br>
-                    <textarea id="transportRules" name="transportRules" placeholder="Describe any specific rules or instructions for this transport"></textarea>
-                    <br>
-
-                    <button type="submit" class="save-button" onclick="updatetransport()">Save Changes</button>
-                </div>
-            </div>
             <div id="personal-edit" class="page-edit" style="display:none">
                 <div class="page-header">
                     <h1>Edit Personal Details</h1>
